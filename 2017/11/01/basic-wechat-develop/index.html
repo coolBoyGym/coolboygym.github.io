@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="wechat," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小美哥的个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。">
+<meta name="keywords" content="wechat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你入门微信公众号开发">
+<meta property="og:url" content="http://yoursite.com/2017/11/01/basic-wechat-develop/index.html">
+<meta property="og:site_name" content="小美哥的个人博客">
+<meta property="og:description" content="这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-2.png">
+<meta property="og:updated_time" content="2017-11-01T14:23:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你入门微信公众号开发">
+<meta name="twitter:description" content="这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/01/basic-wechat-develop/"/>
+
+
+
+
+
+  <title>手把手教你入门微信公众号开发 | 小美哥的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小美哥的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/basic-wechat-develop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小美哥">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/coolboy.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小美哥的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">手把手教你入门微信公众号开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T07:05:30+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/01/basic-wechat-develop/" class="leancloud_visitors" data-flag-title="手把手教你入门微信公众号开发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。</p>
+<a id="more"></a>
+<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><blockquote>
+<p><strong>近日腾讯发布2017年中报，报告中指出，腾讯二季度实现营业收入566.06亿元，经营盈利、期内盈利分别达到225.6亿元和182.54亿元。按照当前利润与员工数估算，腾讯员工的平均年薪达到80万…</strong></p>
+</blockquote>
+<p>尽管很多人吐槽王者荣耀里的小学生太坑爹，但不得不承认，近年来腾讯的变现能力确实强大地吓人。这之中微信和QQ作为用户的入口，起到了很大的作用。特别是微信，已然是一款装机必备的全民软件，如何借助这个庞大的平台搞点事情，分享下微信带来的用户红利，也就成为一件很值得研究的事。微信公众号是个人或者企业的一个宣传平台，通过开发微信公众号，可以给关注公众号的用户提供更多定制化的服务，进一步可以将服务转化为效益。本文旨在给正准备做微信公众号开发的朋友分享一点经验，从而尽快熟悉微信公众号开发的整体流程。在此基础上可以继续去学习一些高级的开发技巧（<em>比如微信支付、账单系统之类的</em>），让自己的公众号更加地精(<em>zhi</em>)美(<em>qian</em>)。</p>
+<h2 id="磨刀不误砍柴工"><a href="#磨刀不误砍柴工" class="headerlink" title="磨刀不误砍柴工"></a>磨刀不误砍柴工</h2><p>微信公众号大家肯定都用过。目前微信公众号主要分为订阅号和服务号，每种账号又分为未认证和已认证，<strong>它们的差别主要在于具有不同的接口权限</strong>，下图（<em>引用自<a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></em>）是一些例子：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-7.png" alt="不同类型公众号的权限"></p>
+<p>总体来说，服务号权限 &gt; 订阅号权限，认证账号权限 &gt; 未认证账号权限。申请订阅号比较简单，服务号相对复杂点，另外要认证的话还要额外提交一些材料。我们可以根据不同的业务需求去申请不同类型的账号，基本上常用的权限列表已经可以满足大部分的场景。</p>
+<p><strong>开发微信公众号本质上和通常的网站开发并无区别</strong>。当我们进入一个公众号页面之后，我们可以向公众号发送文字、语音、图片等消息，也可以通过点击页面下方的菜单触发相应的功能。<strong>那么开发者与微信用户究竟是怎么进行交互的呢？</strong>实际上我们在公众号里的所有操作，都会发送到微信的服务器上，微信服务器将这些动作的具体含义按照一定的格式进行封装后，发送到微信公众号所对应的服务器上（<em>这个服务器的地址可以由开发者在微信公众号的后台进行配置</em>），开发者通过编写代码来处理不同的用户行为，并将处理后的结果按照一定的格式返回给微信服务器，再由微信服务器发送到微信公众号里面，从而完成了一次交互过程。在这里借用<a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方倍老师博客</a>中的一张图片来展示下这个过程，可以帮助大家理解地更清楚：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-5.png" alt="微信用户与开发者的交互流程"></p>
+<p>到这里我们可以知道，所谓的微信公众号开发，其实就是编写业务代码来处理用户的动作请求。这里面会涉及到和微信服务器之间的通信，也就涉及到一些安全认证方面的知识，后文会通过一个实际的例子进行说明。现在，就让我们来看看具体的流程吧。</p>
+<h2 id="巧妇难为无米之炊"><a href="#巧妇难为无米之炊" class="headerlink" title="巧妇难为无米之炊"></a>巧妇难为无米之炊</h2><p>开发微信公众号需要准备以下两样食材：</p>
+<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p>微信公众号可以在<a href="https://mp.weixin.qq.com" target="_blank" rel="external">微信公众平台的官网</a>上申请。前文说过，微信公众号分为几种类型，不同的类型具有不同的权限，具体的权限列表可以查看<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084" target="_blank" rel="external">微信公众平台技术文档</a>。值得注意的是，现在已经不再支持个人类型的公众账号申请微信认证。申请的过程无非是填写下邮箱和信息，建议使用QQ邮箱，毕竟是自家的东西。</p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>由于我们的服务器需要与微信服务器进行交互，因此必须能够让微信服务器可以访问到。很多公司都提供了云服务器租赁，价格不一，可以自行申请，细节在此不表。如果不想花钱申请，也可以使用一些外网穿透工具，将本地的IP暴露到公网中供外部访问，具体的工具请自行百度，不过大部分软件稳定性无法保证，而且分配的域名经常改变。个人建议还是申请一台服务器比较方便，等以后公众号运营良好开始涨(<em>ying</em>)粉(<em>li</em>)了，这些都不是事~</p>
+<h2 id="撸起袖子加油干"><a href="#撸起袖子加油干" class="headerlink" title="撸起袖子加油干"></a>撸起袖子加油干</h2><p>以下是详细步骤：</p>
+<h3 id="开启公众号开发者模式"><a href="#开启公众号开发者模式" class="headerlink" title="开启公众号开发者模式"></a>开启公众号开发者模式</h3><p>为了让微信服务器知道开发者服务器的存在，必须在公众号后台进行相应的配置。<br>(1) 登录<a href="https://mp.weixin.qq.com" target="_blank" rel="external">公众平台官网</a>，找到左边功能栏的最下方，有一个<strong>基本配置</strong>的选项</p>
+<p>(2) 点击<strong>基本配置</strong>按钮，在右边的页面中填写服务器的相关信息。其中<strong>URL填写<a href="http://外网IP:端口号/wx" target="_blank" rel="external">http://外网IP:端口号/wx</a></strong>，这里外网IP是服务器的外网IP地址，端口号固定填写80。Token可以自由填写，用于两个服务器之间的验证。具体见下图： </p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-0.png" alt="配置微信公众号"></p>
+<p>(3) 点击提交按钮，提示<strong>配置失败</strong>。这是自然的，因为我们还需要在开发者服务器上进行配置，才能完成验证的过程。</p>
+<p>(4) 前面在配置微信公众号时为什么提示失败呢？在此我们有必要探究下这个认证过程。当我们点击了提交后，微信服务器会向我们所填写的那个URL发起一个GET请求，并携带以下几个参数：timestamp, nonce, echostr, signature。其中timestamp是一个时间戳，nonce是一个随机数，echostr也是随机数，这几个都很普通，重点在于signature，它的生成方式是将nonce、timestamp和token（<em>也就是我们在网页中配置的TOKNE</em>）三个字符串按照字典序排序后，对排序后得到的字符串数组使用哈希加密算法得到。我们的服务器在收到这个GET请求后，提取对应的参数，并按照前面说的方式生成hashcode，如果这个值与参数中的signature相同，那么我们就将echostr返回给微信服务器，否则返回空值。微信服务器收到这个echostr之后，验证这个值与它发送的echostr值是否相同，如果相同，说明这个值的确是由我们的服务器返回的，从而完成验证，今后所有的信息就都可以发送到这个服务器地址上。这里面涉及到了一些安全认证的相关知识，有兴趣的朋友可以去查阅更详细的资料。<strong>总的来说，就是让通信的双方都能够确认对方的真实身份</strong>。以下是认证部分的主要代码，使用<a href="https://docs.python.org/2.7/" target="_blank" rel="external">Python2.7</a>和<a href="http://webpy.org" target="_blank" rel="external">web.py</a>框架编写：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-1.png" alt="验证开发者服务器"></p>
+<h3 id="编写服务器业务逻辑"><a href="#编写服务器业务逻辑" class="headerlink" title="编写服务器业务逻辑"></a>编写服务器业务逻辑</h3><p>前面我们完成了微信服务器与开发者服务器的相互认证过程，接下来我们需要编写业务逻辑代码来处理微信服务器发送过来的信息。以文本消息为例，当用户在公众号页面发送了消息后，微信服务器会将这条消息封装成如下的<strong>XML</strong>格式，并将其作为请求的内容向开发者服务器发起一个<strong>POST</strong>请求：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-4.png" alt="微信服务器封装的请求内容"></p>
+<p>各个字段的具体含义就如字段名所示，比较直观。我们首先需要解析这个XML对象，并提取出各个字段用于后续的处理：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-3.png" alt="解析XML对象"></p>
+<p>解析之后，我们可以在<strong>主函数</strong>中根据消息的不同类型，来调用不同的处理函数得到相应的处理结果，然后我们要将处理结果封装成同样的<strong>XML</strong>格式返回给微信服务器，封装XML对象的代码如下所示（以文本消息为例）：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-2.png" alt="封装XML对象"></p>
+<p>至此，我们就完成了一个简单的回复流程（虽然目前这种只能回复文本消息==）。</p>
+<h2 id="更上一层楼"><a href="#更上一层楼" class="headerlink" title="更上一层楼"></a>更上一层楼</h2><p>以上就是一个基本的微信公众号开发流程。当然，想要让我们的公众号变得多姿多彩，需要掌握的内容还有很多。比如</p>
+<p>(1) <strong>access_token</strong>：前面我们所做的实际是被动回复消息，微信服务器发起POST请求，我们将处理后的内容借由微信服务器返回给用户。如果我们需要主动地和用户进行交互，比如主动地向用户发一条消息，我们就需要调用微信公众平台提供的相应接口，并且需要主动告诉微信服务器我们的身份，这是通过<strong>access_token</strong>实现的。</p>
+<blockquote>
+<p><strong>access_token</strong>是微信公众号的全局唯一接口调用凭据，公众号在调用各个接口时都需要使用<strong>access_token</strong>。</p>
+</blockquote>
+<p>如上所述，在我们调用各个接口前，需要先使用公众号的<strong>appid</strong>和<strong>appsecret</strong>信息（这两个值可以从微信公众号的网页上查看）向微信服务器请求获取<strong>access_token</strong>，然后带着这个值去调用微信公众平台提供的接口，实现相应的功能。</p>
+<p>(2) <strong>微信网页开发</strong>：网页开发就是指编写一系列的<strong>HTML5</strong>页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。</p>
+<h2 id="从这里出发"><a href="#从这里出发" class="headerlink" title="从这里出发"></a>从这里出发</h2><p>以上就是本文的主体内容。楼主经验尚浅，斗胆提笔撰文，有不当之处欢迎各位指出。本文主要是一个入门的简介，后续的开发还有很多内容要学，以下列出一些个人认为比较不错的文档和资料，楼主也从中学到了很多，在此感谢各位作者。</p>
+<p>(1) <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1445241432" target="_blank" rel="external">微信公众平台技术文档</a><br>(2) <a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方培工作室-微信公众平台开发教程</a><br>(3) <a href="https://github.com/Wechat-Group" target="_blank" rel="external">微信开发者联盟</a><br>(4) <a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></p>
+<p>本文中的代码已上传到<strong>github</strong>，里面包含了微信公众号一些常用功能的实现，仅供参考：<a href="https://github.com/coolBoyGym/wechatdemo" target="_blank" rel="external">微信公众号开发示例程序</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果您阅读本文后有所收获，不妨打赏两块钱，您小小的支持都是对作者莫大的鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechatpay2yuan.png" alt="小美哥 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/wechat/" rel="tag"># wechat</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/01/bai-ye-xing-note/" rel="next" title="我们都曾行走在白夜里">
+                <i class="fa fa-chevron-left"></i> 我们都曾行走在白夜里
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/do-not-trust-user-input/" rel="prev" title="优秀的程序员是什么样的？">
+                优秀的程序员是什么样的？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/coolboy.jpg"
+                alt="小美哥" />
+            
+              <p class="site-author-name" itemprop="name">小美哥</p>
+              <p class="site-description motion-element" itemprop="description">努力不功利 刻苦不痛苦</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/coolboygym" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/gaoyimei777" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缘起"><span class="nav-number">1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磨刀不误砍柴工"><span class="nav-number">2.</span> <span class="nav-text">磨刀不误砍柴工</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#巧妇难为无米之炊"><span class="nav-number">3.</span> <span class="nav-text">巧妇难为无米之炊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微信公众号"><span class="nav-number">3.1.</span> <span class="nav-text">微信公众号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器"><span class="nav-number">3.2.</span> <span class="nav-text">服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撸起袖子加油干"><span class="nav-number">4.</span> <span class="nav-text">撸起袖子加油干</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启公众号开发者模式"><span class="nav-number">4.1.</span> <span class="nav-text">开启公众号开发者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写服务器业务逻辑"><span class="nav-number">4.2.</span> <span class="nav-text">编写服务器业务逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更上一层楼"><span class="nav-number">5.</span> <span class="nav-text">更上一层楼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从这里出发"><span class="nav-number">6.</span> <span class="nav-text">从这里出发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小美哥</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("lUDCYnl8zgsXXaOIFrDuuc1V-gzGzoHsz", "HQYms2aY1B2tQATENrcfbdVw");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

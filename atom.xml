@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小美哥的个人博客</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-11-08T13:47:32.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>小美哥</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac下安装elasticsearch极简指南</title>
+    <link href="http://yoursite.com/2017/11/07/install-elasticsearch-osx/"/>
+    <id>http://yoursite.com/2017/11/07/install-elasticsearch-osx/</id>
+    <published>2017-11-07T09:58:02.000Z</published>
+    <updated>2017-11-08T13:47:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Elasticsearch&lt;/strong&gt;(以下简称&lt;strong&gt;ES&lt;/strong&gt;)是一个面向文档的实时分布式搜索和分析引擎。本文是在&lt;strong&gt;Mac&lt;/strong&gt;系统下使用&lt;strong&gt;Homebrew&lt;/strong&gt;安装&lt;strong&gt;ES+Kibana+Marvel&lt;/strong&gt;的一份极简指南。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信公众号开发工具汇总</title>
+    <link href="http://yoursite.com/2017/11/06/wechat-develop-tools/"/>
+    <id>http://yoursite.com/2017/11/06/wechat-develop-tools/</id>
+    <published>2017-11-06T13:56:26.000Z</published>
+    <updated>2017-11-07T04:51:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面写了篇入坑指南，介绍了下开发微信公众号的基本流程。最近又捣鼓了一阵，发现这开发工具的选择对于提高开发效率真是有莫大的帮助，所谓“只要工具选得好，月底奖金跑不了”。今天得空，笔者就给各位老哥列举几个绝对能派上用场的小工具，保证没毛病！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优秀的程序员是什么样的？</title>
+    <link href="http://yoursite.com/2017/11/03/do-not-trust-user-input/"/>
+    <id>http://yoursite.com/2017/11/03/do-not-trust-user-input/</id>
+    <published>2017-11-02T23:31:52.000Z</published>
+    <updated>2017-11-07T04:50:39.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在程序员的世界里有一句经典的至理名言：永远不要相信用户的输入。相信很多开发者都有过类似的踩坑经历，所谓“幸福的人都是相似的，而编程的人是幸福的”。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ideas" scheme="http://yoursite.com/categories/ideas/"/>
+    
+    
+      <category term="启示录" scheme="http://yoursite.com/tags/%E5%90%AF%E7%A4%BA%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>手把手教你入门微信公众号开发</title>
+    <link href="http://yoursite.com/2017/11/01/basic-wechat-develop/"/>
+    <id>http://yoursite.com/2017/11/01/basic-wechat-develop/</id>
+    <published>2017-10-31T23:05:30.000Z</published>
+    <updated>2017-11-01T14:23:23.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我们都曾行走在白夜里</title>
+    <link href="http://yoursite.com/2017/11/01/bai-ye-xing-note/"/>
+    <id>http://yoursite.com/2017/11/01/bai-ye-xing-note/</id>
+    <published>2017-10-31T22:33:18.000Z</published>
+    <updated>2017-11-01T13:36:05.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我合上书本，再次看到封面上牵着手的小男孩和小女孩时，一种莫名的难过翻涌而来，投射到墙上的阴影仿佛要将整个房间笼罩。那里本该洒满阳光。&lt;/p&gt;
+&lt;p&gt;东野大叔的叙事风格宛若天马行空，这一点在《解忧杂货店》中就充分感受过，相比起来，《白夜行》可谓有过之而无不及，乃至于第一遍捧起书时到第五章就看不下去了，我已经忘了前面都说了啥。我是怀着一点猎奇的心来的，顶尖的推理小说作家，悬疑的杀人案件，如潮水般的好评，这足以让人坚信这本书能给人带来精彩的阅读体验。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="reading" scheme="http://yoursite.com/categories/reading/"/>
+    
+    
+      <category term="东野圭吾" scheme="http://yoursite.com/tags/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Mac上搭建基于Hexo的个人博客网站</title>
+    <link href="http://yoursite.com/2017/10/29/create-hexo-blog/"/>
+    <id>http://yoursite.com/2017/10/29/create-hexo-blog/</id>
+    <published>2017-10-29T03:47:46.000Z</published>
+    <updated>2017-11-08T13:54:19.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt;是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/a&gt;。本文主要记录下笔者在&lt;strong&gt;Mac&lt;/strong&gt;上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/10/28/hello-world/"/>
+    <id>http://yoursite.com/2017/10/28/hello-world/</id>
+    <published>2017-10-28T13:27:45.000Z</published>
+    <updated>2017-11-07T04:52:54.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
+    
+    
+  </entry>
+  
+</feed>
