@@ -1,419 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[Mac下安装Elasticsearch极简指南]]></title>
-      <url>/2017/11/07/install-elasticsearch-osx/</url>
-      <content type="html"><![CDATA[<p><strong>Elasticsearch</strong>(以下简称<strong>ES</strong>)是一个面向文档的实时分布式搜索和分析引擎。本文是在<strong>Mac</strong>系统下使用<strong>Homebrew</strong>安装<strong>ES+Kibana+Marvel</strong>的一份极简指南。</p>
-<a id="more"></a>
-<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><p>想要安装<strong>ES</strong>的前提是已经在本机安装了<strong>Java</strong>环境，在命令行键入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ java -version</div></pre></td></tr></table></figure></p>
-<p>如果正确打印出版本信息则说明已安装<strong>Java</strong>，否则请到<a href="https://www.java.com/zh_CN/" target="_blank" rel="external">Java官网</a>下载最新版安装即可。</p>
-<p>另外，本文使用<strong>Homebrew</strong>来安装<strong>ES</strong>，<strong>Homebrew</strong>是<strong>Mac</strong>环境里的一种包管理工具，可以方便地进行软件的安装、更新和卸载操作。如果本机未安装，可以使用以下命令进行安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure></p>
-<p>完成以上步骤后，本机已具备<strong>Java</strong>和<strong>Homebrew</strong>，进入正题。</p>
-<h3 id="安装ES-amp-Kibana"><a href="#安装ES-amp-Kibana" class="headerlink" title="安装ES &amp; Kibana"></a>安装ES &amp; Kibana</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ brew update</div><div class="line">$ brew install elasticsearch</div><div class="line">$ brew install kibana</div></pre></td></tr></table></figure>
-<p>以上命令将<strong>ES</strong>和<strong>Kibana</strong>安装到本地，其中<strong>Kibana</strong>是<strong>ES</strong>的一个配套工具，可以让用户在网页中与<strong>ES</strong>进行交互。安装完成后，在命令行键入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew info elasticsearch</div><div class="line">$ brew info kibana</div></pre></td></tr></table></figure></p>
-<p>可以分别看到两个软件的一些安装信息，比如<strong>安装路径</strong>和<strong>配置文件的路径</strong>等，后面会用到。</p>
-<h3 id="安装Marvel"><a href="#安装Marvel" class="headerlink" title="安装Marvel"></a>安装Marvel</h3><p><strong>Marvel</strong>也是<strong>ES</strong>的一个插件，能够让你通过<strong>Kibana</strong>非常容易地监视<strong>ES</strong>集群的健康状态等信息。最新版的<strong>Marvel</strong>已经集成到<strong>X-Pack</strong>模块当中。<strong>X-Pack</strong>是<strong>ES</strong>的一个安全框架，可以给网页端访问<strong>Kibana</strong>加入账号系统，使操作更加安全，更多介绍请移步<a href="https://www.elastic.co/products/x-pack" target="_blank" rel="external">官方文档</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/Cellar/elasticsearch/&lt;whatever version you have&gt;</div><div class="line">$ bin/elasticsearch-plugin install x-pack</div></pre></td></tr></table></figure></p>
-<p>以上命令安装<strong>X-Pack</strong>模块到本地，至此安装部分完成。</p>
-<h3 id="启动ES-amp-Kibana"><a href="#启动ES-amp-Kibana" class="headerlink" title="启动ES &amp; Kibana"></a>启动ES &amp; Kibana</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew services start elasticsearch</div><div class="line">$ brew services start kibana</div></pre></td></tr></table></figure>
-<p>启动后可以在本地浏览器访问</p>
-<ul>
-<li><strong>ES</strong>: <a href="http://localhost:9200" target="_blank" rel="external">http://localhost:9200</a></li>
-<li><strong>Kibana</strong>: <a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></li>
-</ul>
-<p>首次进入<strong>Kibana</strong>页面时需要输入账号名和密码，默认的用户名是<code>elastic</code>，密码是<code>changeme</code>，可以通过以下命令修改密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ curl -XPUT -u elastic <span class="string">'localhost:9200/_xpack/security/user/kibana/_password'</span> -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;</span></div><div class="line"><span class="string">  "password" : "kibanapassword"</span></div><div class="line"><span class="string">&#125;'</span></div></pre></td></tr></table></figure></p>
-<p>如果不想使用账号密码，可以将<code>下面的配置</code>写入<strong>ES</strong>和<strong>kibana</strong>的配置文件，配置文件所在目录可以通过<code>brew info xxx</code>查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xpack.security.enabled: <span class="literal">false</span></div></pre></td></tr></table></figure></p>
-<p>重启<strong>ES</strong>和<strong>Kibana</strong>后以上配置即可生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew services restart elasticsearch</div><div class="line">$ brew services restart kibana</div></pre></td></tr></table></figure></p>
-<p>然后可以在<strong>Kibana</strong>页面中的<strong>Dev Tools</strong>子页面下直接与<strong>ES</strong>交互。关于<strong>ES</strong>的具体命令，请参看<a href="https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details" target="_blank" rel="external">Elasticsearch 权威指南</a></p>
-<p>祝学习愉快==</p>
-]]></content>
-      
-        <categories>
-            
-            <category> coding </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Mac </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[微信公众号开发工具汇总]]></title>
-      <url>/2017/11/06/wechat-develop-tools/</url>
-      <content type="html"><![CDATA[<p>前面写了篇入坑指南，介绍了下开发微信公众号的基本流程。最近又捣鼓了一阵，发现这开发工具的选择对于提高开发效率真是有莫大的帮助，所谓“只要工具选得好，月底奖金跑不了”。今天得空，笔者就给各位老哥列举几个绝对能派上用场的小工具，保证没毛病！</p>
-<a id="more"></a>
-<h2 id="微信公众平台技术文档"><a href="#微信公众平台技术文档" class="headerlink" title="微信公众平台技术文档"></a>微信公众平台技术文档</h2><p>这货实际上是必需品，没了它，您还真是寸步难行。官方文档包含了一个产品最直接也最全面的说明，在<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1445241432" target="_blank" rel="external">微信公众平台技术文档</a>中，详细说明了微信公众号开发的概念与流程，以及各个接口的调用方法。<strong>开发中遇到的大部分问题都可以在这里找到答案</strong>。值得称赞的是，这份文档还在一开始给出了一份较为详尽的示例程序，通过代码的方式带着读者走了一遍开发的流程，细致全面又不显得啰嗦，可以说是比较用心了，给写文档的妹子点个赞！</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-tool-01.png" alt="微信公众平台技术文档"></p>
-<h2 id="微信公众平台接口测试账号"><a href="#微信公众平台接口测试账号" class="headerlink" title="微信公众平台接口测试账号"></a>微信公众平台接口测试账号</h2><p>入坑指南里提到过，当前公众号类型主要分为订阅号和服务号，不同类型账号的主要区别在于接口调用的权限不同，那么如果我们就是想学习下各个接口的调用方法，但手边又找不到一个具有对应权限的公众号该怎么办呢？这时候你可以去申请一个接口测试账号。申请流程很简单，点击网页上的按钮，直接用微信扫码即可。</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-tool-03.png" alt="申请测试账号"></p>
-<p>顾名思义，接口测试账号就是专门为开发人员准备的，用于测试接口调用方法的微信公众账号。和普通的公众号一样，可以在网页上对测试账号进行后台的管理，也可以通过扫描二维码的方式来关注测试账号，进行相应的操作。所不同的是，测试账号的名称和<strong>logo</strong>是无法更改的，名称就叫“xxx接口测试号”，<strong>logo</strong>则是个灰色的人头，为的就是把它们和通常的公众号区分开来。很显然，要是能改名改<strong>logo</strong>，那测试号就可以直接用于实际生产环境中了，也就没有必要再去申请公众号。</p>
-<h2 id="微信公众平台接口调试工具"><a href="#微信公众平台接口调试工具" class="headerlink" title="微信公众平台接口调试工具"></a>微信公众平台接口调试工具</h2><p>当我们在开发一个新功能的时候，通常希望能先预览一下实际的效果，这样可以对整个任务有一个更加感性的认识。而在开发微信公众号时，接口调试工具就能起到这样的作用。接口调试工具提供了一组图形化界面，通过简单地输入一些参数，就可以实现各个接口的调用，并立即在公众号上查看对应的效果。<strong>这种交互方式非常直观，也非常高效</strong>。此外接口调试工具还可以帮助我们进行<strong>debug</strong>，当我们在开发中遇到一直无法调通某个接口的情况时，可以将使用到的参数直接复制到接口调试工具的网页上，从而观察运行结果是否符合预期，通过比较两种方式调用结果的异同，我们可以更准确地找到<strong>bug</strong>所在。当然，关于<strong>debug</strong>这一点，下文介绍的工具才是真正的利器。</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-tool-04.png" alt="接口调试工具"></p>
-<h2 id="微信web开发者工具"><a href="#微信web开发者工具" class="headerlink" title="微信web开发者工具"></a>微信web开发者工具</h2><p>入坑指南里提到过，微信网页开发已经成为整个微信公众号开发当中很重要的一分部。事实上，在微信公众号开发中，设置自动回复规则和下拉菜单这两项所能提供给用户的服务非常有限，要想完成一些比较复杂的逻辑交互，就必须实现微信公众号内的网页开发。</p>
-<blockquote>
-<p><strong>网页开发就是指编写一系列的HTML5页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。</strong></p>
-</blockquote>
-<p>做过前端开发的老哥们对于浏览器中的“<strong>检查元素</strong>”这个功能一定都不陌生。当下前后端的开发通常是分离的，二者通过API接口进行对接。前端开发过程中为了进行调试，通常会在网页中打开“<strong>检查元素</strong>”功能来查看后端的回复是否正确，从而发现代码中可能存在的bug。而当我们进行微信web开发时，公众号里的网页是由微信自带的浏览器进行解析的，我们只能看到网页的效果，却无法看到任何有关前后端通信的数据，这样一来，当错误出现时，我们也就无从知道究竟是前端的锅还是后台的锅，这自然会影响开发的效率。微信团队的大佬们自然也想到了这一点，于是便有了web开发者工具这一调试利器。</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-tool-02.png" alt="微信web开发者工具"></p>
-<p>微信web开发者工具实际上就是个<strong>自带“审查元素”功能的微信浏览器</strong>。通过扫码的方式，我们可以用自己的微信账号来登录这个软件。在登录之后，它就成为了一个可以在电脑桌面上打开的“微信浏览器”，<strong>通过在地址栏输入前端网页的地址，我们可以模拟在手机上的微信公众号中点击了某个网页的行为</strong>，当然此时前后端通信的数据也就一目了然。我们可以按照网页上的逻辑进行操作，就好像我们在一个普通的浏览器中所做的一样，简单好用，可以说是非常走心了。</p>
-<hr>
-<p>以上就是笔者在捣鼓微信公众号时经常用到的一些小工具，回想起来，它们确实给开发过程带来了很大的帮助，在此分享给各位老哥，希望对各位有所帮助。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> coding </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> wechat </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[优秀的程序员是什么样的？]]></title>
-      <url>/2017/11/03/do-not-trust-user-input/</url>
-      <content type="html"><![CDATA[<p>在程序员的世界里有一句经典的至理名言：永远不要相信用户的输入。相信很多开发者都有过类似的踩坑经历，所谓“幸福的人都是相似的，而编程的人是幸福的”。</p>
-<a id="more"></a>
-<p>初入职时，作为一名后端工程师，每次实现接口后，老大(我的组长)都会过来帮我瞄一眼，然后提出一堆改进意见，其中最常被提到的一点就是：永远不要相信用户的输入。我不以为意，没怎么去改相关逻辑，这么做的后果就是老大下次再帮我检查时，总会伴随一阵悦耳的争辩声。</p>
-<blockquote>
-<p><strong>Round 1</strong></p>
-</blockquote>
-<p>你这里为什么不加个类型检查？万一接收到的值不是数组怎么办？</p>
-<p>怎么会呢，这些接口类型都是和前端定好的呀。</p>
-<p>前端传入的数据是可以被篡改的，万一有人模拟了一个前端请求，发送一个其他类型的变量，那你的程序不就炸了？</p>
-<p>那样的话程序会返回服务器异常，攻击者也不会得到什么有用的信息吧…</p>
-<p>是没什么损失，但为什么要给别人留下这么个漏洞呢？</p>
-<p>哦哦…</p>
-<blockquote>
-<p><strong>Round 2</strong></p>
-</blockquote>
-<p>这个接口传入的是图片对吧，为什么不检查下图片的大小？</p>
-<p>这个，前端已经检查过了，太大的图片前端会先进行压缩的。</p>
-<p>不是和你说过了吗，永远不要相信前端的输入！万一有攻击者模拟前端接口发来很大的图片呢？</p>
-<p>额，不是还有<code>nginx</code>可以挡一道吗？太大的图片应该直接无法响应吧。</p>
-<p><code>nginx</code>的确能做这个，但这些也是需要配置参数的，万一不小心参数设太大了没发现怎么办？</p>
-<p>哦，那就只能接收并保存下来了，不过我们的图片不都放在<code>s3</code>上吗，大一点也没什么关系吧，存储也挺便宜的…</p>
-<p>你太天真了！首先，<code>s3</code>也是要花钱的，虽然空间不贵，但流量贵啊，万一真被人发现这个漏洞，他们完全可以把大量的图片通过你这里上传，然后根据返回值里的图片链接去获取。甚至如果有不怀好意的人传了些不该传的东西上去，那咱说不定都要去局里坐坐，这可不是开玩笑。</p>
-<blockquote>
-<p><strong>Game Over</strong></p>
-</blockquote>
-<p>这下我算彻底服了，只好满口答应，然后老老实实把该补的补上。嘴上虽这么说，但心里难免还有点疙瘩，这些都是特殊情况嘛，哪有那么容易就发生。事情总是这样，只要还没在自己身上发生，就会抱有侥幸心理，认为它一定不会发生，等到真的发生了，又来责怪自己当初怎么那么不小心。笔者就有过这么个经历，虽没犯下什么大错，但也足够长点记性了。</p>
-<hr>
-<p>话说最近在做微信公众号开发，某天<strong>PM</strong>(产品经理)姐姐拿着个新需求过来，说是要加一个批量导入历史用户的功能，我扫了一眼开发文档，在<code>用户管理</code>文档中找到了<code>获取用户基本信息</code>这一项，心想不正是这个接口么，于是自信地回了句：“明天下班前给你”，转头就热火朝天地敲起了键盘。</p>
-<p>整个流程比较清晰，先通过接口调用凭据<code>access_token</code>获取用户的<code>openid</code>列表，再调用<code>获取用户基本信息</code>接口来得到用户的昵称等信息，再将获取到的信息存到数据库即可。不过，作为一个严谨的开发，当然不能这么草率，还要考虑下效率和安全的问题。微信公众号里的用户动不动就上万，要一个个去获取基本信息那绝对是不妥当的，这一点微信团队的大佬们当然也想到了，所以提供了一个批量获取微信用户信息的接口，甚是方便。</p>
-<p>另外，将数据存储到数据库时，当然也不能一条条地存入，这样一不小心得把数据库整挂了。应该在程序里构造<code>sql</code>语句，累计到一定的用户量之后再以批量的方式插入，这样不仅减少了操作数据库的次数，而且直接执行<code>sql</code>语句的方式也更加高效。</p>
-<p>考虑完这两点后，就开始敲代码了。手指翻飞间，几个接口函数已经基本完成，打开编译器，一路绿灯，又麻利地打开本地的前端服务，准备开始调试。点击<code>导入历史用户</code>按钮，后端收到请求，调试器里查看，微信正确地返回了<code>用户列表</code>，因为线下的环境只是个测试号，所以只有20人左右，继续点击下一步，用户信息也成功获取，下一步，<code>sql</code>语句执行成功，全部用户导入完毕，到数据库里一看，数据确实都存下来了，搞定！</p>
-<p>接下来，就是将程序上线了。虽然只是个小功能，可一旦要上线都是需要找老大来的，毕竟万一线上的代码真出了问题这锅最后还得到他头上。于是我就跑去找来了他，他当然也知道我今天在开发这个功能，看我不到半天就完成了，还捎带夸了句：完成地挺快呵。我自然是轻扬起嘴角，淡淡地回了句：这活还蛮简单的。</p>
-<p>然而，这种笑容很快就消失了，因为我看到坐在我电脑前的老大眉头紧缩，顿觉头顶乌云密布。果然，不到一会儿，就传来了老大的“盘问”。</p>
-<p>你直接用<code>sql</code>语句来插入数据的？</p>
-<p>嗯，感觉这样子更方便一点，效率也更快点。</p>
-<p>这个想法是没错，但你这里有个问题啊，在构造<code>sql</code>语句的时候，要特别注意单引号的使用，你看你这里在每个变量的两边显式地加入了单引号，那要是变量的字符串里本身就包含单引号怎么办呢？</p>
-<p>啊，变量的值怎么可能会有单引号啊，这一点我没想到诶。</p>
-<p>怎么不可能？你这里的值是微信用户的信息对吧，万一哪个家伙无聊在昵称里加了个单引号呢，这完全是可能的，这种时候你的<code>sql</code>语句就会被这个单引号提前封闭，就会产生语法错误，也就无法正常地执行了。更要命的是，这个时候用户单引号后面的部分就成为了<code>sql</code>命令的一部分被执行了，万一来个<code>drop database</code>之类的，再加个单引号把原来的部分还原，那这就成了典型的<code>注入攻击</code>了。到时候你哭都来不及。</p>
-<p>哇靠，原来还有这种操作啊，我如梦初醒，不觉后背发凉。之前听老大提起过在<code>php</code>时代著名的注入攻击的案例，没想到今天自己竟差点犯了这个错误，真是罪过。那该怎么解决呢？我向老大请教。</p>
-<p>这个其实也挺简单，只要把可能存在的特殊字符给转义就行了，这样它们就不会变成<code>sql</code>的一部分被执行。</p>
-<p>嗯，有道理。于是我就噼里啪啦改起来，不一会儿就把该转义的给转义了，老大看完微微点头，然后再次强调说，特别是涉及到数据库的操作时，一定要严格地检查用户的输入，考虑所有可能的情况，防止出现这样的问题。我毕恭毕敬地听着，点头如捣蒜。</p>
-<p>不过事情还没完。老大紧接着又指出另一个问题：你在接收到微信服务器返回的用户信息列表时，有检查它的类型吗？</p>
-<p>我有点疑惑，这个类型不是在微信的文档里写好的嘛，只能是<code>JSON</code>啊，难道这也需要检查吗？</p>
-<p>老大貌似看出了我的疑虑，问到：万一用户的信息里确实有一些特殊的字符，没办法用<code>JSON</code>的方式传输呢？是不是需要先将<code>JSON</code>做个序列化再传输呢？而你没有判断返回值的类型，完全按照<code>JSON</code>的格式来处理，这样后面有可能会出错的。</p>
-<p>我还是有点疑惑，不就是个昵称嘛，能有什么特别的字符呢？</p>
-<p>老大看了看我，建议我现在去试下微信修改昵称的功能。这不看还真不知道，在改昵称的时候原来可以插入表情的啊，还不止是微信官方提供的表情，而是能添加自己私藏的任意表情，表情是海量的，而<code>JSON</code>能识别的字符集是有限的，这么一来也就自然会出现一些<code>JSON</code>无法识别的字符。</p>
-<p>看到这，我算是相信了，于是又把类型检查给加上了，并且当接收到的类型是字符串时，对其进行了处理，消除了里面可能存在的非<code>JSON</code>字符。老大看了看我，这次算是露出了比较满意的表情。</p>
-<p>最后，又检查了一遍，为了验证刚才老大的两个想法，我还特意加了一个记录日志的操作，看看接收到的信息到底都是些啥。确认无误后，老大把程序更新到了线上。两三分钟后，更新完成，我迫不及待地尝试了下这个新功能。说来您还真别不信，线上用户的公众号总共有两万多关注者，这些人里面居然真的有人在昵称里使用了单引号，而且这类人还不少，大概三四百人里就有一个。而且返回的用户信息列表居然真的不全是<code>JSON</code>格式的，而是有部分<code>string</code>格式的，将这些<code>string</code>解析后得到的<code>JSON</code>里面，确实包含了一些无法识别的字符。</p>
-<p>我看着日志里的结果，又看了看微信公众平台的官方文档，再回头看看老大那挂着浅浅笑容的脸颊，不禁肃然起敬。一方面是觉得尽管诸如微信这样的官方文档也难免会有疏漏之处，不可一味地根据主观意向来判断。再者，则是对老大的远见卓识佩服之至。我记得曾在知乎上看到过一个问题，大意是说</p>
-<blockquote>
-<p><strong>做一个优秀的程序员到底难在哪里？</strong></p>
-</blockquote>
-<p>答案里有一条是这么写的：</p>
-<blockquote>
-<p><strong>由于你是一个优秀的（或仅仅是经验丰富的）程序员，你可以看出项目代码里存在着的隐患。你选择防患于未然，修复这些问题，但由于问题并没有真的发生，你所做的一切，在不那么优秀的程序员同事的眼中（以及老大眼中），看起来并没有什么产出。</strong></p>
-</blockquote>
-<p>诚哉斯言。回想起先前的经历，要不是老大及时指出代码里可能存在的错误，那肯定是要出问题的，虽然这一次不一定导致什么严重的后果，但若问题不除，迟早要吃大亏。此时老大已经起身准备离开了，他还有一大堆的事情要忙呢。不过在临走前，他又一次嘱咐了我：永远不要相信用户的输入。</p>
-<p>嗯，这次我是真的记住了。望着老大远去的背影，我在心里默念到。</p>
-<p>大概，这就是我心目中优秀程序员该有的样子。</p>
-<hr>
-<p>参考链接</p>
-<p><a href="https://www.zhihu.com/question/63152623/answer/206189038" target="_blank" rel="external">做一个优秀的程序员到底难在哪里？ - Van Bruce的回答 - 知乎</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> ideas </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 启示录 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[手把手教你入门微信公众号开发]]></title>
-      <url>/2017/11/01/basic-wechat-develop/</url>
-      <content type="html"><![CDATA[<p>这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。</p>
-<a id="more"></a>
-<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><blockquote>
-<p><strong>近日腾讯发布2017年中报，报告中指出，腾讯二季度实现营业收入566.06亿元，经营盈利、期内盈利分别达到225.6亿元和182.54亿元。按照当前利润与员工数估算，腾讯员工的平均年薪达到80万…</strong></p>
-</blockquote>
-<p>尽管很多人吐槽王者荣耀里的小学生太坑爹，但不得不承认，近年来腾讯的变现能力确实强大地吓人。这之中微信和QQ作为用户的入口，起到了很大的作用。特别是微信，已然是一款装机必备的全民软件，如何借助这个庞大的平台搞点事情，分享下微信带来的用户红利，也就成为一件很值得研究的事。微信公众号是个人或者企业的一个宣传平台，通过开发微信公众号，可以给关注公众号的用户提供更多定制化的服务，进一步可以将服务转化为效益。本文旨在给正准备做微信公众号开发的朋友分享一点经验，从而尽快熟悉微信公众号开发的整体流程。在此基础上可以继续去学习一些高级的开发技巧（<em>比如微信支付、账单系统之类的</em>），让自己的公众号更加地精(<em>zhi</em>)美(<em>qian</em>)。</p>
-<h2 id="磨刀不误砍柴工"><a href="#磨刀不误砍柴工" class="headerlink" title="磨刀不误砍柴工"></a>磨刀不误砍柴工</h2><p>微信公众号大家肯定都用过。目前微信公众号主要分为订阅号和服务号，每种账号又分为未认证和已认证，<strong>它们的差别主要在于具有不同的接口权限</strong>，下图（<em>引用自<a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></em>）是一些例子：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-7.png" alt="不同类型公众号的权限"></p>
-<p>总体来说，服务号权限 &gt; 订阅号权限，认证账号权限 &gt; 未认证账号权限。申请订阅号比较简单，服务号相对复杂点，另外要认证的话还要额外提交一些材料。我们可以根据不同的业务需求去申请不同类型的账号，基本上常用的权限列表已经可以满足大部分的场景。</p>
-<p><strong>开发微信公众号本质上和通常的网站开发并无区别</strong>。当我们进入一个公众号页面之后，我们可以向公众号发送文字、语音、图片等消息，也可以通过点击页面下方的菜单触发相应的功能。<strong>那么开发者与微信用户究竟是怎么进行交互的呢？</strong>实际上我们在公众号里的所有操作，都会发送到微信的服务器上，微信服务器将这些动作的具体含义按照一定的格式进行封装后，发送到微信公众号所对应的服务器上（<em>这个服务器的地址可以由开发者在微信公众号的后台进行配置</em>），开发者通过编写代码来处理不同的用户行为，并将处理后的结果按照一定的格式返回给微信服务器，再由微信服务器发送到微信公众号里面，从而完成了一次交互过程。在这里借用<a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方倍老师博客</a>中的一张图片来展示下这个过程，可以帮助大家理解地更清楚：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-5.png" alt="微信用户与开发者的交互流程"></p>
-<p>到这里我们可以知道，所谓的微信公众号开发，其实就是编写业务代码来处理用户的动作请求。这里面会涉及到和微信服务器之间的通信，也就涉及到一些安全认证方面的知识，后文会通过一个实际的例子进行说明。现在，就让我们来看看具体的流程吧。</p>
-<h2 id="巧妇难为无米之炊"><a href="#巧妇难为无米之炊" class="headerlink" title="巧妇难为无米之炊"></a>巧妇难为无米之炊</h2><p>开发微信公众号需要准备以下两样食材：</p>
-<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p>微信公众号可以在<a href="https://mp.weixin.qq.com" target="_blank" rel="external">微信公众平台的官网</a>上申请。前文说过，微信公众号分为几种类型，不同的类型具有不同的权限，具体的权限列表可以查看<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084" target="_blank" rel="external">微信公众平台技术文档</a>。值得注意的是，现在已经不再支持个人类型的公众账号申请微信认证。申请的过程无非是填写下邮箱和信息，建议使用QQ邮箱，毕竟是自家的东西。</p>
-<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>由于我们的服务器需要与微信服务器进行交互，因此必须能够让微信服务器可以访问到。很多公司都提供了云服务器租赁，价格不一，可以自行申请，细节在此不表。如果不想花钱申请，也可以使用一些外网穿透工具，将本地的IP暴露到公网中供外部访问，具体的工具请自行百度，不过大部分软件稳定性无法保证，而且分配的域名经常改变。个人建议还是申请一台服务器比较方便，等以后公众号运营良好开始涨(<em>ying</em>)粉(<em>li</em>)了，这些都不是事~</p>
-<h2 id="撸起袖子加油干"><a href="#撸起袖子加油干" class="headerlink" title="撸起袖子加油干"></a>撸起袖子加油干</h2><p>以下是详细步骤：</p>
-<h3 id="开启公众号开发者模式"><a href="#开启公众号开发者模式" class="headerlink" title="开启公众号开发者模式"></a>开启公众号开发者模式</h3><p>为了让微信服务器知道开发者服务器的存在，必须在公众号后台进行相应的配置。<br>(1) 登录<a href="https://mp.weixin.qq.com" target="_blank" rel="external">公众平台官网</a>，找到左边功能栏的最下方，有一个<strong>基本配置</strong>的选项</p>
-<p>(2) 点击<strong>基本配置</strong>按钮，在右边的页面中填写服务器的相关信息。其中<strong>URL填写<a href="http://外网IP:端口号/wx" target="_blank" rel="external">http://外网IP:端口号/wx</a></strong>，这里外网IP是服务器的外网IP地址，端口号固定填写80。Token可以自由填写，用于两个服务器之间的验证。具体见下图： </p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-0.png" alt="配置微信公众号"></p>
-<p>(3) 点击提交按钮，提示<strong>配置失败</strong>。这是自然的，因为我们还需要在开发者服务器上进行配置，才能完成验证的过程。</p>
-<p>(4) 前面在配置微信公众号时为什么提示失败呢？在此我们有必要探究下这个认证过程。当我们点击了提交后，微信服务器会向我们所填写的那个URL发起一个GET请求，并携带以下几个参数：timestamp, nonce, echostr, signature。其中timestamp是一个时间戳，nonce是一个随机数，echostr也是随机数，这几个都很普通，重点在于signature，它的生成方式是将nonce、timestamp和token（<em>也就是我们在网页中配置的TOKNE</em>）三个字符串按照字典序排序后，对排序后得到的字符串数组使用哈希加密算法得到。我们的服务器在收到这个GET请求后，提取对应的参数，并按照前面说的方式生成hashcode，如果这个值与参数中的signature相同，那么我们就将echostr返回给微信服务器，否则返回空值。微信服务器收到这个echostr之后，验证这个值与它发送的echostr值是否相同，如果相同，说明这个值的确是由我们的服务器返回的，从而完成验证，今后所有的信息就都可以发送到这个服务器地址上。这里面涉及到了一些安全认证的相关知识，有兴趣的朋友可以去查阅更详细的资料。<strong>总的来说，就是让通信的双方都能够确认对方的真实身份</strong>。以下是认证部分的主要代码，使用<a href="https://docs.python.org/2.7/" target="_blank" rel="external">Python2.7</a>和<a href="http://webpy.org" target="_blank" rel="external">web.py</a>框架编写：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-1.png" alt="验证开发者服务器"></p>
-<h3 id="编写服务器业务逻辑"><a href="#编写服务器业务逻辑" class="headerlink" title="编写服务器业务逻辑"></a>编写服务器业务逻辑</h3><p>前面我们完成了微信服务器与开发者服务器的相互认证过程，接下来我们需要编写业务逻辑代码来处理微信服务器发送过来的信息。以文本消息为例，当用户在公众号页面发送了消息后，微信服务器会将这条消息封装成如下的<strong>XML</strong>格式，并将其作为请求的内容向开发者服务器发起一个<strong>POST</strong>请求：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-4.png" alt="微信服务器封装的请求内容"></p>
-<p>各个字段的具体含义就如字段名所示，比较直观。我们首先需要解析这个XML对象，并提取出各个字段用于后续的处理：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-3.png" alt="解析XML对象"></p>
-<p>解析之后，我们可以在<strong>主函数</strong>中根据消息的不同类型，来调用不同的处理函数得到相应的处理结果，然后我们要将处理结果封装成同样的<strong>XML</strong>格式返回给微信服务器，封装XML对象的代码如下所示（以文本消息为例）：</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-2.png" alt="封装XML对象"></p>
-<p>至此，我们就完成了一个简单的回复流程（虽然目前这种只能回复文本消息==）。</p>
-<h2 id="更上一层楼"><a href="#更上一层楼" class="headerlink" title="更上一层楼"></a>更上一层楼</h2><p>以上就是一个基本的微信公众号开发流程。当然，想要让我们的公众号变得多姿多彩，需要掌握的内容还有很多。比如</p>
-<p>(1) <strong>access_token</strong>：前面我们所做的实际是被动回复消息，微信服务器发起POST请求，我们将处理后的内容借由微信服务器返回给用户。如果我们需要主动地和用户进行交互，比如主动地向用户发一条消息，我们就需要调用微信公众平台提供的相应接口，并且需要主动告诉微信服务器我们的身份，这是通过<strong>access_token</strong>实现的。</p>
-<blockquote>
-<p><strong>access_token</strong>是微信公众号的全局唯一接口调用凭据，公众号在调用各个接口时都需要使用<strong>access_token</strong>。</p>
-</blockquote>
-<p>如上所述，在我们调用各个接口前，需要先使用公众号的<strong>appid</strong>和<strong>appsecret</strong>信息（这两个值可以从微信公众号的网页上查看）向微信服务器请求获取<strong>access_token</strong>，然后带着这个值去调用微信公众平台提供的接口，实现相应的功能。</p>
-<p>(2) <strong>微信网页开发</strong>：网页开发就是指编写一系列的<strong>HTML5</strong>页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。</p>
-<h2 id="从这里出发"><a href="#从这里出发" class="headerlink" title="从这里出发"></a>从这里出发</h2><p>以上就是本文的主体内容。楼主经验尚浅，斗胆提笔撰文，有不当之处欢迎各位指出。本文主要是一个入门的简介，后续的开发还有很多内容要学，以下列出一些个人认为比较不错的文档和资料，楼主也从中学到了很多，在此感谢各位作者。</p>
-<p>(1) <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1445241432" target="_blank" rel="external">微信公众平台技术文档</a><br>(2) <a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方培工作室-微信公众平台开发教程</a><br>(3) <a href="https://github.com/Wechat-Group" target="_blank" rel="external">微信开发者联盟</a><br>(4) <a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></p>
-<p>本文中的代码已上传到<strong>github</strong>，里面包含了微信公众号一些常用功能的实现，仅供参考：<a href="https://github.com/coolBoyGym/wechatdemo" target="_blank" rel="external">微信公众号开发示例程序</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> coding </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> wechat </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[我们都曾行走在白夜里]]></title>
-      <url>/2017/11/01/bai-ye-xing-note/</url>
-      <content type="html"><![CDATA[<p>当我合上书本，再次看到封面上牵着手的小男孩和小女孩时，一种莫名的难过翻涌而来，投射到墙上的阴影仿佛要将整个房间笼罩。那里本该洒满阳光。</p>
-<p>东野大叔的叙事风格宛若天马行空，这一点在《解忧杂货店》中就充分感受过，相比起来，《白夜行》可谓有过之而无不及，乃至于第一遍捧起书时到第五章就看不下去了，我已经忘了前面都说了啥。我是怀着一点猎奇的心来的，顶尖的推理小说作家，悬疑的杀人案件，如潮水般的好评，这足以让人坚信这本书能给人带来精彩的阅读体验。</p>
-<a id="more"></a>
-<p>但很显然，那时的我并没感受到。紧张的案件叙述部分在第一章的末尾戛然而止，接下来时光不断往前推进，各色人物一个接一个出现，发生的故事似乎没什么联系，那桩案子也宛如投向湖中的石子，随着波纹的远去逐渐淡出人们的视野。</p>
-<p>难道就这样了吗？我不禁暗自揣测。合上书本，我瞅了眼封面，两个小孩子携手同行，他们的影子被拉得老长。这幅画有什么含义呢？我实在搞不懂。但东野大叔应该不会让人失望吧。</p>
-<p>于是我又把书翻到了第一页。</p>
-<p>东野大叔也确实没让人失望。</p>
-<p>天网恢恢，疏而不漏。尽职的老刑警追了十九年，终于亲手将真凶绳之于法，而另一位主谋唐泽雪穗，则在失去唯一的精神支柱后彻底卸下了伪装。</p>
-<blockquote>
-<p><strong>她一次都没有回头。</strong></p>
-</blockquote>
-<p>这是全文的结尾，也是最精彩的地方之一。初看起来，这句话似乎进一步表现了雪穗的心狠手辣，对于和自己相依为命的伙伴的死也毫不在乎，但考虑到当时的场景，一个“陌生人”在自己店门口死亡，换做普通人应该会和她的店员们一样惊慌失措，而她却没有丝毫的情绪变化，这恰恰说明她此刻内心的波动之大，甚至让她忘记了身上一直披着的那层伪装。以这种方式接受惩罚，大概是最令人满意的结局。</p>
-<p>东野大叔的确很擅长叙事，当看完全书再把前面的故事串起来时，才发现原来两位主角犯下了如此多的罪行，可谓千夫所指。这种人性的恶，在主人公身上被展现地淋漓尽致。</p>
-<p>但整本书仅仅就是为了描述人性的恶吗？</p>
-<p>关于整个故事，有一个颇具争议的问题：该不该同情雪穗和亮司？</p>
-<p>我想，纵使不被同情，也不该把全部的错怪罪到他们身上。任何事情的发生都有个缘由。善恶终有来处。</p>
-<p>出身贫苦，父亲早逝，与柔弱的母亲相依为命，被迫和陌生的大叔发生关系，这是唐泽雪穗的童年，也是导致其性格变化的直接原因。在那个破烂的潮湿的小屋子里，她度过了人生中本该最美好的一段时光，但留给她的却只有无尽的黑暗。母亲忙于生计，卑躬屈膝还要处处遭人白眼，连带着她一起受尽委屈。最可恨的是，为了生活，亲生母亲居然把她交易给胡子拉碴的大叔作为性工具，那是怎样一种无奈与痛苦。雪穗向母亲抗议过吗？我想大概是有的。但在母亲的恳求或是诱导下，她不得不接受这样的现实。从那一刻起，她的心里就已经埋下了邪恶的种子，随着时间的推移，慢慢生根发芽。</p>
-<blockquote>
-<p><strong>我从来就没有太阳，所以不怕失去。</strong></p>
-</blockquote>
-<p>正如她自已所说，她从一开始就是个身处黑暗的人，心中只剩欲望和仇恨。</p>
-<p>桐原亮司的幼年也不快乐。虽然不愁吃穿，但风流成性的母亲和患有恋童癖的父亲显然没有给过他任何的关爱。他们不关心他每天都去了哪，干了啥，只管自己过得快活。他在家里没有任何人可以交流，于是他跑了出去，和同龄小朋友们玩耍是他少有的慰藉。直到他遇见了雪穗，他找到了一个可以说话的人，他把自己心爱的剪纸拿给她看，他和她经常相约在图书馆见面。多么美好的事啊，有这么可爱的玩伴。</p>
-<p>他们本该这样长大。</p>
-<p>当桐原拿起剪刀戳向父亲时，他一定花光了全部的力气。那种义无反顾，就像是去完成一件多么伟大的使命一般。只不过，此时的天空已被白夜笼罩。</p>
-<p>从此枪虾和虾虎鱼开始了彼此依赖的生活。他们结伴而行，在白夜里摸索。</p>
-<p>亮司最后强奸了美佳，变成了他父亲那样的人。雪穗安排了这一切，变成了她母亲那样的人。</p>
-<p>这是小说中最具戏剧性的地方。受害者最终成为了害人者，新的受害人又是否会延续这样的轮回？循环往复，归途何处？</p>
-<p>每当我们在报道里看到，一些青年乃至少年犯下的极恶罪行，总是会习惯性地感叹一番人心的险恶，家教的缺失，然后再将《未成年人保护法》痛骂一番。罪犯固然可恨，该受到应有的制裁，但我们更应该考虑到，扭曲的心灵并非与生俱来的，黑暗的背后更需要阳光的照耀。</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/baiyexing.png" alt="白夜行"></p>
-<p>我曾认识这样一个女孩。</p>
-<p>她出生在一个农村家庭，父亲嗜赌如命，在输光了家里所有的积蓄后，抛下她和母亲独自离去，那时她只有两岁半。母亲不堪重负，也狠心离去，将她留给了年迈的爷爷奶奶。村里的孩子经常欺负她，嘲笑她是个没人要的小孩，她很难过，又不知怎么反驳，就只是一味地哭。二老也没什么法子，就让她待在房间里，不准她出来。从此每天陪伴她的就只有洋娃娃和天花板，甚至连外面的蓝天白云都看不到。</p>
-<p>后来她上了学，总是一个人坐在最角落的位置上，无心上课，成绩也一塌糊涂。后排调皮的男孩子经常拿她开玩笑，有的还动手动脚，她拼命想要反抗，但双拳难敌四手，她还是会经常受到欺负。终于有一天，她忍不住了，在放学路上捡起一块砖头狠狠扔向了其中一个人的头。</p>
-<p>男孩受了重伤，家人找上门来，索要赔款，声称不赔钱就抓人。二老一边哭一边气，骂她是个没用的东西，和她爸一样，就知道干坏事。嘴上虽然骂娘，但钱还是得赔，总不能真让个十来岁的女娃子去蹲派出所。亲戚朋友们凑了点钱，把这事儿算是盖了过去。</p>
-<p>后来倒也真平静了一阵儿，半年多没再闹事儿，估计是学校里的小伙儿们也心有戚戚，这姑娘惹不得。</p>
-<p>那年春节，我爸妈觉得她家怪可怜的，又是街坊邻居的，就让我送点东西去她家。我把一篮子吃的提到厨房，和她奶奶聊了会儿家常。出门的时候，我不经意间回了个头，从旁边小房间里传来一道阴冷的光，差点没把我吓到。</p>
-<p>她一个人蜷缩在房间的地板上，靠着床沿，边上是一台老旧的小彩电。她的目光朝我这边汇聚，眉头有一点点皱，紧咬着嘴唇，就那么死死地看着我。</p>
-<p>我晃了晃神，匆忙地溜出大门，脚步飞快。</p>
-<p>那是我一辈子忘不掉的眼神。</p>
-<p>再后来，我去县城里上高中，少有机会回家，也就没再见到过她。只是某一年回去的时候听妈提起过，她好像很早就辍学了，离开了那个家，不知道去了哪。</p>
-<p>天大地大，何处是家。</p>
-<p>细想下这事儿，她的父亲肯定是要负首要责任的。父亲的恶习导致了家庭的破裂，给年幼的孩子造成了不可挽回的伤害。如果不想养家，又为何要成家？再往上找，父亲的恶习又是怎么造成的呢？大概是早年时不学无术，又没有一技之长，甚至懒惰地连活也不想干，于是就想找点快捷的方法。你说这该怪他的父母吗？可他们大概会说，我们要赚钱养家啊，哪有时间管孩子，只要他老老实实不给我们惹麻烦就行。他自己好赌，那是他天生的，这混账小子。</p>
-<p>呵，养家糊口，不肖子孙，多么冠冕堂皇。</p>
-<p>总有一些人，喜欢把孩子当做自己的附属品，只要给口饭吃给个衣服穿，就算是养他了。他们不懂得什么是教育，甚至不会教孩子基本的行为礼仪和道德廉耻，反正命是他的，爱咋咋地，老子当年也是这么过来的，不照样活得好好的？</p>
-<p><strong>愚昧和无知，比黑暗本身更可怕</strong>。</p>
-<p>想再讲个事儿。</p>
-<p>近年来有个词在网络上出现的频率不断提升，就是“抑郁症”。</p>
-<p>“某当红男星因抑郁症在家中服毒自杀，花样年华就此陨落。”</p>
-<p>“某中学女生因难忍同学的流言蜚语，终日恍惚不定，最后留下一纸遗书，从十楼的家中跳下。”</p>
-<p>伴随着抑郁症而出现的，还有一种叫做“网络暴力”的现象。某人被爆“黑料”，全网通告，好事者火速赶往现场，不论是非曲直，群起而攻之，或图一时之嘴快，或蹭一时之流量，他们坚信法不责众，大家都说黑的肯定错不了。当事人还未晃过神，就要迎接漫天的声讨。理智者顺藤摸瓜，找准源头，可使烟消云散。更多的人则选择沉默，听之任之，不到数日，或在沉默中爆发，或在沉默中消亡。前者伤人，后者伤身，只留下一声叹息，以供凭吊。</p>
-<p>而我们，或许就曾是众多好事者中的一个，尽管有时连我们自己可能都没意识到。</p>
-<p>少一点刽子手，多一点摸摸头。我们没办法要求别人如何如何，但至少自己能做到不轻信，不盲从，凡事有个理性的判断，而非人云亦云。毕竟，思维能力是人区别于动物的最大特点，如果连独立思考都不会了，又与动物何异呢？</p>
-<p>愿白夜不再笼罩，黑夜里也能传来欢笑。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> reading </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 东野圭吾 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[在Mac上搭建基于Hexo的个人博客网站]]></title>
-      <url>/2017/10/29/create-hexo-blog/</url>
-      <content type="html"><![CDATA[<p><strong>Hexo</strong>是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external"><strong>官方文档</strong></a>。本文主要记录下笔者在<strong>Mac</strong>上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。</p>
-<a id="more"></a>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>安装<strong>Hexo</strong>前需要先安装<strong>Git</strong>和<strong>Node.js</strong></p>
-<h3 id="1-Git"><a href="#1-Git" class="headerlink" title="1. Git"></a>1. Git</h3><p>在<strong>Mac</strong>上安装<strong>Git</strong>最方便的方式是使用<strong>Homebrew</strong>，它是<strong>Mac</strong>上的一种包管理工具，能方便地安装和卸载软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install git</div></pre></td></tr></table></figure></p>
-<p>安装结束后在命令行输入<strong>git</strong>后运行，如果屏幕上出现<strong>git</strong>命令的使用帮助，说明安装成功。</p>
-<p>在后文中可以看到，笔者借助<strong>github</strong>的网站作为个人博客网站的代理服务器。在进行博客网站部署时，会频繁涉及到本地与<strong>github</strong>网站的通信，为了免去每次通信时都要输入用户名和密码的烦恼，我们可以将本地的一组<strong>ssh-key</strong>传到<strong>github</strong>网站上，作为通信的凭据。</p>
-<p><strong>SSH</strong>是一种网络协议，全称<strong>Secure Shell</strong>，主要用于计算机之间的加密传输。以下介绍相应配置。</p>
-<p>首先检查本地是否已存在<strong>ssh-keys</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -a ~/.ssh/</div></pre></td></tr></table></figure></p>
-<p>以上命令列出当前用户主目录下的<strong>.ssh</strong>目录中的所有文件，如果存在<strong>id_rsa</strong>和<strong>id_rsa.pub</strong>则跳过下一步，否则需要手动生成一组<strong>ssh-key</strong></p>
-<p>执行以下命令生成一组公/私钥，其中<strong>your_email@example.com</strong>需要替换成你自己的邮箱地址。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div></pre></td></tr></table></figure></p>
-<p>生成的文件默认会放在之前提到的<strong>.ssh</strong>目录中，我们需要获得公钥的值，在命令行输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
-<p>该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。</p>
-<p>接着登录<strong>github</strong>网站，单击右上角的头像，依次点击<strong>Settings -&gt; SSH and GPG keys -&gt; New SSH key</strong> 之后，会出现个文本框，在<strong>Title</strong>那一栏填写一些用于标识当前机器的信息，然后将前面复制的公钥值粘贴到<strong>Key</strong>那一栏，点击<strong>Add SSH key</strong>，即完成了添加操作，今后可以使用<strong>ssh</strong>地址直接从你的<strong>github</strong>仓库<strong>clone</strong>项目到本地，也可以将本地的修改直接<strong>push</strong>到<strong>github</strong>上，非常方便。</p>
-<h3 id="2-Node-js"><a href="#2-Node-js" class="headerlink" title="2. Node.js"></a>2. Node.js</h3><p><strong>Node</strong>是<strong>javascript</strong>的一种运行时环境，也是近年来非常流行的一门技术。安装<strong>Node.js</strong>的最佳方式是使用<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a>。在命令行输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</div></pre></td></tr></table></figure></p>
-<p>这条命令通过<strong>curl</strong>下载<strong>install.sh</strong>脚本，并执行脚本。待执行完成后，它会把<strong>nvm</strong>命令的执行路径放到<strong>~/.bashrc</strong>文件里，我们可以用<strong>cat</strong>命令来查看一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.bashrc</div><div class="line"></div><div class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/Users/gao-yimei/.nvm"</span></div><div class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></div></pre></td></tr></table></figure></p>
-<p>确认存在以上配置后，通过执行<strong>source</strong>命令来使得环境变量生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure></p>
-<p>至此我们就把<strong>nvm</strong>安装好了，可以通过以下命令查看<strong>nvm</strong>版本号<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ nvm --version</div><div class="line">0.29.0</div></pre></td></tr></table></figure></p>
-<p>如果能正确打印出版本信息就证明<strong>nvm</strong>已经安装成功。接着通过执行以下命令来安装<strong>Node.js</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install stable</div></pre></td></tr></table></figure></p>
-<p>如果安装期间遇到权限问题，可以改用<strong>sudo</strong>的方式重新运行。</p>
-<p>安装完成后，在命令行键入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ node -v</div><div class="line">v7.1.0</div></pre></td></tr></table></figure></p>
-<p>如果能够正确打印出版本信息，则说明安装成功。</p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>完成准备工作后，可以正式开始安装<strong>Hexo</strong>。在命令行输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p><a href="https://www.npmjs.com" target="_blank" rel="external">npm</a>是<strong>Node.js</strong>自带的一个包管理工具，用于安装和卸载<strong>Node</strong>模块。上面的命令将<strong>Hexo</strong>这个模块以全局的方式安装到我们的电脑中，是<strong>Hexo</strong>官方推荐的方式。但笔者在运行这条命令时，出现了如下的错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">npm ERR! Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span></div><div class="line">npm ERR!     at Error (native)</div><div class="line">npm ERR!  &#123; [Error: EACCES: permission denied, mkdir <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>]</div><div class="line">npm ERR!   errno: -13,</div><div class="line">npm ERR!   code: <span class="string">'EACCES'</span>,</div><div class="line">npm ERR!   syscall: <span class="string">'mkdir'</span>,</div><div class="line">npm ERR!   path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</div><div class="line">npm ERR!   fstream_type: <span class="string">'Directory'</span>,</div><div class="line">npm ERR!   fstream_path: <span class="string">'/usr/local/lib/node_modules/hexo-cli'</span>,</div><div class="line">npm ERR!   fstream_class: <span class="string">'DirWriter'</span>,</div><div class="line">npm ERR!   fstream_stack: </div><div class="line">npm ERR!    [ <span class="string">'/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25'</span>,</div><div class="line">npm ERR!      <span class="string">'/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53'</span>,</div><div class="line">npm ERR!      <span class="string">'FSReqWrap.oncomplete (fs.js:82:15)'</span> ] &#125;</div><div class="line">npm ERR! </div><div class="line">npm ERR! Please try running this <span class="built_in">command</span> again as root/Administrator.</div></pre></td></tr></table></figure></p>
-<p>明明是以<strong>sudo</strong>方式运行的啊，为什么会出现权限错误呢？笔者一头雾水，最后还是在某度上找到了一个解决方案。执行以下代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install --unsafe-perm --verbose -g hexo</div></pre></td></tr></table></figure></p>
-<p>大意就是忽略一些安全方面的警告，强制安装。最终成功安装上了。</p>
-<h2 id="使用Hexo"><a href="#使用Hexo" class="headerlink" title="使用Hexo"></a>使用Hexo</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p><strong>Hexo</strong>默认已经配置好了基本的选项，通过以下几步简单的操作就可以获得一个示例的博客网站。</p>
-<p>终端切换到一个你准备用来搭建博客的目录，然后执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init myblog</div></pre></td></tr></table></figure></p>
-<p>其中<strong>myblog</strong>将会作为博客网站的本地主目录，该命令对文件夹进行了初始化，生成了一些建设网站所必须的材料。切换到<strong>myblog</strong>文件夹下，执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install</div></pre></td></tr></table></figure></p>
-<p>前面提到过，<strong>npm install</strong>是用来安装<strong>Node.js</strong>模块的，当这个命令不带参数时，它将会读取当前目录(也就是<strong>myblog</strong>目录)下的<strong>package.json</strong>文件，并按照里面的描述来安装，所有的模块都会存在当前目录下一个名为<strong>node_modules</strong>的文件夹下。</p>
-<p>等待安装完成后，仍在当前目录下，执行以下命令，开启<strong>Hexo</strong>服务器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo start</div></pre></td></tr></table></figure></p>
-<p>若一切正常，则命令行会打印出如下的提示信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure></p>
-<p>该信息表示<strong>Hexo</strong>服务器已经在本地的<strong>4000</strong>端口运行了。打开任意浏览器，在地址栏输入<strong>localhost:4000</strong>后回车，即可看到默认的欢迎页面。</p>
-<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>默认页面上信息都是关于<strong>Hexo</strong>的，我们要将其改为自己的信息。在<strong>myblog</strong>目录下，使用<strong>ls</strong>命令查看该目录下的所有文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ls</div><div class="line">_config.yml     node_modules    package.json    scaffolds   themes  db.json     package-lock.json   public      <span class="built_in">source</span>      yarn.lock</div></pre></td></tr></table></figure></p>
-<p>其中<strong>_config.yml</strong>保存了与网站相关的基本配置。使用<strong>vim</strong>打开，可以看到如下信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Hexo Configuration</span></div><div class="line"><span class="comment">## Docs: https://hexo.io/docs/configuration.html</span></div><div class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></div><div class="line"></div><div class="line"><span class="comment"># Site</span></div><div class="line">title: 你的博客名称</div><div class="line">subtitle:</div><div class="line">description: 你的博客介绍或者座右铭</div><div class="line">author: 你的昵称</div><div class="line">language: zh-Hans</div><div class="line">timezone:</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>最开始的部分就是关于网站的标题、作者和简介等信息，这里可以根据个人的情况填写，其中<strong>language</strong>那一栏填写<strong>zh-Hans</strong>表示网站采用简体中文。<strong>填写时注意各个字段的冒号后必须要空一格再填具体内容</strong>，填写完毕后保存即可。</p>
-<p>接着我们来看一下<strong>Hexo</strong>中一项很实用也很强大的工具，那就是<strong>主题</strong>。大家之所以喜欢写个人博客，一个很重要的原因就是它的自由性，我们可以往博客上添加任何个人喜欢的元素，也可以根据自己的喜好来定制网站的背景、样式、配色等。<strong>Hexo</strong>为我们修改网站的风格提供了一种非常便捷的方法，只需要简单的几步，就可以将我们的网站修改成一种指定的风格，我们还可以自己定制喜欢的模板。下面以<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo官网</a>上提供的<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a>主题为例，介绍下如何为我们的博客更换不同的主题。</p>
-<p>在<strong>myblog</strong>目录下执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<p><strong>Hexo</strong>中的主题实际上都是由不同的网友贡献的，以上命令将该主题所对应的<strong>github</strong>上的项目克隆到<strong>myblog</strong>目录的<strong>themes</strong>目录下。</p>
-<p>接着打开<strong>myblog</strong>目录下的<strong>_config.yml</strong>文件，找到<strong>theme</strong>配置项，将对应的值改成<strong>next</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Extensions</span></div><div class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></div><div class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></div><div class="line">theme: next</div></pre></td></tr></table></figure></p>
-<p>保存后退出。仍在<strong>myblog</strong>目录下，依次执行以下指令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean    </div><div class="line">$ hexo generate</div></pre></td></tr></table></figure></p>
-<p>两条命令分别是清除缓存文件以及重新生成静态文件。重新启动<strong>Hexo</strong>服务，即可看到<strong>next</strong>主题风格的博客页面。</p>
-<h3 id="更多设置"><a href="#更多设置" class="headerlink" title="更多设置"></a>更多设置</h3><h4 id="添加个人头像"><a href="#添加个人头像" class="headerlink" title="添加个人头像"></a>添加个人头像</h4><p>有了主题之后，我们可以在网站中设置侧边栏个人头像。在<strong>myblog</strong>目录下，打开<strong>themes/next/_config.yml</strong>文件，找到<strong>avatar</strong>配置项，将值设为头像的地址。该地址可以是一个完整的图片链接，也可以是一个站点内的相对路径。如果使用前者，为了保证图片链接的有效性，可以先将图片上传到<strong>github</strong>上再使用对应链接，而对于后者，则需要先将图片放到<strong>themes/next/source/images</strong>目录下，再使用相对路径引用。以下配置是一个采用相对路径的示例<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Sidebar Avatar</span></div><div class="line"><span class="comment"># in theme directory(source/images): /images/avatar.gif</span></div><div class="line"><span class="comment"># in site  directory(source/uploads): /uploads/avatar.gif</span></div><div class="line">avatar: /images/coolboy.jpg</div></pre></td></tr></table></figure></p>
-<h4 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h4><p><strong>Hexo</strong>默认只开启了两个标签：首页和归档，我们可以添加一些常用的其他标签，比如标签、分类和关于。先打开<strong>/themes/next/_config.yml</strong>文件，找到<strong>menu</strong>配置项，如下所示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">  home: / || home</div><div class="line">  <span class="comment">#about: /about/ || user</span></div><div class="line">  <span class="comment">#tags: /tags/ || tags</span></div><div class="line">  <span class="comment">#categories: /categories/ || th</span></div><div class="line">  archives: /archives/ || archive</div><div class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></div><div class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></div><div class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></div><div class="line"></div><div class="line"><span class="comment"># Enable/Disable menu icons.</span></div><div class="line">menu_icons:</div><div class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></div><div class="line">  home: home</div><div class="line">  about: user</div><div class="line">  categories: th</div><div class="line">  tags: tags</div><div class="line">  archives: archive</div></pre></td></tr></table></figure></p>
-<p>可以看到默认情况下只有<strong>home</strong>和<strong>archives</strong>前面没有<strong>#</strong>号，其他项都没注释掉了，因此我们要先把准备开启的标签前的<strong>#</strong>号给去掉，并且在下方<strong>menu_icons</strong>配置相应的值，这里配置的<strong>icon</strong>也就是网页上展现的对应的图标，实际上是由<a href="http://fontawesome.io" target="_blank" rel="external">Font Awesomo</a>网站提供的，涵盖了众多常用的网站图标。配好之后保存退出。</p>
-<p>然后我们来创建需要的页面。首先是<strong>about</strong>页面，在<strong>myblog</strong>目录下运行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page <span class="string">"about"</span></div></pre></td></tr></table></figure></p>
-<p>这条命令会在<strong>source</strong>目录下新建一个名为<strong>about</strong>的文件夹，并生成一个<strong>index.md</strong>文件，使用任意的<strong>markdown</strong>编辑器打开后编辑，可以写上个人的介绍以及一些自己想说的话，完成后保存退出，这样一来<strong>about</strong>页面就做好了。</p>
-<p>接下来是<strong>categories</strong>页面，同理，先在命令行运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page categories</div></pre></td></tr></table></figure></p>
-<p>然后编辑刚刚创建的<strong>index.md</strong>文档，将页面类型设置为<strong>categories</strong>即可，Hexo会自动将带有不同类别标签的文章进行分类归档展示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: Categories</div><div class="line">date: 2017-10-27 17:27:06</div><div class="line"><span class="built_in">type</span>: <span class="string">"categories"</span></div><div class="line">comments: <span class="literal">false</span></div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>这里还有个<strong>comments</strong>字段被设置为<strong>false</strong>，这是因为<strong>Hexo</strong>的博客可以外接一些第三方的评论系统，默认在所有页面都会显示，而我们一般只希望评论显示在文章主页面的下方，因此此处将评论给关闭。</p>
-<p>最后是<strong>tags</strong>页面，同理先在命令行创建页面，然后编辑页面，将页面的类型设置为<strong>tags</strong>即可，<strong>Hexo</strong>的主题系统会自动地在这个页面中显示标签云<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page <span class="string">"tags"</span></div></pre></td></tr></table></figure></p>
-<h4 id="添加Read-More按钮"><a href="#添加Read-More按钮" class="headerlink" title="添加Read More按钮"></a>添加Read More按钮</h4><p>默认情况下我们的文章会在主页以全部展开的形式呈现，但我们通常希望在主页上每篇文章只显示一部分，这样既显得简洁，又可能让读者看到更多的文章，便于读者的判断。想要做到这一点很简单，只要在文章对应的<strong>markdown</strong>文档中，按照下图所示插入一句特殊的代码到我们想要进行截断的任意位置即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">More info: [Server](https://hexo.io/docs/server.html)</div><div class="line"></div><div class="line">&lt;!--more--&gt;</div><div class="line"></div><div class="line"><span class="comment">### Generate static files</span></div></pre></td></tr></table></figure></p>
-<p>这样首页上的文章只会显示之前的部分，然后会有一个<strong>阅读全文</strong>的按钮，点击之后再进入文章的主页面，看起来非常舒服，也很合理。</p>
-<p>经过上面的这些设置后，我们就能得到一个看起来不错的博客网站了，可以运行<strong>Hexo</strong>服务，在浏览器上实时查看我们的网站，现在的情况就像这样</p>
-<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/01.png" alt="blog-first-site"></p>
-<h2 id="通过github发布"><a href="#通过github发布" class="headerlink" title="通过github发布"></a>通过github发布</h2><p>现在我们已在把网站在本地搭起来了，为了让别人能通过互联网访问我们的网站，还需要将其发布到网络上，这里我们以发布到<strong>github</strong>上为例。</p>
-<p>首先，我们要在<strong>github</strong>上新建一个<strong>Repository</strong>，名称固定为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yourNickName.github.io</div></pre></td></tr></table></figure></p>
-<p>其中<strong>yourNickName</strong>指的是你的<strong>github</strong>账户昵称，注意必须按照这个规则来命名。然后我们编辑<strong>myblog/_config.yml</strong>文件，在文件的最后几行找到<strong>deploy</strong>设置项，按照下面的方式进行修改<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Deployment</span></div><div class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></div><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: git@github.com:coolBoyGym/coolboygym.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>其中的<strong>repository</strong>字段需改成你自己的<strong>giuhub</strong>项目对应的地址。</p>
-<p>修改完成后，在<strong>blog</strong>目录下依次运行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
-<p><strong>Hexo</strong>会先在本地生成静态的网页文件，然后将所有文件推送到<strong>github</strong>上对应的项目中。一切正常的话，我们就可以通过下面的网址访问个人博客，应该能看到和本地一样的效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://yourNickName.github.io</div></pre></td></tr></table></figure></p>
-<p>到此，我们就算是真的搭建好一个简单的博客网站了，赶快请你的小伙伴们来看看吧~</p>
-<h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><p>当我们想要写一篇新博客时，先执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My-New-Post"</span></div></pre></td></tr></table></figure></p>
-<p>其中<strong>My-New-Post</strong>是你想新建的博文的名字，这条指令会在<strong>myblog/source/_posts</strong>文件夹下新建一个名为<strong>My-New-Post.md</strong>的文件，我们可以使用任意的<strong>markdown</strong>编辑器来打开它进行编写，完成之后，我们可以先在本地查看下效果，确认无误后，同样通过之前的两条命令来将这篇新的博文发布到<strong>github</strong>上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
-<p>关于<strong>markdown</strong>编辑器，笔者使用的是<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">Cmd Markdown</a>，界面比较简洁，可预览，功能也较全，值得推荐~</p>
-<p>以上就是本文的全部内容，涉及到了<strong>Hexo</strong>的一些基本操作，当然它的强大还远不止于此，通过集成各种第三方的服务，可以让我们的网站变得更加有趣，这个就有待读者们自己探究了，有什么好玩的第三方工具欢迎告诉我。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
-<ul>
-<li><a href="http://gonghonglou.com/2016/02/03/firstblog/" target="_blank" rel="external">与佳期的个人博客</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external">Hexo</a></li>
-<li><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a></li>
-<li><a href="https://github.com/iissnan/hexo-theme-next/wiki" target="_blank" rel="external">github/iissnan</a></li>
-</ul>
-</blockquote>
-]]></content>
-      
-        <categories>
-            
-            <category> coding </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Mac </tag>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>/2017/10/28/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> daily </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[Mac下安装Elasticsearch极简指南]]></title>
+    <url>%2F2017%2F11%2F07%2Finstall-elasticsearch-osx%2F</url>
+    <content type="text"><![CDATA[Elasticsearch(以下简称ES)是一个面向文档的实时分布式搜索和分析引擎。本文是在Mac系统下使用Homebrew安装ES+Kibana+Marvel的一份极简指南。 前置条件想要安装ES的前提是已经在本机安装了Java环境，在命令行键入1$ java -version 如果正确打印出版本信息则说明已安装Java，否则请到Java官网下载最新版安装即可。 另外，本文使用Homebrew来安装ES，Homebrew是Mac环境里的一种包管理工具，可以方便地进行软件的安装、更新和卸载操作。如果本机未安装，可以使用以下命令进行安装。1$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 完成以上步骤后，本机已具备Java和Homebrew，进入正题。 安装ES &amp; Kibana123$ brew update$ brew install elasticsearch$ brew install kibana 以上命令将ES和Kibana安装到本地，其中Kibana是ES的一个配套工具，可以让用户在网页中与ES进行交互。安装完成后，在命令行键入12$ brew info elasticsearch$ brew info kibana 可以分别看到两个软件的一些安装信息，比如安装路径和配置文件的路径等，后面会用到。 安装MarvelMarvel也是ES的一个插件，能够让你通过Kibana非常容易地监视ES集群的健康状态等信息。最新版的Marvel已经集成到X-Pack模块当中。X-Pack是ES的一个安全框架，可以给网页端访问Kibana加入账号系统，使操作更加安全，更多介绍请移步官方文档12$ cd /usr/local/Cellar/elasticsearch/&lt;whatever version you have&gt;$ bin/elasticsearch-plugin install x-pack 以上命令安装X-Pack模块到本地，至此安装部分完成。 启动ES &amp; Kibana12$ brew services start elasticsearch$ brew services start kibana 启动后可以在本地浏览器访问 ES: http://localhost:9200 Kibana: http://localhost:5601 首次进入Kibana页面时需要输入账号名和密码，默认的用户名是elastic，密码是changeme，可以通过以下命令修改密码123$ curl -XPUT -u elastic 'localhost:9200/_xpack/security/user/kibana/_password' -H "Content-Type: application/json" -d '&#123; "password" : "kibanapassword"&#125;' 如果不想使用账号密码，可以将下面的配置写入ES和kibana的配置文件，配置文件所在目录可以通过brew info xxx查看1xpack.security.enabled: false 重启ES和Kibana后以上配置即可生效12$ brew services restart elasticsearch$ brew services restart kibana 然后可以在Kibana页面中的Dev Tools子页面下直接与ES交互。关于ES的具体命令，请参看《Elasticsearch 权威指南》 祝学习愉快==]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[微信公众号开发工具汇总]]></title>
+    <url>%2F2017%2F11%2F06%2Fwechat-develop-tools%2F</url>
+    <content type="text"><![CDATA[前面写了篇入坑指南，介绍了下开发微信公众号的基本流程。最近又捣鼓了一阵，发现这开发工具的选择对于提高开发效率真是有莫大的帮助，所谓“只要工具选得好，月底奖金跑不了”。今天得空，笔者就给各位老哥列举几个绝对能派上用场的小工具，保证没毛病！ 微信公众平台技术文档这货实际上是必需品，没了它，您还真是寸步难行。官方文档包含了一个产品最直接也最全面的说明，在微信公众平台技术文档中，详细说明了微信公众号开发的概念与流程，以及各个接口的调用方法。开发中遇到的大部分问题都可以在这里找到答案。值得称赞的是，这份文档还在一开始给出了一份较为详尽的示例程序，通过代码的方式带着读者走了一遍开发的流程，细致全面又不显得啰嗦，可以说是比较用心了，给写文档的妹子点个赞！ 微信公众平台接口测试账号入坑指南里提到过，当前公众号类型主要分为订阅号和服务号，不同类型账号的主要区别在于接口调用的权限不同，那么如果我们就是想学习下各个接口的调用方法，但手边又找不到一个具有对应权限的公众号该怎么办呢？这时候你可以去申请一个接口测试账号。申请流程很简单，点击网页上的按钮，直接用微信扫码即可。 顾名思义，接口测试账号就是专门为开发人员准备的，用于测试接口调用方法的微信公众账号。和普通的公众号一样，可以在网页上对测试账号进行后台的管理，也可以通过扫描二维码的方式来关注测试账号，进行相应的操作。所不同的是，测试账号的名称和logo是无法更改的，名称就叫“xxx接口测试号”，logo则是个灰色的人头，为的就是把它们和通常的公众号区分开来。很显然，要是能改名改logo，那测试号就可以直接用于实际生产环境中了，也就没有必要再去申请公众号。 微信公众平台接口调试工具当我们在开发一个新功能的时候，通常希望能先预览一下实际的效果，这样可以对整个任务有一个更加感性的认识。而在开发微信公众号时，接口调试工具就能起到这样的作用。接口调试工具提供了一组图形化界面，通过简单地输入一些参数，就可以实现各个接口的调用，并立即在公众号上查看对应的效果。这种交互方式非常直观，也非常高效。此外接口调试工具还可以帮助我们进行debug，当我们在开发中遇到一直无法调通某个接口的情况时，可以将使用到的参数直接复制到接口调试工具的网页上，从而观察运行结果是否符合预期，通过比较两种方式调用结果的异同，我们可以更准确地找到bug所在。当然，关于debug这一点，下文介绍的工具才是真正的利器。 微信web开发者工具入坑指南里提到过，微信网页开发已经成为整个微信公众号开发当中很重要的一分部。事实上，在微信公众号开发中，设置自动回复规则和下拉菜单这两项所能提供给用户的服务非常有限，要想完成一些比较复杂的逻辑交互，就必须实现微信公众号内的网页开发。 网页开发就是指编写一系列的HTML5页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。 做过前端开发的老哥们对于浏览器中的“检查元素”这个功能一定都不陌生。当下前后端的开发通常是分离的，二者通过API接口进行对接。前端开发过程中为了进行调试，通常会在网页中打开“检查元素”功能来查看后端的回复是否正确，从而发现代码中可能存在的bug。而当我们进行微信web开发时，公众号里的网页是由微信自带的浏览器进行解析的，我们只能看到网页的效果，却无法看到任何有关前后端通信的数据，这样一来，当错误出现时，我们也就无从知道究竟是前端的锅还是后台的锅，这自然会影响开发的效率。微信团队的大佬们自然也想到了这一点，于是便有了web开发者工具这一调试利器。 微信web开发者工具实际上就是个自带“审查元素”功能的微信浏览器。通过扫码的方式，我们可以用自己的微信账号来登录这个软件。在登录之后，它就成为了一个可以在电脑桌面上打开的“微信浏览器”，通过在地址栏输入前端网页的地址，我们可以模拟在手机上的微信公众号中点击了某个网页的行为，当然此时前后端通信的数据也就一目了然。我们可以按照网页上的逻辑进行操作，就好像我们在一个普通的浏览器中所做的一样，简单好用，可以说是非常走心了。 以上就是笔者在捣鼓微信公众号时经常用到的一些小工具，回想起来，它们确实给开发过程带来了很大的帮助，在此分享给各位老哥，希望对各位有所帮助。]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>wechat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[优秀的程序员是什么样的？]]></title>
+    <url>%2F2017%2F11%2F03%2Fdo-not-trust-user-input%2F</url>
+    <content type="text"><![CDATA[在程序员的世界里有一句经典的至理名言：永远不要相信用户的输入。相信很多开发者都有过类似的踩坑经历，所谓“幸福的人都是相似的，而编程的人是幸福的”。 初入职时，作为一名后端工程师，每次实现接口后，老大(我的组长)都会过来帮我瞄一眼，然后提出一堆改进意见，其中最常被提到的一点就是：永远不要相信用户的输入。我不以为意，没怎么去改相关逻辑，这么做的后果就是老大下次再帮我检查时，总会伴随一阵悦耳的争辩声。 Round 1 你这里为什么不加个类型检查？万一接收到的值不是数组怎么办？ 怎么会呢，这些接口类型都是和前端定好的呀。 前端传入的数据是可以被篡改的，万一有人模拟了一个前端请求，发送一个其他类型的变量，那你的程序不就炸了？ 那样的话程序会返回服务器异常，攻击者也不会得到什么有用的信息吧… 是没什么损失，但为什么要给别人留下这么个漏洞呢？ 哦哦… Round 2 这个接口传入的是图片对吧，为什么不检查下图片的大小？ 这个，前端已经检查过了，太大的图片前端会先进行压缩的。 不是和你说过了吗，永远不要相信前端的输入！万一有攻击者模拟前端接口发来很大的图片呢？ 额，不是还有nginx可以挡一道吗？太大的图片应该直接无法响应吧。 nginx的确能做这个，但这些也是需要配置参数的，万一不小心参数设太大了没发现怎么办？ 哦，那就只能接收并保存下来了，不过我们的图片不都放在s3上吗，大一点也没什么关系吧，存储也挺便宜的… 你太天真了！首先，s3也是要花钱的，虽然空间不贵，但流量贵啊，万一真被人发现这个漏洞，他们完全可以把大量的图片通过你这里上传，然后根据返回值里的图片链接去获取。甚至如果有不怀好意的人传了些不该传的东西上去，那咱说不定都要去局里坐坐，这可不是开玩笑。 Game Over 这下我算彻底服了，只好满口答应，然后老老实实把该补的补上。嘴上虽这么说，但心里难免还有点疙瘩，这些都是特殊情况嘛，哪有那么容易就发生。事情总是这样，只要还没在自己身上发生，就会抱有侥幸心理，认为它一定不会发生，等到真的发生了，又来责怪自己当初怎么那么不小心。笔者就有过这么个经历，虽没犯下什么大错，但也足够长点记性了。 话说最近在做微信公众号开发，某天PM(产品经理)姐姐拿着个新需求过来，说是要加一个批量导入历史用户的功能，我扫了一眼开发文档，在用户管理文档中找到了获取用户基本信息这一项，心想不正是这个接口么，于是自信地回了句：“明天下班前给你”，转头就热火朝天地敲起了键盘。 整个流程比较清晰，先通过接口调用凭据access_token获取用户的openid列表，再调用获取用户基本信息接口来得到用户的昵称等信息，再将获取到的信息存到数据库即可。不过，作为一个严谨的开发，当然不能这么草率，还要考虑下效率和安全的问题。微信公众号里的用户动不动就上万，要一个个去获取基本信息那绝对是不妥当的，这一点微信团队的大佬们当然也想到了，所以提供了一个批量获取微信用户信息的接口，甚是方便。 另外，将数据存储到数据库时，当然也不能一条条地存入，这样一不小心得把数据库整挂了。应该在程序里构造sql语句，累计到一定的用户量之后再以批量的方式插入，这样不仅减少了操作数据库的次数，而且直接执行sql语句的方式也更加高效。 考虑完这两点后，就开始敲代码了。手指翻飞间，几个接口函数已经基本完成，打开编译器，一路绿灯，又麻利地打开本地的前端服务，准备开始调试。点击导入历史用户按钮，后端收到请求，调试器里查看，微信正确地返回了用户列表，因为线下的环境只是个测试号，所以只有20人左右，继续点击下一步，用户信息也成功获取，下一步，sql语句执行成功，全部用户导入完毕，到数据库里一看，数据确实都存下来了，搞定！ 接下来，就是将程序上线了。虽然只是个小功能，可一旦要上线都是需要找老大来的，毕竟万一线上的代码真出了问题这锅最后还得到他头上。于是我就跑去找来了他，他当然也知道我今天在开发这个功能，看我不到半天就完成了，还捎带夸了句：完成地挺快呵。我自然是轻扬起嘴角，淡淡地回了句：这活还蛮简单的。 然而，这种笑容很快就消失了，因为我看到坐在我电脑前的老大眉头紧缩，顿觉头顶乌云密布。果然，不到一会儿，就传来了老大的“盘问”。 你直接用sql语句来插入数据的？ 嗯，感觉这样子更方便一点，效率也更快点。 这个想法是没错，但你这里有个问题啊，在构造sql语句的时候，要特别注意单引号的使用，你看你这里在每个变量的两边显式地加入了单引号，那要是变量的字符串里本身就包含单引号怎么办呢？ 啊，变量的值怎么可能会有单引号啊，这一点我没想到诶。 怎么不可能？你这里的值是微信用户的信息对吧，万一哪个家伙无聊在昵称里加了个单引号呢，这完全是可能的，这种时候你的sql语句就会被这个单引号提前封闭，就会产生语法错误，也就无法正常地执行了。更要命的是，这个时候用户单引号后面的部分就成为了sql命令的一部分被执行了，万一来个drop database之类的，再加个单引号把原来的部分还原，那这就成了典型的注入攻击了。到时候你哭都来不及。 哇靠，原来还有这种操作啊，我如梦初醒，不觉后背发凉。之前听老大提起过在php时代著名的注入攻击的案例，没想到今天自己竟差点犯了这个错误，真是罪过。那该怎么解决呢？我向老大请教。 这个其实也挺简单，只要把可能存在的特殊字符给转义就行了，这样它们就不会变成sql的一部分被执行。 嗯，有道理。于是我就噼里啪啦改起来，不一会儿就把该转义的给转义了，老大看完微微点头，然后再次强调说，特别是涉及到数据库的操作时，一定要严格地检查用户的输入，考虑所有可能的情况，防止出现这样的问题。我毕恭毕敬地听着，点头如捣蒜。 不过事情还没完。老大紧接着又指出另一个问题：你在接收到微信服务器返回的用户信息列表时，有检查它的类型吗？ 我有点疑惑，这个类型不是在微信的文档里写好的嘛，只能是JSON啊，难道这也需要检查吗？ 老大貌似看出了我的疑虑，问到：万一用户的信息里确实有一些特殊的字符，没办法用JSON的方式传输呢？是不是需要先将JSON做个序列化再传输呢？而你没有判断返回值的类型，完全按照JSON的格式来处理，这样后面有可能会出错的。 我还是有点疑惑，不就是个昵称嘛，能有什么特别的字符呢？ 老大看了看我，建议我现在去试下微信修改昵称的功能。这不看还真不知道，在改昵称的时候原来可以插入表情的啊，还不止是微信官方提供的表情，而是能添加自己私藏的任意表情，表情是海量的，而JSON能识别的字符集是有限的，这么一来也就自然会出现一些JSON无法识别的字符。 看到这，我算是相信了，于是又把类型检查给加上了，并且当接收到的类型是字符串时，对其进行了处理，消除了里面可能存在的非JSON字符。老大看了看我，这次算是露出了比较满意的表情。 最后，又检查了一遍，为了验证刚才老大的两个想法，我还特意加了一个记录日志的操作，看看接收到的信息到底都是些啥。确认无误后，老大把程序更新到了线上。两三分钟后，更新完成，我迫不及待地尝试了下这个新功能。说来您还真别不信，线上用户的公众号总共有两万多关注者，这些人里面居然真的有人在昵称里使用了单引号，而且这类人还不少，大概三四百人里就有一个。而且返回的用户信息列表居然真的不全是JSON格式的，而是有部分string格式的，将这些string解析后得到的JSON里面，确实包含了一些无法识别的字符。 我看着日志里的结果，又看了看微信公众平台的官方文档，再回头看看老大那挂着浅浅笑容的脸颊，不禁肃然起敬。一方面是觉得尽管诸如微信这样的官方文档也难免会有疏漏之处，不可一味地根据主观意向来判断。再者，则是对老大的远见卓识佩服之至。我记得曾在知乎上看到过一个问题，大意是说 做一个优秀的程序员到底难在哪里？ 答案里有一条是这么写的： 由于你是一个优秀的（或仅仅是经验丰富的）程序员，你可以看出项目代码里存在着的隐患。你选择防患于未然，修复这些问题，但由于问题并没有真的发生，你所做的一切，在不那么优秀的程序员同事的眼中（以及老大眼中），看起来并没有什么产出。 诚哉斯言。回想起先前的经历，要不是老大及时指出代码里可能存在的错误，那肯定是要出问题的，虽然这一次不一定导致什么严重的后果，但若问题不除，迟早要吃大亏。此时老大已经起身准备离开了，他还有一大堆的事情要忙呢。不过在临走前，他又一次嘱咐了我：永远不要相信用户的输入。 嗯，这次我是真的记住了。望着老大远去的背影，我在心里默念到。 大概，这就是我心目中优秀程序员该有的样子。 参考链接 做一个优秀的程序员到底难在哪里？ - Van Bruce的回答 - 知乎]]></content>
+      <categories>
+        <category>ideas</category>
+      </categories>
+      <tags>
+        <tag>启示录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[手把手教你入门微信公众号开发]]></title>
+    <url>%2F2017%2F11%2F01%2Fbasic-wechat-develop%2F</url>
+    <content type="text"><![CDATA[这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。 缘起 近日腾讯发布2017年中报，报告中指出，腾讯二季度实现营业收入566.06亿元，经营盈利、期内盈利分别达到225.6亿元和182.54亿元。按照当前利润与员工数估算，腾讯员工的平均年薪达到80万… 尽管很多人吐槽王者荣耀里的小学生太坑爹，但不得不承认，近年来腾讯的变现能力确实强大地吓人。这之中微信和QQ作为用户的入口，起到了很大的作用。特别是微信，已然是一款装机必备的全民软件，如何借助这个庞大的平台搞点事情，分享下微信带来的用户红利，也就成为一件很值得研究的事。微信公众号是个人或者企业的一个宣传平台，通过开发微信公众号，可以给关注公众号的用户提供更多定制化的服务，进一步可以将服务转化为效益。本文旨在给正准备做微信公众号开发的朋友分享一点经验，从而尽快熟悉微信公众号开发的整体流程。在此基础上可以继续去学习一些高级的开发技巧（比如微信支付、账单系统之类的），让自己的公众号更加地精(zhi)美(qian)。 磨刀不误砍柴工微信公众号大家肯定都用过。目前微信公众号主要分为订阅号和服务号，每种账号又分为未认证和已认证，它们的差别主要在于具有不同的接口权限，下图（引用自微信开发实战系列）是一些例子： 总体来说，服务号权限 &gt; 订阅号权限，认证账号权限 &gt; 未认证账号权限。申请订阅号比较简单，服务号相对复杂点，另外要认证的话还要额外提交一些材料。我们可以根据不同的业务需求去申请不同类型的账号，基本上常用的权限列表已经可以满足大部分的场景。 开发微信公众号本质上和通常的网站开发并无区别。当我们进入一个公众号页面之后，我们可以向公众号发送文字、语音、图片等消息，也可以通过点击页面下方的菜单触发相应的功能。那么开发者与微信用户究竟是怎么进行交互的呢？实际上我们在公众号里的所有操作，都会发送到微信的服务器上，微信服务器将这些动作的具体含义按照一定的格式进行封装后，发送到微信公众号所对应的服务器上（这个服务器的地址可以由开发者在微信公众号的后台进行配置），开发者通过编写代码来处理不同的用户行为，并将处理后的结果按照一定的格式返回给微信服务器，再由微信服务器发送到微信公众号里面，从而完成了一次交互过程。在这里借用方倍老师博客中的一张图片来展示下这个过程，可以帮助大家理解地更清楚： 到这里我们可以知道，所谓的微信公众号开发，其实就是编写业务代码来处理用户的动作请求。这里面会涉及到和微信服务器之间的通信，也就涉及到一些安全认证方面的知识，后文会通过一个实际的例子进行说明。现在，就让我们来看看具体的流程吧。 巧妇难为无米之炊开发微信公众号需要准备以下两样食材： 微信公众号微信公众号可以在微信公众平台的官网上申请。前文说过，微信公众号分为几种类型，不同的类型具有不同的权限，具体的权限列表可以查看微信公众平台技术文档。值得注意的是，现在已经不再支持个人类型的公众账号申请微信认证。申请的过程无非是填写下邮箱和信息，建议使用QQ邮箱，毕竟是自家的东西。 服务器由于我们的服务器需要与微信服务器进行交互，因此必须能够让微信服务器可以访问到。很多公司都提供了云服务器租赁，价格不一，可以自行申请，细节在此不表。如果不想花钱申请，也可以使用一些外网穿透工具，将本地的IP暴露到公网中供外部访问，具体的工具请自行百度，不过大部分软件稳定性无法保证，而且分配的域名经常改变。个人建议还是申请一台服务器比较方便，等以后公众号运营良好开始涨(ying)粉(li)了，这些都不是事~ 撸起袖子加油干以下是详细步骤： 开启公众号开发者模式为了让微信服务器知道开发者服务器的存在，必须在公众号后台进行相应的配置。(1) 登录公众平台官网，找到左边功能栏的最下方，有一个基本配置的选项 (2) 点击基本配置按钮，在右边的页面中填写服务器的相关信息。其中URL填写http://外网IP:端口号/wx，这里外网IP是服务器的外网IP地址，端口号固定填写80。Token可以自由填写，用于两个服务器之间的验证。具体见下图： (3) 点击提交按钮，提示配置失败。这是自然的，因为我们还需要在开发者服务器上进行配置，才能完成验证的过程。 (4) 前面在配置微信公众号时为什么提示失败呢？在此我们有必要探究下这个认证过程。当我们点击了提交后，微信服务器会向我们所填写的那个URL发起一个GET请求，并携带以下几个参数：timestamp, nonce, echostr, signature。其中timestamp是一个时间戳，nonce是一个随机数，echostr也是随机数，这几个都很普通，重点在于signature，它的生成方式是将nonce、timestamp和token（也就是我们在网页中配置的TOKNE）三个字符串按照字典序排序后，对排序后得到的字符串数组使用哈希加密算法得到。我们的服务器在收到这个GET请求后，提取对应的参数，并按照前面说的方式生成hashcode，如果这个值与参数中的signature相同，那么我们就将echostr返回给微信服务器，否则返回空值。微信服务器收到这个echostr之后，验证这个值与它发送的echostr值是否相同，如果相同，说明这个值的确是由我们的服务器返回的，从而完成验证，今后所有的信息就都可以发送到这个服务器地址上。这里面涉及到了一些安全认证的相关知识，有兴趣的朋友可以去查阅更详细的资料。总的来说，就是让通信的双方都能够确认对方的真实身份。以下是认证部分的主要代码，使用Python2.7和web.py框架编写： 编写服务器业务逻辑前面我们完成了微信服务器与开发者服务器的相互认证过程，接下来我们需要编写业务逻辑代码来处理微信服务器发送过来的信息。以文本消息为例，当用户在公众号页面发送了消息后，微信服务器会将这条消息封装成如下的XML格式，并将其作为请求的内容向开发者服务器发起一个POST请求： 各个字段的具体含义就如字段名所示，比较直观。我们首先需要解析这个XML对象，并提取出各个字段用于后续的处理： 解析之后，我们可以在主函数中根据消息的不同类型，来调用不同的处理函数得到相应的处理结果，然后我们要将处理结果封装成同样的XML格式返回给微信服务器，封装XML对象的代码如下所示（以文本消息为例）： 至此，我们就完成了一个简单的回复流程（虽然目前这种只能回复文本消息==）。 更上一层楼以上就是一个基本的微信公众号开发流程。当然，想要让我们的公众号变得多姿多彩，需要掌握的内容还有很多。比如 (1) access_token：前面我们所做的实际是被动回复消息，微信服务器发起POST请求，我们将处理后的内容借由微信服务器返回给用户。如果我们需要主动地和用户进行交互，比如主动地向用户发一条消息，我们就需要调用微信公众平台提供的相应接口，并且需要主动告诉微信服务器我们的身份，这是通过access_token实现的。 access_token是微信公众号的全局唯一接口调用凭据，公众号在调用各个接口时都需要使用access_token。 如上所述，在我们调用各个接口前，需要先使用公众号的appid和appsecret信息（这两个值可以从微信公众号的网页上查看）向微信服务器请求获取access_token，然后带着这个值去调用微信公众平台提供的接口，实现相应的功能。 (2) 微信网页开发：网页开发就是指编写一系列的HTML5页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。 从这里出发以上就是本文的主体内容。楼主经验尚浅，斗胆提笔撰文，有不当之处欢迎各位指出。本文主要是一个入门的简介，后续的开发还有很多内容要学，以下列出一些个人认为比较不错的文档和资料，楼主也从中学到了很多，在此感谢各位作者。 (1) 微信公众平台技术文档(2) 方培工作室-微信公众平台开发教程(3) 微信开发者联盟(4) 微信开发实战系列 本文中的代码已上传到github，里面包含了微信公众号一些常用功能的实现，仅供参考：微信公众号开发示例程序]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>wechat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[我们都曾行走在白夜里]]></title>
+    <url>%2F2017%2F11%2F01%2Fbai-ye-xing-note%2F</url>
+    <content type="text"><![CDATA[当我合上书本，再次看到封面上牵着手的小男孩和小女孩时，一种莫名的难过翻涌而来，投射到墙上的阴影仿佛要将整个房间笼罩。那里本该洒满阳光。 东野大叔的叙事风格宛若天马行空，这一点在《解忧杂货店》中就充分感受过，相比起来，《白夜行》可谓有过之而无不及，乃至于第一遍捧起书时到第五章就看不下去了，我已经忘了前面都说了啥。我是怀着一点猎奇的心来的，顶尖的推理小说作家，悬疑的杀人案件，如潮水般的好评，这足以让人坚信这本书能给人带来精彩的阅读体验。 但很显然，那时的我并没感受到。紧张的案件叙述部分在第一章的末尾戛然而止，接下来时光不断往前推进，各色人物一个接一个出现，发生的故事似乎没什么联系，那桩案子也宛如投向湖中的石子，随着波纹的远去逐渐淡出人们的视野。 难道就这样了吗？我不禁暗自揣测。合上书本，我瞅了眼封面，两个小孩子携手同行，他们的影子被拉得老长。这幅画有什么含义呢？我实在搞不懂。但东野大叔应该不会让人失望吧。 于是我又把书翻到了第一页。 东野大叔也确实没让人失望。 天网恢恢，疏而不漏。尽职的老刑警追了十九年，终于亲手将真凶绳之于法，而另一位主谋唐泽雪穗，则在失去唯一的精神支柱后彻底卸下了伪装。 她一次都没有回头。 这是全文的结尾，也是最精彩的地方之一。初看起来，这句话似乎进一步表现了雪穗的心狠手辣，对于和自己相依为命的伙伴的死也毫不在乎，但考虑到当时的场景，一个“陌生人”在自己店门口死亡，换做普通人应该会和她的店员们一样惊慌失措，而她却没有丝毫的情绪变化，这恰恰说明她此刻内心的波动之大，甚至让她忘记了身上一直披着的那层伪装。以这种方式接受惩罚，大概是最令人满意的结局。 东野大叔的确很擅长叙事，当看完全书再把前面的故事串起来时，才发现原来两位主角犯下了如此多的罪行，可谓千夫所指。这种人性的恶，在主人公身上被展现地淋漓尽致。 但整本书仅仅就是为了描述人性的恶吗？ 关于整个故事，有一个颇具争议的问题：该不该同情雪穗和亮司？ 我想，纵使不被同情，也不该把全部的错怪罪到他们身上。任何事情的发生都有个缘由。善恶终有来处。 出身贫苦，父亲早逝，与柔弱的母亲相依为命，被迫和陌生的大叔发生关系，这是唐泽雪穗的童年，也是导致其性格变化的直接原因。在那个破烂的潮湿的小屋子里，她度过了人生中本该最美好的一段时光，但留给她的却只有无尽的黑暗。母亲忙于生计，卑躬屈膝还要处处遭人白眼，连带着她一起受尽委屈。最可恨的是，为了生活，亲生母亲居然把她交易给胡子拉碴的大叔作为性工具，那是怎样一种无奈与痛苦。雪穗向母亲抗议过吗？我想大概是有的。但在母亲的恳求或是诱导下，她不得不接受这样的现实。从那一刻起，她的心里就已经埋下了邪恶的种子，随着时间的推移，慢慢生根发芽。 我从来就没有太阳，所以不怕失去。 正如她自已所说，她从一开始就是个身处黑暗的人，心中只剩欲望和仇恨。 桐原亮司的幼年也不快乐。虽然不愁吃穿，但风流成性的母亲和患有恋童癖的父亲显然没有给过他任何的关爱。他们不关心他每天都去了哪，干了啥，只管自己过得快活。他在家里没有任何人可以交流，于是他跑了出去，和同龄小朋友们玩耍是他少有的慰藉。直到他遇见了雪穗，他找到了一个可以说话的人，他把自己心爱的剪纸拿给她看，他和她经常相约在图书馆见面。多么美好的事啊，有这么可爱的玩伴。 他们本该这样长大。 当桐原拿起剪刀戳向父亲时，他一定花光了全部的力气。那种义无反顾，就像是去完成一件多么伟大的使命一般。只不过，此时的天空已被白夜笼罩。 从此枪虾和虾虎鱼开始了彼此依赖的生活。他们结伴而行，在白夜里摸索。 亮司最后强奸了美佳，变成了他父亲那样的人。雪穗安排了这一切，变成了她母亲那样的人。 这是小说中最具戏剧性的地方。受害者最终成为了害人者，新的受害人又是否会延续这样的轮回？循环往复，归途何处？ 每当我们在报道里看到，一些青年乃至少年犯下的极恶罪行，总是会习惯性地感叹一番人心的险恶，家教的缺失，然后再将《未成年人保护法》痛骂一番。罪犯固然可恨，该受到应有的制裁，但我们更应该考虑到，扭曲的心灵并非与生俱来的，黑暗的背后更需要阳光的照耀。 我曾认识这样一个女孩。 她出生在一个农村家庭，父亲嗜赌如命，在输光了家里所有的积蓄后，抛下她和母亲独自离去，那时她只有两岁半。母亲不堪重负，也狠心离去，将她留给了年迈的爷爷奶奶。村里的孩子经常欺负她，嘲笑她是个没人要的小孩，她很难过，又不知怎么反驳，就只是一味地哭。二老也没什么法子，就让她待在房间里，不准她出来。从此每天陪伴她的就只有洋娃娃和天花板，甚至连外面的蓝天白云都看不到。 后来她上了学，总是一个人坐在最角落的位置上，无心上课，成绩也一塌糊涂。后排调皮的男孩子经常拿她开玩笑，有的还动手动脚，她拼命想要反抗，但双拳难敌四手，她还是会经常受到欺负。终于有一天，她忍不住了，在放学路上捡起一块砖头狠狠扔向了其中一个人的头。 男孩受了重伤，家人找上门来，索要赔款，声称不赔钱就抓人。二老一边哭一边气，骂她是个没用的东西，和她爸一样，就知道干坏事。嘴上虽然骂娘，但钱还是得赔，总不能真让个十来岁的女娃子去蹲派出所。亲戚朋友们凑了点钱，把这事儿算是盖了过去。 后来倒也真平静了一阵儿，半年多没再闹事儿，估计是学校里的小伙儿们也心有戚戚，这姑娘惹不得。 那年春节，我爸妈觉得她家怪可怜的，又是街坊邻居的，就让我送点东西去她家。我把一篮子吃的提到厨房，和她奶奶聊了会儿家常。出门的时候，我不经意间回了个头，从旁边小房间里传来一道阴冷的光，差点没把我吓到。 她一个人蜷缩在房间的地板上，靠着床沿，边上是一台老旧的小彩电。她的目光朝我这边汇聚，眉头有一点点皱，紧咬着嘴唇，就那么死死地看着我。 我晃了晃神，匆忙地溜出大门，脚步飞快。 那是我一辈子忘不掉的眼神。 再后来，我去县城里上高中，少有机会回家，也就没再见到过她。只是某一年回去的时候听妈提起过，她好像很早就辍学了，离开了那个家，不知道去了哪。 天大地大，何处是家。 细想下这事儿，她的父亲肯定是要负首要责任的。父亲的恶习导致了家庭的破裂，给年幼的孩子造成了不可挽回的伤害。如果不想养家，又为何要成家？再往上找，父亲的恶习又是怎么造成的呢？大概是早年时不学无术，又没有一技之长，甚至懒惰地连活也不想干，于是就想找点快捷的方法。你说这该怪他的父母吗？可他们大概会说，我们要赚钱养家啊，哪有时间管孩子，只要他老老实实不给我们惹麻烦就行。他自己好赌，那是他天生的，这混账小子。 呵，养家糊口，不肖子孙，多么冠冕堂皇。 总有一些人，喜欢把孩子当做自己的附属品，只要给口饭吃给个衣服穿，就算是养他了。他们不懂得什么是教育，甚至不会教孩子基本的行为礼仪和道德廉耻，反正命是他的，爱咋咋地，老子当年也是这么过来的，不照样活得好好的？ 愚昧和无知，比黑暗本身更可怕。 想再讲个事儿。 近年来有个词在网络上出现的频率不断提升，就是“抑郁症”。 “某当红男星因抑郁症在家中服毒自杀，花样年华就此陨落。” “某中学女生因难忍同学的流言蜚语，终日恍惚不定，最后留下一纸遗书，从十楼的家中跳下。” 伴随着抑郁症而出现的，还有一种叫做“网络暴力”的现象。某人被爆“黑料”，全网通告，好事者火速赶往现场，不论是非曲直，群起而攻之，或图一时之嘴快，或蹭一时之流量，他们坚信法不责众，大家都说黑的肯定错不了。当事人还未晃过神，就要迎接漫天的声讨。理智者顺藤摸瓜，找准源头，可使烟消云散。更多的人则选择沉默，听之任之，不到数日，或在沉默中爆发，或在沉默中消亡。前者伤人，后者伤身，只留下一声叹息，以供凭吊。 而我们，或许就曾是众多好事者中的一个，尽管有时连我们自己可能都没意识到。 少一点刽子手，多一点摸摸头。我们没办法要求别人如何如何，但至少自己能做到不轻信，不盲从，凡事有个理性的判断，而非人云亦云。毕竟，思维能力是人区别于动物的最大特点，如果连独立思考都不会了，又与动物何异呢？ 愿白夜不再笼罩，黑夜里也能传来欢笑。]]></content>
+      <categories>
+        <category>reading</category>
+      </categories>
+      <tags>
+        <tag>东野圭吾</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在Mac上搭建基于Hexo的个人博客网站]]></title>
+    <url>%2F2017%2F10%2F29%2Fcreate-hexo-blog%2F</url>
+    <content type="text"><![CDATA[Hexo是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步官方文档。本文主要记录下笔者在Mac上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。 环境配置安装Hexo前需要先安装Git和Node.js 1. Git在Mac上安装Git最方便的方式是使用Homebrew，它是Mac上的一种包管理工具，能方便地安装和卸载软件。1$ brew install git 安装结束后在命令行输入git后运行，如果屏幕上出现git命令的使用帮助，说明安装成功。 在后文中可以看到，笔者借助github的网站作为个人博客网站的代理服务器。在进行博客网站部署时，会频繁涉及到本地与github网站的通信，为了免去每次通信时都要输入用户名和密码的烦恼，我们可以将本地的一组ssh-key传到github网站上，作为通信的凭据。 SSH是一种网络协议，全称Secure Shell，主要用于计算机之间的加密传输。以下介绍相应配置。 首先检查本地是否已存在ssh-keys1$ ls -a ~/.ssh/ 以上命令列出当前用户主目录下的.ssh目录中的所有文件，如果存在id_rsa和id_rsa.pub则跳过下一步，否则需要手动生成一组ssh-key 执行以下命令生成一组公/私钥，其中your_email@example.com需要替换成你自己的邮箱地址。1$ ssh-keygen -t rsa -C "your_email@example.com" 生成的文件默认会放在之前提到的.ssh目录中，我们需要获得公钥的值，在命令行输入1$ cat ~/.ssh/id_rsa.pub 该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。 接着登录github网站，单击右上角的头像，依次点击Settings -&gt; SSH and GPG keys -&gt; New SSH key 之后，会出现个文本框，在Title那一栏填写一些用于标识当前机器的信息，然后将前面复制的公钥值粘贴到Key那一栏，点击Add SSH key，即完成了添加操作，今后可以使用ssh地址直接从你的github仓库clone项目到本地，也可以将本地的修改直接push到github上，非常方便。 2. Node.jsNode是javascript的一种运行时环境，也是近年来非常流行的一门技术。安装Node.js的最佳方式是使用nvm。在命令行输入1$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash 这条命令通过curl下载install.sh脚本，并执行脚本。待执行完成后，它会把nvm命令的执行路径放到~/.bashrc文件里，我们可以用cat命令来查看一下1234$ cat ~/.bashrcexport NVM_DIR="/Users/gao-yimei/.nvm"[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh" # This loads nvm 确认存在以上配置后，通过执行source命令来使得环境变量生效1$ source ~/.bashrc 至此我们就把nvm安装好了，可以通过以下命令查看nvm版本号12$ nvm --version0.29.0 如果能正确打印出版本信息就证明nvm已经安装成功。接着通过执行以下命令来安装Node.js1$ nvm install stable 如果安装期间遇到权限问题，可以改用sudo的方式重新运行。 安装完成后，在命令行键入12$ node -vv7.1.0 如果能够正确打印出版本信息，则说明安装成功。 安装Hexo完成准备工作后，可以正式开始安装Hexo。在命令行输入1$ sudo npm install -g hexo-cli npm是Node.js自带的一个包管理工具，用于安装和卸载Node模块。上面的命令将Hexo这个模块以全局的方式安装到我们的电脑中，是Hexo官方推荐的方式。但笔者在运行这条命令时，出现了如下的错误12345678910111213141516npm ERR! Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/hexo-cli'npm ERR! at Error (native)npm ERR! &#123; [Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/hexo-cli']npm ERR! errno: -13,npm ERR! code: 'EACCES',npm ERR! syscall: 'mkdir',npm ERR! path: '/usr/local/lib/node_modules/hexo-cli',npm ERR! fstream_type: 'Directory',npm ERR! fstream_path: '/usr/local/lib/node_modules/hexo-cli',npm ERR! fstream_class: 'DirWriter',npm ERR! fstream_stack: npm ERR! [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25',npm ERR! '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53',npm ERR! 'FSReqWrap.oncomplete (fs.js:82:15)' ] &#125;npm ERR! npm ERR! Please try running this command again as root/Administrator. 明明是以sudo方式运行的啊，为什么会出现权限错误呢？笔者一头雾水，最后还是在某度上找到了一个解决方案。执行以下代码1$ sudo npm install --unsafe-perm --verbose -g hexo 大意就是忽略一些安全方面的警告，强制安装。最终成功安装上了。 使用Hexo基本用法Hexo默认已经配置好了基本的选项，通过以下几步简单的操作就可以获得一个示例的博客网站。 终端切换到一个你准备用来搭建博客的目录，然后执行命令1$ hexo init myblog 其中myblog将会作为博客网站的本地主目录，该命令对文件夹进行了初始化，生成了一些建设网站所必须的材料。切换到myblog文件夹下，执行以下命令1$ npm install 前面提到过，npm install是用来安装Node.js模块的，当这个命令不带参数时，它将会读取当前目录(也就是myblog目录)下的package.json文件，并按照里面的描述来安装，所有的模块都会存在当前目录下一个名为node_modules的文件夹下。 等待安装完成后，仍在当前目录下，执行以下命令，开启Hexo服务器1$ hexo start 若一切正常，则命令行会打印出如下的提示信息12INFO Start processingINFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop. 该信息表示Hexo服务器已经在本地的4000端口运行了。打开任意浏览器，在地址栏输入localhost:4000后回车，即可看到默认的欢迎页面。 修改配置默认页面上信息都是关于Hexo的，我们要将其改为自己的信息。在myblog目录下，使用ls命令查看该目录下的所有文件12$ ls_config.yml node_modules package.json scaffolds themes db.json package-lock.json public source yarn.lock 其中_config.yml保存了与网站相关的基本配置。使用vim打开，可以看到如下信息123456789101112# Hexo Configuration## Docs: https://hexo.io/docs/configuration.html## Source: https://github.com/hexojs/hexo/# Sitetitle: 你的博客名称subtitle:description: 你的博客介绍或者座右铭author: 你的昵称language: zh-Hanstimezone:... 最开始的部分就是关于网站的标题、作者和简介等信息，这里可以根据个人的情况填写，其中language那一栏填写zh-Hans表示网站采用简体中文。填写时注意各个字段的冒号后必须要空一格再填具体内容，填写完毕后保存即可。 接着我们来看一下Hexo中一项很实用也很强大的工具，那就是主题。大家之所以喜欢写个人博客，一个很重要的原因就是它的自由性，我们可以往博客上添加任何个人喜欢的元素，也可以根据自己的喜好来定制网站的背景、样式、配色等。Hexo为我们修改网站的风格提供了一种非常便捷的方法，只需要简单的几步，就可以将我们的网站修改成一种指定的风格，我们还可以自己定制喜欢的模板。下面以Hexo官网上提供的NexT主题为例，介绍下如何为我们的博客更换不同的主题。 在myblog目录下执行以下命令1$ git clone https://github.com/iissnan/hexo-theme-next themes/next Hexo中的主题实际上都是由不同的网友贡献的，以上命令将该主题所对应的github上的项目克隆到myblog目录的themes目录下。 接着打开myblog目录下的_config.yml文件，找到theme配置项，将对应的值改成next1234# Extensions## Plugins: https://hexo.io/plugins/## Themes: https://hexo.io/themes/theme: next 保存后退出。仍在myblog目录下，依次执行以下指令12$ hexo clean $ hexo generate 两条命令分别是清除缓存文件以及重新生成静态文件。重新启动Hexo服务，即可看到next主题风格的博客页面。 更多设置添加个人头像有了主题之后，我们可以在网站中设置侧边栏个人头像。在myblog目录下，打开themes/next/_config.yml文件，找到avatar配置项，将值设为头像的地址。该地址可以是一个完整的图片链接，也可以是一个站点内的相对路径。如果使用前者，为了保证图片链接的有效性，可以先将图片上传到github上再使用对应链接，而对于后者，则需要先将图片放到themes/next/source/images目录下，再使用相对路径引用。以下配置是一个采用相对路径的示例1234# Sidebar Avatar# in theme directory(source/images): /images/avatar.gif# in site directory(source/uploads): /uploads/avatar.gifavatar: /images/coolboy.jpg 添加标签Hexo默认只开启了两个标签：首页和归档，我们可以添加一些常用的其他标签，比如标签、分类和关于。先打开/themes/next/_config.yml文件，找到menu配置项，如下所示123456789101112131415161718menu: home: / || home #about: /about/ || user #tags: /tags/ || tags #categories: /categories/ || th archives: /archives/ || archive #schedule: /schedule/ || calendar #sitemap: /sitemap.xml || sitemap #commonweal: /404/ || heartbeat# Enable/Disable menu icons.menu_icons: enable: true home: home about: user categories: th tags: tags archives: archive 可以看到默认情况下只有home和archives前面没有#号，其他项都没注释掉了，因此我们要先把准备开启的标签前的#号给去掉，并且在下方menu_icons配置相应的值，这里配置的icon也就是网页上展现的对应的图标，实际上是由Font Awesomo网站提供的，涵盖了众多常用的网站图标。配好之后保存退出。 然后我们来创建需要的页面。首先是about页面，在myblog目录下运行命令1$ hexo new page "about" 这条命令会在source目录下新建一个名为about的文件夹，并生成一个index.md文件，使用任意的markdown编辑器打开后编辑，可以写上个人的介绍以及一些自己想说的话，完成后保存退出，这样一来about页面就做好了。 接下来是categories页面，同理，先在命令行运行1$ hexo new page categories 然后编辑刚刚创建的index.md文档，将页面类型设置为categories即可，Hexo会自动将带有不同类别标签的文章进行分类归档展示123456---title: Categoriesdate: 2017-10-27 17:27:06type: "categories"comments: false--- 这里还有个comments字段被设置为false，这是因为Hexo的博客可以外接一些第三方的评论系统，默认在所有页面都会显示，而我们一般只希望评论显示在文章主页面的下方，因此此处将评论给关闭。 最后是tags页面，同理先在命令行创建页面，然后编辑页面，将页面的类型设置为tags即可，Hexo的主题系统会自动地在这个页面中显示标签云1$ hexo new page "tags" 添加Read More按钮默认情况下我们的文章会在主页以全部展开的形式呈现，但我们通常希望在主页上每篇文章只显示一部分，这样既显得简洁，又可能让读者看到更多的文章，便于读者的判断。想要做到这一点很简单，只要在文章对应的markdown文档中，按照下图所示插入一句特殊的代码到我们想要进行截断的任意位置即可12345More info: [Server](https://hexo.io/docs/server.html)&lt;!--more--&gt;### Generate static files 这样首页上的文章只会显示之前的部分，然后会有一个阅读全文的按钮，点击之后再进入文章的主页面，看起来非常舒服，也很合理。 经过上面的这些设置后，我们就能得到一个看起来不错的博客网站了，可以运行Hexo服务，在浏览器上实时查看我们的网站，现在的情况就像这样 通过github发布现在我们已在把网站在本地搭起来了，为了让别人能通过互联网访问我们的网站，还需要将其发布到网络上，这里我们以发布到github上为例。 首先，我们要在github上新建一个Repository，名称固定为1yourNickName.github.io 其中yourNickName指的是你的github账户昵称，注意必须按照这个规则来命名。然后我们编辑myblog/_config.yml文件，在文件的最后几行找到deploy设置项，按照下面的方式进行修改123456# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repository: git@github.com:coolBoyGym/coolboygym.github.io.git branch: master 其中的repository字段需改成你自己的giuhub项目对应的地址。 修改完成后，在blog目录下依次运行以下命令12$ hexo generate$ hexo deploy Hexo会先在本地生成静态的网页文件，然后将所有文件推送到github上对应的项目中。一切正常的话，我们就可以通过下面的网址访问个人博客，应该能看到和本地一样的效果1https://yourNickName.github.io 到此，我们就算是真的搭建好一个简单的博客网站了，赶快请你的小伙伴们来看看吧~ 新建文章当我们想要写一篇新博客时，先执行以下命令1$ hexo new "My-New-Post" 其中My-New-Post是你想新建的博文的名字，这条指令会在myblog/source/_posts文件夹下新建一个名为My-New-Post.md的文件，我们可以使用任意的markdown编辑器来打开它进行编写，完成之后，我们可以先在本地查看下效果，确认无误后，同样通过之前的两条命令来将这篇新的博文发布到github上12$ hexo generate$ hexo deploy 关于markdown编辑器，笔者使用的是Cmd Markdown，界面比较简洁，可预览，功能也较全，值得推荐~ 以上就是本文的全部内容，涉及到了Hexo的一些基本操作，当然它的强大还远不止于此，通过集成各种第三方的服务，可以让我们的网站变得更加有趣，这个就有待读者们自己探究了，有什么好玩的第三方工具欢迎告诉我。 参考链接 与佳期的个人博客 Hexo NexT github/iissnan]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F10%2F28%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>daily</category>
+      </categories>
+  </entry>
 </search>
