@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="小美哥的个人博客">
 <meta property="og:description" content="Elasticsearch(以下简称ES)是一个面向文档的实时分布式搜索和分析引擎。本文是在Mac系统下使用Homebrew安装ES+Kibana+Marvel的一份极简指南。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-08T13:58:17.000Z">
+<meta property="og:updated_time" content="2017-11-08T14:15:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下安装Elasticsearch极简指南">
 <meta name="twitter:description" content="Elasticsearch(以下简称ES)是一个面向文档的实时分布式搜索和分析引擎。本文是在Mac系统下使用Homebrew安装ES+Kibana+Marvel的一份极简指南。">
@@ -414,7 +414,7 @@
 <p>启动后可以在本地浏览器访问</p>
 <ul>
 <li><strong>ES</strong>: <a href="http://localhost:9200" target="_blank" rel="external">http://localhost:9200</a></li>
-<li><strong>Kibana</strong> <a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></li>
+<li><strong>Kibana</strong>: <a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a></li>
 </ul>
 <p>首次进入<strong>Kibana</strong>页面时需要输入账号名和密码，默认的用户名是<code>elastic</code>，密码是<code>changeme</code>，可以通过以下命令修改密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ curl -XPUT -u elastic <span class="string">'localhost:9200/_xpack/security/user/kibana/_password'</span> -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;</span></div><div class="line"><span class="string">  "password" : "kibanapassword"</span></div><div class="line"><span class="string">&#125;'</span></div></pre></td></tr></table></figure></p>
 <p>如果不想使用账号密码，可以将<code>下面的配置</code>写入<strong>ES</strong>和<strong>kibana</strong>的配置文件，配置文件所在目录可以通过<code>brew info xxx</code>查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xpack.security.enabled: <span class="literal">false</span></div></pre></td></tr></table></figure></p>
