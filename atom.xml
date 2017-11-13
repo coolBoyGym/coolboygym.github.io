@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-13T12:48:05.000Z</updated>
+  <updated>2017-11-13T12:49:55.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2017/11/13/update-es-synonym/"/>
     <id>http://yoursite.com/2017/11/13/update-es-synonym/</id>
     <published>2017-11-13T12:35:56.000Z</published>
-    <updated>2017-11-13T12:48:05.000Z</updated>
+    <updated>2017-11-13T12:49:55.000Z</updated>
     
     <summary type="html">
     
@@ -41,7 +41,7 @@
     <link href="http://yoursite.com/2017/11/07/install-elasticsearch-osx/"/>
     <id>http://yoursite.com/2017/11/07/install-elasticsearch-osx/</id>
     <published>2017-11-07T09:58:02.000Z</published>
-    <updated>2017-11-08T14:42:43.000Z</updated>
+    <updated>2017-11-13T12:51:44.000Z</updated>
     
     <summary type="html">
     
@@ -53,6 +53,8 @@
     
     
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
     
   </entry>
   
