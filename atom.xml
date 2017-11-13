@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-08T14:42:43.000Z</updated>
+  <updated>2017-11-13T12:48:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Elasticsearch更新同义词表</title>
+    <link href="http://yoursite.com/2017/11/13/update-es-synonym/"/>
+    <id>http://yoursite.com/2017/11/13/update-es-synonym/</id>
+    <published>2017-11-13T12:35:56.000Z</published>
+    <updated>2017-11-13T12:48:05.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;是一个基于&lt;strong&gt;Lucene&lt;/strong&gt;的搜索服务器，能够高效地进行查询操作。同义词表是&lt;strong&gt;ES&lt;/strong&gt;中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac下安装Elasticsearch极简指南</title>

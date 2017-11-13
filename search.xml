@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Elasticsearch更新同义词表]]></title>
+    <url>%2F2017%2F11%2F13%2Fupdate-es-synonym%2F</url>
+    <content type="text"><![CDATA[ElasticSearch是一个基于Lucene的搜索服务器，能够高效地进行查询操作。同义词表是ES中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。 步骤0、Ubuntu 16.04操作系统中，默认情况下，ES的同义词表保存在 /etc/elasticsearch/analysis/synonym.txt 文件中，以下操作以此为例。 1、修改synonym.txt1$ sudo vim /etc/elasticsearch/analysis/synonym.txt 根据规则添加所需的同义词条目，具体规则如下图所示，或查看文档https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html 2、重启ES服务1$ sudo systemctl restart elasticsearch 3、至此，同义词表更新完毕，可以通过观察程序的运行效果来验证是否成功。]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>ES</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Mac下安装Elasticsearch极简指南]]></title>
     <url>%2F2017%2F11%2F07%2Finstall-elasticsearch-osx%2F</url>
     <content type="text"><![CDATA[Elasticsearch(以下简称ES)是一个面向文档的实时分布式搜索和分析引擎。本文是在Mac系统下使用Homebrew安装ES+Kibana+Marvel的一份极简指南。 前置条件想要安装ES的前提是已经在本机安装了Java环境，在命令行键入1$ java -version 如果正确打印出版本信息则说明已安装Java，否则请到Java官网下载最新版安装即可。 另外，本文使用Homebrew来安装ES，Homebrew是Mac环境里的一种包管理工具，可以方便地进行软件的安装、更新和卸载操作。如果本机未安装，可以使用以下命令进行安装。1$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 完成以上步骤后，本机已具备Java和Homebrew，进入正题。 安装ES &amp; Kibana123$ brew update$ brew install elasticsearch$ brew install kibana 以上命令将ES和Kibana安装到本地，其中Kibana是ES的一个配套工具，可以让用户在网页中与ES进行交互。安装完成后，在命令行键入12$ brew info elasticsearch$ brew info kibana 可以分别看到两个软件的一些安装信息，比如安装路径和配置文件的路径等，后面会用到。 安装MarvelMarvel也是ES的一个插件，能够让你通过Kibana非常容易地监视ES集群的健康状态等信息。最新版的Marvel已经集成到X-Pack模块当中。X-Pack是ES的一个安全框架，可以给网页端访问Kibana加入账号系统，使操作更加安全，更多介绍请移步官方文档12$ cd /usr/local/Cellar/elasticsearch/&lt;whatever version you have&gt;$ bin/elasticsearch-plugin install x-pack 以上命令安装X-Pack模块到本地，至此安装部分完成。 启动ES &amp; Kibana12$ brew services start elasticsearch$ brew services start kibana 启动后可以在本地浏览器访问 ES: http://localhost:9200 Kibana: http://localhost:5601 首次进入Kibana页面时需要输入账号名和密码，默认的用户名是elastic，密码是changeme，可以通过以下命令修改密码123$ curl -XPUT -u elastic 'localhost:9200/_xpack/security/user/kibana/_password' -H "Content-Type: application/json" -d '&#123; "password" : "kibanapassword"&#125;' 如果不想使用账号密码，可以将下面的配置写入ES和kibana的配置文件，配置文件所在目录可以通过brew info xxx查看1xpack.security.enabled: false 重启ES和Kibana后以上配置即可生效12$ brew services restart elasticsearch$ brew services restart kibana 然后可以在Kibana页面中的Dev Tools子页面下直接与ES交互。关于ES的具体命令，请参看《Elasticsearch 权威指南》 祝学习愉快==]]></content>
