@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-13T12:49:55.000Z</updated>
+  <updated>2017-12-04T00:13:58.500Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一页纸搞定git命令</title>
+    <link href="http://yoursite.com/2017/12/04/git-cheat-sheet-cn/"/>
+    <id>http://yoursite.com/2017/12/04/git-cheat-sheet-cn/</id>
+    <published>2017-12-03T22:50:53.000Z</published>
+    <updated>2017-12-04T00:13:58.500Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文翻译自&lt;a href=&quot;https://www.git-tower.com/blog/posts/git-cheat-sheet&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;Git cheat sheet&lt;/strong&gt;&lt;/a&gt;，通过一页纸的内容搞定&lt;strong&gt;Git&lt;/strong&gt;常用命令。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Elasticsearch更新同义词表</title>
     <link href="http://yoursite.com/2017/11/13/update-es-synonym/"/>
     <id>http://yoursite.com/2017/11/13/update-es-synonym/</id>
     <published>2017-11-13T12:35:56.000Z</published>
-    <updated>2017-11-13T12:49:55.000Z</updated>
+    <updated>2017-12-04T00:17:00.772Z</updated>
     
     <summary type="html">
     
@@ -29,7 +49,7 @@
     
     </summary>
     
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
     
       <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
@@ -41,7 +61,7 @@
     <link href="http://yoursite.com/2017/11/07/install-elasticsearch-osx/"/>
     <id>http://yoursite.com/2017/11/07/install-elasticsearch-osx/</id>
     <published>2017-11-07T09:58:02.000Z</published>
-    <updated>2017-11-13T12:51:44.000Z</updated>
+    <updated>2017-12-04T00:16:25.395Z</updated>
     
     <summary type="html">
     
@@ -49,7 +69,7 @@
     
     </summary>
     
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
     
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
@@ -63,7 +83,7 @@
     <link href="http://yoursite.com/2017/11/06/wechat-develop-tools/"/>
     <id>http://yoursite.com/2017/11/06/wechat-develop-tools/</id>
     <published>2017-11-06T13:56:26.000Z</published>
-    <updated>2017-11-07T04:51:16.000Z</updated>
+    <updated>2017-12-04T00:16:09.459Z</updated>
     
     <summary type="html">
     
@@ -71,7 +91,7 @@
     
     </summary>
     
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
     
       <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
@@ -144,7 +164,7 @@
     <link href="http://yoursite.com/2017/10/29/create-hexo-blog/"/>
     <id>http://yoursite.com/2017/10/29/create-hexo-blog/</id>
     <published>2017-10-29T03:47:46.000Z</published>
-    <updated>2017-11-08T13:54:19.000Z</updated>
+    <updated>2017-12-04T00:17:20.848Z</updated>
     
     <summary type="html">
     
@@ -152,7 +172,7 @@
     
     </summary>
     
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
     
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
