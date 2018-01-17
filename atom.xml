@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-04T00:13:58.500Z</updated>
+  <updated>2018-01-17T14:40:35.113Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PostgreSQL基本用法</title>
+    <link href="http://yoursite.com/2018/01/11/postgresql-basic-usage/"/>
+    <id>http://yoursite.com/2018/01/11/postgresql-basic-usage/</id>
+    <published>2018-01-11T13:26:50.000Z</published>
+    <updated>2018-01-17T14:40:35.113Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称&lt;strong&gt;pg&lt;/strong&gt;）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的&lt;strong&gt;pg&lt;/strong&gt;版本是&lt;strong&gt;9.6&lt;/strong&gt;。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>一页纸搞定git命令</title>
