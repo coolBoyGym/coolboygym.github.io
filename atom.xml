@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-29T11:26:57.764Z</updated>
+  <updated>2018-03-11T15:04:41.376Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一页纸搞定bash快捷键</title>
+    <link href="http://yoursite.com/2018/01/30/bash-shortcut-key/"/>
+    <id>http://yoursite.com/2018/01/30/bash-shortcut-key/</id>
+    <published>2018-01-30T05:09:16.000Z</published>
+    <updated>2018-03-11T15:04:41.376Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Bash命令行是程序员日常开发中必备的好帮手，掌握一些有效且常用的快捷键可以帮助我们更好地使用bash这个工具，提高工作效率。本文根据笔者个人的经验，总结了一些针对Linux系统的Bash快捷键操作，供各位参考。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="Bash" scheme="http://yoursite.com/tags/Bash/"/>
+    
+  </entry>
   
   <entry>
     <title>PostgreSQL基本用法</title>

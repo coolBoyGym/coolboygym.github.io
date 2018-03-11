@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[一页纸搞定bash快捷键]]></title>
+    <url>%2F2018%2F01%2F30%2Fbash-shortcut-key%2F</url>
+    <content type="text"><![CDATA[Bash命令行是程序员日常开发中必备的好帮手，掌握一些有效且常用的快捷键可以帮助我们更好地使用bash这个工具，提高工作效率。本文根据笔者个人的经验，总结了一些针对Linux系统的Bash快捷键操作，供各位参考。 Ctrl + L: 清屏，强迫症患者必备Ctrl + R: 逆向搜索命令的历史记录Ctrl + C: 终止命令，中断一个前台作业Ctrl + A: 光标移动到命令行首Ctrl + E: 光标移动到命令行尾Ctrl + U: 从光标出删除至命令行首Ctrl + K: 从光标出删除至命令行尾Ctrl + W: 从光标处删除至字首Alt + D: 从光标处删除至字尾方向键上↑: 查看历史中的上一条命令方向键下↓: 查看历史中的下一条命令Command -h: 查看某个命令的帮助文档 虽然数量不多，但都很常用，牢记这几个快捷操作，相信对开发会有帮助的。]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>Bash</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PostgreSQL基本用法]]></title>
     <url>%2F2018%2F01%2F11%2Fpostgresql-basic-usage%2F</url>
     <content type="text"><![CDATA[前言PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称pg）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的pg版本是9.6。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。 安装Ubuntu默认集成了pg，可以通过命令行直接安装 以下命令分别安装pg的客户端和服务端12$ sudo apt-get install postgresql-client$ sudo apt-get install postgresql 安装完成后，通过以下命令即可启动pg1$ sudo service postgresql start 相应的，只要将这里的start改为stop和restart，就可以实现服务的停止和重启 创建一个数据库在初次安装完成后，pg默认已经进行了如下的操作：创建了一个名为postgres的数据库用户和一个名为postgres的数据库，同时还创建了一个名为postgres的Linux系统用户。实际上，这里创建的postgres数据库用户拥有超级管理员身份，可以访问我们后面所创建的所有数据库，同时可以进行创建新数据库用户和修改用户密码等操作。 为了操作数据库，我们通常需要先登录控制台1$ sudo -u postgres psql 这条命令表示Linux用户postgres以超级用户postgres的身份登录了名为postgres的数据库，因为是Ubuntu系统，所以默认这个时候是不需要输入密码的，直接进入了pg的控制台1postgres=# 通常我们会在登录后先给postgres用户设置一下密码1postgres=# \password postgres 两次输入相同的密码后即可修改成功 因为postgers用户具有很高的权限，通常我们不会直接以这个身份登录，而是会另外创建一个新用户，比如创建一个和当前系统用户同名的数据库用户1postgres=# CREATE USER dbuser WITH PASSWORD 'password'; 然后我们可以为这个新用户创建一个数据库1postgres=# CREATE DATABASE exampledb OWNER dbuser; 接下来我们就可以使用刚才创建的用户登录控制台并连接到创建的数据库中来进行一系列的操作了1$ psql -U dbuser -d exampledb 常用的控制台命令12345678910\password 设置密码\q 退出\h 查看SQL命令的解释，比如\h select\? 查看psql命令列表\l 列出所有数据库\c [database_name] 连接其他数据库\d 列出当前数据库的所有表格\d [table_name] 列出某一张表格的结构\x 对数据做展开操作\du 列出所有用户 常用的SQL语句123456789101112131415161718192021222324252627282930313233343536373839404142# 创建新表CREATE TABLE table_name(name VARCHAR(20), birth DATE);# 插入数据INSERT INTO table_name(name, birth) VALUES('欧文', '1994-08-23');# 查询记录SELECT * FROM table_name;# 更新数据UPDATE table_name set name = '勒夫' WHERE name = '欧文';# 删除记录DELETE FROM table_name WHERE name = '欧文' ;# 添加字段ALTER TABLE table_name ADD email VARCHAR(40);# 更改字段类型ALTER TABLE table_name ALTER COLUMN birth SET NOT NULL;# 设置字段默认值（注意字符串使用单引号）ALTER TABLE table_name ALTER COLUMN email SET DEFAULT 'example@example.com';# 去除字段默认值ALTER TABLE table_name ALTER email DROP DEFAULT;# 重命名字段ALTER TABLE table_name RENAME COLUMN birth TO birthday;# 删除字段ALTER TABLE table_name DROP COLUMN email;# 表重命名ALTER TABLE table_name RENAME TO backup_table;# 删除表DROP TABLE IF EXISTS backup_table;# 删除库\c postgres;DROP DATABASE IF EXISTS hello; 备份和恢复12$ pg_dump --format=t -d db_name -U user_name -h 127.0.0.1 -O -W &gt; dump.sql$ psql -h 127.0.0.1 -U user_name db_name &lt; dump.sql 参考资料 PostgreSQL官方文档 阮一峰的网路日志]]></content>
