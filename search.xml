@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[一页纸搞定bash快捷键]]></title>
+    <title><![CDATA[常用的Bash快捷键]]></title>
     <url>%2F2018%2F01%2F30%2Fbash-shortcut-key%2F</url>
     <content type="text"><![CDATA[Bash命令行是程序员日常开发中必备的好帮手，掌握一些有效且常用的快捷键可以帮助我们更好地使用bash这个工具，提高工作效率。本文根据笔者个人的经验，总结了一些针对Linux系统的Bash快捷键操作，供各位参考。 Ctrl + L: 清屏，强迫症患者必备Ctrl + R: 逆向搜索命令的历史记录Ctrl + C: 终止命令，中断一个前台作业Ctrl + A: 光标移动到命令行首Ctrl + E: 光标移动到命令行尾Ctrl + U: 从光标处删除至命令行首Ctrl + K: 从光标处删除至命令行尾Ctrl + W: 从光标处删除至字首Alt + D: 从光标处删除至字尾Ctrl + Shift + C: 在bash中复制Ctrl + Shift + V: 在bash中粘贴方向键上↑: 查看历史中的上一条命令方向键下↓: 查看历史中的下一条命令Command -h: 查看某个命令的帮助文档 虽然数量不多，但都很常用，牢记这几个快捷操作，相信对开发会有帮助的。]]></content>
       <categories>
