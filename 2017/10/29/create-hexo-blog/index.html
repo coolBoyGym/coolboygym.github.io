@@ -90,7 +90,7 @@
 <meta property="og:description" content="Hexo是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步官方文档。本文主要记录下笔者在Mac上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/01.png">
-<meta property="og:updated_time" content="2017-12-04T00:17:20.848Z">
+<meta property="og:updated_time" content="2018-04-05T11:36:58.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Mac上搭建基于Hexo的个人博客网站">
 <meta name="twitter:description" content="Hexo是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步官方文档。本文主要记录下笔者在Mac上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。">
@@ -413,7 +413,7 @@
 <p>执行以下命令生成一组公/私钥，其中<strong>your_email@example.com</strong>需要替换成你自己的邮箱地址。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div></pre></td></tr></table></figure></p>
 <p>生成的文件默认会放在之前提到的<strong>.ssh</strong>目录中，我们需要获得公钥的值，在命令行输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
 <p>该命令将公钥文件中的值，也就是一个很长的字符串输出到命令行中，复制该值备用。</p>
-<p>接着登录<strong>github</strong>网站，单击右上角的头像，依次点击<strong>Settings -&gt; SSH and GPG keys -&gt; New SSH key</strong> 之后，会出现个文本框，在<strong>Title</strong>那一栏填写一些用于标识当前机器的信息，然后将前面复制的公钥值粘贴到<strong>Key</strong>那一栏，点击<strong>Add SSH key</strong>，即完成了添加操作，今后可以使用<strong>ssh</strong>地址直接从你的<strong>github</strong>仓库<strong>clone</strong>项目到本地，也可以将本地的修改直接<strong>push</strong>到<strong>github</strong>上，非常方便。</p>
+<p>接着登录<strong>github</strong>网站，单击右上角的头像，依次点击<code>Settings -&gt; SSH and GPG keys -&gt; New SSH key</code> 之后，会出现个文本框，在<code>Title</code>那一栏填写一些用于标识当前机器的信息，然后将前面复制的公钥值粘贴到<code>Key</code>那一栏，点击<code>Add SSH key</code>，即完成了添加操作，今后可以使用<code>ssh</code>地址直接从你的<strong>github</strong>仓库<code>clone</code>项目到本地，也可以将本地的修改直接<code>push</code>到<strong>github</strong>上，非常方便。</p>
 <h3 id="2-Node-js"><a href="#2-Node-js" class="headerlink" title="2. Node.js"></a>2. Node.js</h3><p><strong>Node</strong>是<strong>javascript</strong>的一种运行时环境，也是近年来非常流行的一门技术。安装<strong>Node.js</strong>的最佳方式是使用<a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a>。在命令行输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</div></pre></td></tr></table></figure></p>
 <p>这条命令通过<strong>curl</strong>下载<strong>install.sh</strong>脚本，并执行脚本。待执行完成后，它会把<strong>nvm</strong>命令的执行路径放到<strong>~/.bashrc</strong>文件里，我们可以用<strong>cat</strong>命令来查看一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.bashrc</div><div class="line"></div><div class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/Users/gao-yimei/.nvm"</span></div><div class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></div></pre></td></tr></table></figure></p>
 <p>确认存在以上配置后，通过执行<strong>source</strong>命令来使得环境变量生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure></p>
@@ -623,7 +623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -645,7 +645,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
