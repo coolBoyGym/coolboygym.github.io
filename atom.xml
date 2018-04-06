@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-31T07:23:15.379Z</updated>
+  <updated>2018-04-06T07:47:09.560Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>短链接的实现原理</title>
+    <title>网页短链接的实现原理</title>
     <link href="http://yoursite.com/2018/03/31/short-link-implement/"/>
     <id>http://yoursite.com/2018/03/31/short-link-implement/</id>
     <published>2018-03-31T03:48:20.000Z</published>
-    <updated>2018-03-31T07:23:15.379Z</updated>
+    <updated>2018-04-06T07:47:09.560Z</updated>
     
     <summary type="html">
+    
+      &lt;p&gt;网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如&lt;a href=&quot;http://dwz.wailian.work/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;新浪微博短网址服务&lt;/a&gt;等，本文就来聊聊实现短链接服务的基本原理。&lt;/p&gt;
     
     </summary>
     
@@ -218,7 +220,7 @@
     <link href="http://yoursite.com/2017/10/29/create-hexo-blog/"/>
     <id>http://yoursite.com/2017/10/29/create-hexo-blog/</id>
     <published>2017-10-29T03:47:46.000Z</published>
-    <updated>2018-04-05T11:36:58.047Z</updated>
+    <updated>2018-04-05T12:18:40.929Z</updated>
     
     <summary type="html">
     

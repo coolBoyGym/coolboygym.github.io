@@ -81,17 +81,19 @@
 
 
 
-<meta name="description" content="努力不功利 刻苦不痛苦">
+<meta name="description" content="网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如新浪微博短网址服务等，本文就来聊聊实现短链接服务的基本原理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="短链接的实现原理">
+<meta property="og:title" content="网页短链接的实现原理">
 <meta property="og:url" content="http://yoursite.com/2018/03/31/short-link-implement/index.html">
 <meta property="og:site_name" content="小美哥的个人博客">
-<meta property="og:description" content="努力不功利 刻苦不痛苦">
+<meta property="og:description" content="网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如新浪微博短网址服务等，本文就来聊聊实现短链接服务的基本原理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T07:23:15.379Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/short-link-flow.png">
+<meta property="og:updated_time" content="2018-04-06T07:47:09.560Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="短链接的实现原理">
-<meta name="twitter:description" content="努力不功利 刻苦不痛苦">
+<meta name="twitter:title" content="网页短链接的实现原理">
+<meta name="twitter:description" content="网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如新浪微博短网址服务等，本文就来聊聊实现短链接服务的基本原理。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/short-link-flow.png">
 
 
 
@@ -127,7 +129,7 @@
 
 
 
-  <title>短链接的实现原理 | 小美哥的个人博客</title>
+  <title>网页短链接的实现原理 | 小美哥的个人博客</title>
   
 
 
@@ -315,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">短链接的实现原理</h1>
+          <h1 class="post-title" itemprop="name headline">网页短链接的实现原理</h1>
         
 
         <div class="post-meta">
@@ -367,7 +369,7 @@
 
           
           
-             <span id="/2018/03/31/short-link-implement/" class="leancloud_visitors" data-flag-title="短链接的实现原理">
+             <span id="/2018/03/31/short-link-implement/" class="leancloud_visitors" data-flag-title="网页短链接的实现原理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -398,7 +400,17 @@
       
 
       
-        
+        <p>网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如<a href="http://dwz.wailian.work/" target="_blank" rel="external">新浪微博短网址服务</a>等，本文就来聊聊实现短链接服务的基本原理。</p>
+<a id="more"></a>
+<p>我们不妨先来看一下短链接服务的整个流程，以前面提到的<strong>微博短网址服务</strong>为例。用户输入想要缩短的长网址，转化后得到一个以<code>http://t.cn</code>开头的短网址，然后用户将该链接通过微信或者微博等方式分享给朋友，其他人点击之后即可进入原本长网址所对应的页面。整个流程如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/short-link-flow.png" alt="短链接服务整体流程"></p>
+<p>从图中可以很清楚地看到，实现短链接服务的关键是两个步骤：1、如何把一个任意长的字符串转化成一个较短的字符串；2、从短网址如何还原出长网址。第一个问题很容易让人想到哈希算法，通过一定的方式将任意长的文本转化成一个固定长度的字符串，只要目标字符串的长度适当，那么不同的输入几乎不可能对应同一个字符串。不过这么做有个缺点就是无法从得到的结果还原输入的字符串，因此不适用于我们的场景。但基于哈希算法的思想，我们可以设计一种<strong>以多进制为基础</strong>的算法完成这个任务。</p>
+<p>具体而言，我们可以创建一个用于保存长网址的数据表，比如就叫<strong>Url</strong>，这张表很简单，只需要两个字段，一个<code>主键</code>用于保存<code>id</code>，一个<code>url</code>字段用于存放原始的长网址，每个长网址都在这张表有一条记录。当进行长网址转换时，先检查数据表中是否存在该长网址，若是直接获取该记录的<code>id</code>，否则在数据表中创建一条新记录，并返回其<code>id</code>。对于这个<code>id</code>，我们可以得到一个多进制表示下的新值，比如在以“0-9a-z”这36个字符表示的36进制中，<code>一亿</code>这个数字可以被表示成<code>1njchs</code>，只需要6个字符即可，将这6个字符拼接到准备好的域名后即可得到一个对应的短网址返回给用户。由于一亿个网址只需要6个字符，因此这种方式足够满足大部分网站的需求。</p>
+<p>而当用户点击了我们生成的短网址后，只需要将代表多进制的这部分提取出来，还原成十进制的数字后查表即可得到原始的长网址，再根据网址做一个重定向即可让用户访问到原始的网页。具体的实现可以参考下面的<code>typescript</code>代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 将原始的长链接通过36进制转化为短链接</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">long2short</span>(<span class="params">url: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!url.startsWith(<span class="string">'http://'</span>) &amp;&amp; !url.startsWith(<span class="string">'https://'</span>)) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid url'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (url.startsWith(config.shortLinkBaseUrl)) &#123;</div><div class="line">        <span class="keyword">return</span> url;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">let</span> item = <span class="keyword">await</span> Url.getByUrl(url);</div><div class="line">    <span class="keyword">if</span> (!item) &#123;</div><div class="line">        item = <span class="keyword">await</span> Url.create(url);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> config.shortLinkBaseUrl + item.id.toString(<span class="number">36</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 将短链接还原为真实的长链接</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">short2long</span>(<span class="params">url: string</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> item = <span class="keyword">await</span> Url.select(<span class="built_in">Number</span>.parseInt(url, <span class="number">36</span>));</div><div class="line">    <span class="keyword">if</span> (!item) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid url'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> item.url;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的<code>config.shortLinkBaseUrl</code>也就是我们用来做短链接服务的域名，在前面的例子中就是<code>http://t.cn</code>，我们需要在这个域名对应的服务器内实现短链接的服务，同时这个域名本身不能太长，否则就失去了它的意义。另外还有一点值得注意，就是在根据长网址去数据表查找它是否存在时，因为长网址可以任意长，因此直接用它作为索引在数据表中查找的话效率较低，可以考虑在表中增加一个<code>hash</code>字段，保存长网址的哈希值，并通过查找哈希值来判断条目是否存在，提高查找的效率。</p>
+<p>以上就是短链接服务的基本实现方法，最核心的其实就是<code>多进制</code>的使用，有兴趣的朋友可以自己动手试试看，有任何问题欢迎留言交流。</p>
+
       
     </div>
     
