@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-06T07:47:09.560Z</updated>
+  <updated>2018-04-07T04:59:20.798Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>nodejs调用SendCloud邮件API2.0</title>
+    <link href="http://yoursite.com/2018/04/07/nodejs-sendcloud-mail-api/"/>
+    <id>http://yoursite.com/2018/04/07/nodejs-sendcloud-mail-api/</id>
+    <published>2018-04-07T02:50:44.000Z</published>
+    <updated>2018-04-07T04:59:20.798Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SendCloud作为专业的第三方邮件发送服务提供商，具有高效和稳定的特点，很好地满足平时业务中的相关需求。前一阵在使用时发现原有的邮件API接口升级到2.0了，对于普通发送功能而言，主要的区别在于传递的参数从&lt;code&gt;body参数&lt;/code&gt;变成了&lt;code&gt;query参数&lt;/code&gt;，由于SendCloud官网还未给出&lt;code&gt;nodejs&lt;/code&gt;版本的示例代码，故在此分享，供各位参考。如果需要查看相关文档，请至&lt;a href=&quot;https://www.sendcloud.net/doc/email_v2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SendCloud官方文档页&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>网页短链接的实现原理</title>
     <link href="http://yoursite.com/2018/03/31/short-link-implement/"/>
     <id>http://yoursite.com/2018/03/31/short-link-implement/</id>
     <published>2018-03-31T03:48:20.000Z</published>
-    <updated>2018-04-06T07:47:09.560Z</updated>
+    <updated>2018-04-07T05:10:43.107Z</updated>
     
     <summary type="html">
     
@@ -31,6 +51,8 @@
     
       <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
     
+    
+      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
     
   </entry>
   
