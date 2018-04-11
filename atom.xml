@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-07T04:59:20.798Z</updated>
+  <updated>2018-04-11T15:59:32.760Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AUC值的含义与计算方法</title>
+    <link href="http://yoursite.com/2018/04/11/auc-meaning-calculation/"/>
+    <id>http://yoursite.com/2018/04/11/auc-meaning-calculation/</id>
+    <published>2018-04-11T03:46:37.000Z</published>
+    <updated>2018-04-11T15:59:32.760Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;在机器学习领域，&lt;strong&gt;AUC&lt;/strong&gt;值经常用来评价一个二分类模型的训练效果，对于许多机器学习或者数据挖掘的从业者或在校学生来说，&lt;strong&gt;AUC&lt;/strong&gt;值的概念也经常被提起，但由于大多数时候我们都是借助一些软件包来训练机器学习模型，模型评价指标的计算往往被软件包所封装，因此我们常常会忽略了它们的具体意义，这在有些时候会让我们对于手头正在进行的任务感到困惑。笔者也曾遇到类似的问题，因此希望借由本文来梳理下&lt;strong&gt;AUC&lt;/strong&gt;值的意义与计算方法，通过实际的例子帮助读者加深理解，同时给出了使用&lt;strong&gt;scikit-learn&lt;/strong&gt;工具库计算&lt;strong&gt;AUC&lt;/strong&gt;值的方法，供各位参考。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
+    
+  </entry>
   
   <entry>
     <title>nodejs调用SendCloud邮件API2.0</title>
