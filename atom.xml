@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-11T15:59:32.760Z</updated>
+  <updated>2018-04-18T12:05:59.305Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决Mac安装Jupyter notebook出错的问题</title>
+    <link href="http://yoursite.com/2018/04/18/jupyter-notebook-install-error/"/>
+    <id>http://yoursite.com/2018/04/18/jupyter-notebook-install-error/</id>
+    <published>2018-04-18T12:02:25.000Z</published>
+    <updated>2018-04-18T12:05:59.305Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Mac上安装Jupyter Notebook，按照&lt;a href=&quot;https://jupyter.org/install&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jupyter官网文档&lt;/a&gt;进行安装，命令如下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install jupyter&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后执行&lt;code&gt;jupyter notebook&lt;/code&gt;命令时提示&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Error executing Jupyter &lt;span class=&quot;built_in&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;notebook&#39;&lt;/span&gt;: [Errno 2] No such file or directory&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="Jupyter" scheme="http://yoursite.com/tags/Jupyter/"/>
+    
+  </entry>
   
   <entry>
     <title>AUC值的含义与计算方法</title>

@@ -3,6 +3,37 @@
   
     
     <entry>
+      <title><![CDATA[解决Mac安装Jupyter notebook出错的问题]]></title>
+      <url>/2018/04/18/jupyter-notebook-install-error/</url>
+      <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在Mac上安装Jupyter Notebook，按照<a href="https://jupyter.org/install" target="_blank" rel="external">Jupyter官网文档</a>进行安装，命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python3 -m pip install --upgrade pip</div><div class="line">python3 -m pip install jupyter</div></pre></td></tr></table></figure></p>
+<p>安装完成后执行<code>jupyter notebook</code>命令时提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error executing Jupyter <span class="built_in">command</span> <span class="string">'notebook'</span>: [Errno 2] No such file or directory</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>相关的环境参数</p>
+<blockquote>
+<ul>
+<li>操作系统：macOS 10.13.4</li>
+<li>Python版本：Python 3.6.3</li>
+</ul>
+</blockquote>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>依次输入以下两条命令，若提示权限不足在前面加<strong>sudo</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pip3 install ipython[notebook]</div><div class="line">pip3 install jupyter</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> tool </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Jupyter </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[AUC值的含义与计算方法]]></title>
       <url>/2018/04/11/auc-meaning-calculation/</url>
       <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在机器学习领域，<strong>AUC</strong>值经常用来评价一个二分类模型的训练效果，对于许多机器学习或者数据挖掘的从业者或在校学生来说，<strong>AUC</strong>值的概念也经常被提起，但由于大多数时候我们都是借助一些软件包来训练机器学习模型，模型评价指标的计算往往被软件包所封装，因此我们常常会忽略了它们的具体意义，这在有些时候会让我们对于手头正在进行的任务感到困惑。笔者也曾遇到类似的问题，因此希望借由本文来梳理下<strong>AUC</strong>值的意义与计算方法，通过实际的例子帮助读者加深理解，同时给出了使用<strong>scikit-learn</strong>工具库计算<strong>AUC</strong>值的方法，供各位参考。</p>
