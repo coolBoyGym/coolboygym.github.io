@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-18T12:05:59.305Z</updated>
+  <updated>2018-04-23T15:39:12.457Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gensim计算文档相似度</title>
+    <link href="http://yoursite.com/2018/04/23/gensim-doc-similarity/"/>
+    <id>http://yoursite.com/2018/04/23/gensim-doc-similarity/</id>
+    <published>2018-04-23T14:21:18.000Z</published>
+    <updated>2018-04-23T15:39:12.457Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;gensim&lt;/strong&gt;是一个基于Python语言的开源工具集，用于处理向量空间模型(vector space modeling)和话题模型(topic modeling)的相关问题。本文分享如何使用&lt;strong&gt;gensim&lt;/strong&gt;工具来计算两篇中文文档的相似度。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="gensim" scheme="http://yoursite.com/tags/gensim/"/>
+    
+  </entry>
   
   <entry>
     <title>解决Mac安装Jupyter notebook出错的问题</title>
