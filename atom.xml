@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-23T15:39:12.457Z</updated>
+  <updated>2018-04-29T03:38:42.527Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【已解决】PyCharm证书过期</title>
+    <link href="http://yoursite.com/2018/04/29/pycharm-license-expired/"/>
+    <id>http://yoursite.com/2018/04/29/pycharm-license-expired/</id>
+    <published>2018-04-29T02:32:26.000Z</published>
+    <updated>2018-04-29T03:38:42.527Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;今天打开&lt;strong&gt;PyCharm&lt;/strong&gt;的时候弹出提示框 &lt;code&gt;Your license has expired&lt;/code&gt;，表示证书到期了，无法继续使用软件。之前使用的证书是在学校的时候注册的学生账号，也就是以&lt;code&gt;.edu.cn&lt;/code&gt;结尾的账号。现在需要寻找一种新的认证方式。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
+    
+    
+      <category term="JetBrains" scheme="http://yoursite.com/tags/JetBrains/"/>
+    
+  </entry>
   
   <entry>
     <title>gensim计算文档相似度</title>
