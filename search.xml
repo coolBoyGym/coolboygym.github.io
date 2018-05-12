@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kibana和Elasticsearch允许外网访问]]></title>
+    <url>%2F2018%2F05%2F12%2Fkibana-es-access-connection%2F</url>
+    <content type="text"><![CDATA[ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。 我们先看一下在使用默认设置时，当我们尝试通过IP地址去访问ES的服务(在9200端口)时，会得到如下结果 12$ curl 10.0.0.141:9200curl: (7) Failed to connect to 10.0.0.141 port 9200: Connection refused 从提示结果可以看到，ES服务拒绝了我们的访问，这是因为ES服务默认监听的主机是localhost，如果希望通过IP进行访问，需要设置其监听0.0.0.0。这个地址表示的是所有未知的主机和目的网络的集合。对于Kibana也是一样的道理，因此以下只阐述ES的配置方法 具体来说，分为两步走，首先要找到ES的配置文件，在不同的系统中配置文件存放的路径也不同。对于Mac系统来说，如果是通过brew安装的ES，那么可以通过以下命令来查看配置文件的位置 12345678910111213141516171819202122$ brew info elasticsearchelasticsearch: stable 6.2.3, HEADDistributed search &amp; analytics enginehttps://www.elastic.co/products/elasticsearch/usr/local/Cellar/elasticsearch/5.6.3 (217 files, 124MB) * Built from source on 2017-11-07 at 16:32:00From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/elasticsearch.rb==&gt; RequirementsRequired: java = 1.8 ✔==&gt; Options--HEAD Install HEAD version==&gt; CaveatsData: /usr/local/var/lib/elasticsearch/elasticsearch_gao-yimei/Logs: /usr/local/var/log/elasticsearch/elasticsearch_gao-yimei.logPlugins: /usr/local/var/elasticsearch/plugins/Config: /usr/local/etc/elasticsearch/To have launchd start elasticsearch now and restart at login: brew services start elasticsearchOr, if you don't want/need a background service you can just run: elasticsearch 结果中的Config标识了配置文件所在的目录。进入该目录，可以看到一个名为elasticsearch.yml的配置文件，通过less命令查看并搜索host可以找到一个network.host的配置参数，我们只需要将该参数前的#号去掉，并将该值设置为0.0.0.0并保存即可。注意第一个0与参数名之间需要有一个空格，这是配置文件的格式要求 修改完成后，还需要一步，那就是重新启动ES服务器，对于Mac用户，可以通过以下命令重启服务： 1234$ brew services restart elasticsearch Stopping `elasticsearch`... (might take a while)==&gt; Successfully stopped `elasticsearch` (label: homebrew.mxcl.elasticsearch)==&gt; Successfully started `elasticsearch` (label: homebrew.mxcl.elasticsearch) 等待两三分钟后，服务即可稳定，此时再通过IP访问ES服务，就可以正常使用 值得注意的是，当我们这样设置以后，同一网络中的所有设备都能随意地访问到本机的ES服务，包括所有存储在ES中的数据，这是一个比较危险的操作，因此请谨慎使用。另外，对于其他很多不同的软件，也存在这种默认情况下不允许通过IP访问的问题，设置的方式和ES大同小异，可以参考上述的操作流程。]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>ES</tag>
+        <tag>Kibana</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Mac设置固定IP地址]]></title>
     <url>%2F2018%2F05%2F12%2Fset-fixed-ip-address-on-mac%2F</url>
     <content type="text"><![CDATA[在日常的开发过程中，有时候为了方便程序的调试，需要将本机的IP地址固定。本文分享下在Mac系统中固定IP地址的方法，仅供参考。 1、点击桌面上的系统偏好设置图标，在打开的设置界面点击网络图标 2、在网络设置界面，点击高级，进入高级设置 3、在高级设置界面，进入TCP/IP选项，点击配置IPv4选项，在下拉框中选择手动，同时设置对应的IPv4地址和路由器地址。注意必须保证此处设置的IPv4地址是内网中还未被使用的，如已被占用会提示错误，需要重新进行填写 4、还是在当前页面，进入DNS选项，在DNS服务器这一栏中添加本地的DNS服务器地址，可能需要问一下网络管理员 5、设置完成，点击右下角好，再继续点击右下角应用，然后重新连接网络，即可使用固定的IP地址进行程序开发]]></content>

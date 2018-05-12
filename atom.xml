@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-12T05:50:58.839Z</updated>
+  <updated>2018-05-12T07:09:26.430Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kibana和Elasticsearch允许外网访问</title>
+    <link href="http://yoursite.com/2018/05/12/kibana-es-access-connection/"/>
+    <id>http://yoursite.com/2018/05/12/kibana-es-access-connection/</id>
+    <published>2018-05-12T06:00:57.000Z</published>
+    <updated>2018-05-12T07:09:26.430Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
+    
+      <category term="Kibana" scheme="http://yoursite.com/tags/Kibana/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac设置固定IP地址</title>

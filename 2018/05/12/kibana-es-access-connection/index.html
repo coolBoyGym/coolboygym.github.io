@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="SQL," />
+  <meta name="keywords" content="ES,Kibana," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="前言PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称pg）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的pg版本是9.6。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。">
-<meta name="keywords" content="SQL">
+<meta name="description" content="ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。">
+<meta name="keywords" content="ES,Kibana">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL基本用法">
-<meta property="og:url" content="http://yoursite.com/2018/01/11/postgresql-basic-usage/index.html">
+<meta property="og:title" content="Kibana和Elasticsearch允许外网访问">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/kibana-es-access-connection/index.html">
 <meta property="og:site_name" content="小美哥的个人博客">
-<meta property="og:description" content="前言PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称pg）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的pg版本是9.6。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。">
+<meta property="og:description" content="ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-29T11:26:57.765Z">
+<meta property="og:updated_time" content="2018-05-12T07:09:26.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PostgreSQL基本用法">
-<meta name="twitter:description" content="前言PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称pg）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的pg版本是9.6。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。">
+<meta name="twitter:title" content="Kibana和Elasticsearch允许外网访问">
+<meta name="twitter:description" content="ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/11/postgresql-basic-usage/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/kibana-es-access-connection/"/>
 
 
 
 
 
-  <title>PostgreSQL基本用法 | 小美哥的个人博客</title>
+  <title>Kibana和Elasticsearch允许外网访问 | 小美哥的个人博客</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/postgresql-basic-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/kibana-es-access-connection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小美哥">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PostgreSQL基本用法</h1>
+          <h1 class="post-title" itemprop="name headline">Kibana和Elasticsearch允许外网访问</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T21:26:50+08:00">
-                2018-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T14:00:57+08:00">
+                2018-05-12
               </time>
             
 
@@ -368,7 +368,7 @@
 
           
           
-             <span id="/2018/01/11/postgresql-basic-usage/" class="leancloud_visitors" data-flag-title="PostgreSQL基本用法">
+             <span id="/2018/05/12/kibana-es-access-connection/" class="leancloud_visitors" data-flag-title="Kibana和Elasticsearch允许外网访问">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -399,29 +399,18 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称<strong>pg</strong>）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的<strong>pg</strong>版本是<strong>9.6</strong>。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。</p>
+        <p>ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Ubuntu默认集成了<strong>pg</strong>，可以通过命令行直接安装</p>
-<p>以下命令分别安装<strong>pg</strong>的客户端和服务端<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install postgresql-client</div><div class="line">$ sudo apt-get install postgresql</div></pre></td></tr></table></figure></p>
-<p>安装完成后，通过以下命令即可启动<strong>pg</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service postgresql start</div></pre></td></tr></table></figure></p>
-<p>相应的，只要将这里的start改为stop和restart，就可以实现服务的停止和重启</p>
-<h2 id="创建一个数据库"><a href="#创建一个数据库" class="headerlink" title="创建一个数据库"></a>创建一个数据库</h2><p>在初次安装完成后，<strong>pg</strong>默认已经进行了如下的操作：创建了一个名为<strong>postgres</strong>的数据库用户和一个名为<strong>postgres</strong>的数据库，同时还创建了一个名为<strong>postgres</strong>的Linux系统用户。实际上，这里创建的<strong>postgres</strong>数据库用户拥有超级管理员身份，可以访问我们后面所创建的所有数据库，同时可以进行创建新数据库用户和修改用户密码等操作。</p>
-<p>为了操作数据库，我们通常需要先登录控制台<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo -u postgres psql</div></pre></td></tr></table></figure></p>
-<p>这条命令表示Linux用户<strong>postgres</strong>以超级用户<strong>postgres</strong>的身份登录了名为<strong>postgres</strong>的数据库，因为是Ubuntu系统，所以默认这个时候是不需要输入密码的，直接进入了<strong>pg</strong>的控制台<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgres=<span class="comment">#</span></div></pre></td></tr></table></figure></p>
-<p>通常我们会在登录后先给postgres用户设置一下密码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgres=<span class="comment"># \password postgres</span></div></pre></td></tr></table></figure></p>
-<p>两次输入相同的密码后即可修改成功</p>
-<p>因为postgers用户具有很高的权限，通常我们不会直接以这个身份登录，而是会另外创建一个新用户，比如创建一个和当前系统用户同名的数据库用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgres=<span class="comment"># CREATE USER dbuser WITH PASSWORD 'password';</span></div></pre></td></tr></table></figure></p>
-<p>然后我们可以为这个新用户创建一个数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgres=<span class="comment"># CREATE DATABASE exampledb OWNER dbuser;</span></div></pre></td></tr></table></figure></p>
-<p>接下来我们就可以使用刚才创建的用户登录控制台并连接到创建的数据库中来进行一系列的操作了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ psql -U dbuser -d exampledb</div></pre></td></tr></table></figure></p>
-<h2 id="常用的控制台命令"><a href="#常用的控制台命令" class="headerlink" title="常用的控制台命令"></a>常用的控制台命令</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\password           设置密码</div><div class="line">\q                  退出</div><div class="line">\h                  查看SQL命令的解释，比如\h <span class="keyword">select</span></div><div class="line">\?                  查看psql命令列表</div><div class="line">\l                  列出所有数据库</div><div class="line">\c [database_name]  连接其他数据库</div><div class="line">\d                  列出当前数据库的所有表格</div><div class="line">\d [table_name]     列出某一张表格的结构</div><div class="line">\x                  对数据做展开操作</div><div class="line">\du                 列出所有用户</div></pre></td></tr></table></figure>
-<h2 id="常用的SQL语句"><a href="#常用的SQL语句" class="headerlink" title="常用的SQL语句"></a>常用的SQL语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"># 创建新表</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name(<span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>), birth <span class="built_in">DATE</span>);</div><div class="line"></div><div class="line"># 插入数据</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name(<span class="keyword">name</span>, birth) <span class="keyword">VALUES</span>(<span class="string">'欧文'</span>, <span class="string">'1994-08-23'</span>);</div><div class="line"></div><div class="line"># 查询记录</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name;</div><div class="line"></div><div class="line"># 更新数据</div><div class="line"><span class="keyword">UPDATE</span> table_name <span class="keyword">set</span> <span class="keyword">name</span> = <span class="string">'勒夫'</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'欧文'</span>;</div><div class="line"></div><div class="line"># 删除记录</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'欧文'</span> ;</div><div class="line"></div><div class="line"># 添加字段</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> email <span class="built_in">VARCHAR</span>(<span class="number">40</span>);</div><div class="line"></div><div class="line"># 更改字段类型</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> birth <span class="keyword">SET</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</div><div class="line"></div><div class="line"># 设置字段默认值（注意字符串使用单引号）</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> email <span class="keyword">SET</span> <span class="keyword">DEFAULT</span> <span class="string">'example@example.com'</span>;</div><div class="line"></div><div class="line"># 去除字段默认值</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ALTER</span> email <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>;</div><div class="line"></div><div class="line"># 重命名字段</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">RENAME</span> <span class="keyword">COLUMN</span> birth <span class="keyword">TO</span> birthday;</div><div class="line"></div><div class="line"># 删除字段</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> email;</div><div class="line"></div><div class="line"># 表重命名</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">RENAME</span> <span class="keyword">TO</span> backup_table;</div><div class="line"></div><div class="line"># 删除表</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> backup_table;</div><div class="line"></div><div class="line"># 删除库</div><div class="line">\c postgres;</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> hello;</div></pre></td></tr></table></figure>
-<h2 id="备份和恢复"><a href="#备份和恢复" class="headerlink" title="备份和恢复"></a>备份和恢复</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pg_dump --format=t -d db_name -U user_name -h 127.0.0.1 -O -W  &gt; dump.sql</div><div class="line">$ psql -h 127.0.0.1 -U user_name db_name &lt; dump.sql</div></pre></td></tr></table></figure>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
-<ul>
-<li><a href="https://www.postgresql.org/docs/9.6/static/index.html" target="_blank" rel="external">PostgreSQL官方文档</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="external">阮一峰的网路日志</a></li>
-</ul>
-</blockquote>
+<p>我们先看一下在使用默认设置时，当我们尝试通过IP地址去访问ES的服务(在9200端口)时，会得到如下结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl 10.0.0.141:9200</div><div class="line">curl: (7) Failed to connect to 10.0.0.141 port 9200: Connection refused</div></pre></td></tr></table></figure>
+<p>从提示结果可以看到，ES服务拒绝了我们的访问，这是因为ES服务默认监听的主机是localhost，如果希望通过IP进行访问，需要设置其监听<code>0.0.0.0</code>。这个地址表示的是所有未知的主机和目的网络的集合。对于Kibana也是一样的道理，因此以下只阐述ES的配置方法</p>
+<p>具体来说，分为两步走，首先要找到ES的配置文件，在不同的系统中配置文件存放的路径也不同。对于Mac系统来说，如果是通过<code>brew</code>安装的ES，那么可以通过以下命令来查看配置文件的位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ brew info elasticsearch</div><div class="line">elasticsearch: stable 6.2.3, HEAD</div><div class="line">Distributed search &amp; analytics engine</div><div class="line">https://www.elastic.co/products/elasticsearch</div><div class="line">/usr/<span class="built_in">local</span>/Cellar/elasticsearch/5.6.3 (217 files, 124MB) *</div><div class="line">  Built from <span class="built_in">source</span> on 2017-11-07 at 16:32:00</div><div class="line">From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/elasticsearch.rb</div><div class="line">==&gt; Requirements</div><div class="line">Required: java = 1.8 ✔</div><div class="line">==&gt; Options</div><div class="line">--HEAD</div><div class="line">	Install HEAD version</div><div class="line">==&gt; Caveats</div><div class="line">Data:    /usr/<span class="built_in">local</span>/var/lib/elasticsearch/elasticsearch_gao-yimei/</div><div class="line">Logs:    /usr/<span class="built_in">local</span>/var/<span class="built_in">log</span>/elasticsearch/elasticsearch_gao-yimei.log</div><div class="line">Plugins: /usr/<span class="built_in">local</span>/var/elasticsearch/plugins/</div><div class="line">Config:  /usr/<span class="built_in">local</span>/etc/elasticsearch/</div><div class="line"></div><div class="line">To have launchd start elasticsearch now and restart at login:</div><div class="line">  brew services start elasticsearch</div><div class="line">Or, <span class="keyword">if</span> you don<span class="string">'t want/need a background service you can just run:</span></div><div class="line"><span class="string">  elasticsearch</span></div></pre></td></tr></table></figure>
+<p>结果中的<code>Config</code>标识了配置文件所在的目录。进入该目录，可以看到一个名为<code>elasticsearch.yml</code>的配置文件，通过<code>less</code>命令查看并搜索<code>host</code>可以找到一个<code>network.host</code>的配置参数，我们只需要将该参数前的<code>#</code>号去掉，并将该值设置为<code>0.0.0.0</code>并保存即可。注意第一个<code>0</code>与参数名之间需要有一个空格，这是配置文件的格式要求</p>
+<p>修改完成后，还需要一步，那就是重新启动ES服务器，对于Mac用户，可以通过以下命令重启服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ brew services restart elasticsearch  </div><div class="line">Stopping `elasticsearch`... (might take a <span class="keyword">while</span>)</div><div class="line">==&gt; Successfully stopped `elasticsearch` (label: homebrew.mxcl.elasticsearch)</div><div class="line">==&gt; Successfully started `elasticsearch` (label: homebrew.mxcl.elasticsearch)</div></pre></td></tr></table></figure>
+<p>等待两三分钟后，服务即可稳定，此时再通过IP访问ES服务，就可以正常使用</p>
+<p>值得注意的是，当我们这样设置以后，同一网络中的所有设备都能随意地访问到本机的ES服务，包括所有存储在ES中的数据，这是一个比较危险的操作，因此请谨慎使用。另外，对于其他很多不同的软件，也存在这种默认情况下不允许通过IP访问的问题，设置的方式和ES大同小异，可以参考上述的操作流程。</p>
 
       
     </div>
@@ -463,7 +452,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQL/" rel="tag"># SQL</a>
+            <a href="/tags/ES/" rel="tag"># ES</a>
+          
+            <a href="/tags/Kibana/" rel="tag"># Kibana</a>
           
         </div>
       
@@ -476,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/04/git-cheat-sheet-cn/" rel="next" title="一页纸搞定git命令">
-                <i class="fa fa-chevron-left"></i> 一页纸搞定git命令
+              <a href="/2018/05/12/set-fixed-ip-address-on-mac/" rel="next" title="Mac设置固定IP地址">
+                <i class="fa fa-chevron-left"></i> Mac设置固定IP地址
               </a>
             
           </div>
@@ -485,10 +476,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/30/bash-shortcut-key/" rel="prev" title="常用的Bash快捷键">
-                常用的Bash快捷键 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,17 +527,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -637,22 +615,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个数据库"><span class="nav-number">3.</span> <span class="nav-text">创建一个数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的控制台命令"><span class="nav-number">4.</span> <span class="nav-text">常用的控制台命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的SQL语句"><span class="nav-number">5.</span> <span class="nav-text">常用的SQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份和恢复"><span class="nav-number">6.</span> <span class="nav-text">备份和恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
