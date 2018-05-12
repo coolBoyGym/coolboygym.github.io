@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Mac设置固定IP地址]]></title>
+    <url>%2F2018%2F05%2F12%2Fset-fixed-ip-address-on-mac%2F</url>
+    <content type="text"><![CDATA[在日常的开发过程中，有时候为了方便程序的调试，需要将本机的IP地址固定。本文分享下在Mac系统中固定IP地址的方法，仅供参考。 1、点击桌面上的系统偏好设置图标，在打开的设置界面点击网络图标 2、在网络设置界面，点击高级，进入高级设置 3、在高级设置界面，进入TCP/IP选项，点击配置IPv4选项，在下拉框中选择手动，同时设置对应的IPv4地址和路由器地址。注意必须保证此处设置的IPv4地址是内网中还未被使用的，如已被占用会提示错误，需要重新进行填写 4、还是在当前页面，进入DNS选项，在DNS服务器这一栏中添加本地的DNS服务器地址，可能需要问一下网络管理员 5、设置完成，点击右下角好，再继续点击右下角应用，然后重新连接网络，即可使用固定的IP地址进行程序开发]]></content>
+      <categories>
+        <category>daily</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【已解决】PyCharm证书过期]]></title>
     <url>%2F2018%2F04%2F29%2Fpycharm-license-expired%2F</url>
     <content type="text"><![CDATA[问题描述今天打开PyCharm的时候弹出提示框 Your license has expired，表示证书到期了，无法继续使用软件。之前使用的证书是在学校的时候注册的学生账号，也就是以.edu.cn结尾的账号。现在需要寻找一种新的认证方式。 解决方案PyCharm属于JetBrains的一员，这个系列的软件的认证方式有三种，分别是账号登录、激活码和授权服务器。对于在校的学生用户，可以使用.edu后缀的邮箱注册JetBrains账号即可免费使用。激活码则需要在官网上购买，也可以在网上找一些共享的激活码，但使用期限和稳定性无法保证，也并非官方推荐的方法。还有一种方法就是通过授权服务器，这种方法相当于把大量可用的license聚集起来，然后在多个用户间共享，每个用户每次分配到的license可能都不一致。关于授权服务器的更多信息，可以查看官网文档 官方提供了一些可用的授权服务器地址，一般是需要付费的。当然也可以自己来搭建授权服务器。这里就分享一下网友栗小米搭建的授权服务器地址:https://www.imsxm.com，亲测可用，稳定性很高，而且还会保持更新，可以说是非常赞了！ 具体的使用方法很简单，打开软件后，在授权页面勾选License server选项，在地址栏输入http://idea.imsxm.com/，再点击右下角的Activate即可。重启软件，弹出提示框Your copy is licensed to imsxm.com，表示软件已经认证成功。也可以在软件内点击菜单栏上的Help选项，单击最后一个选项Register，即可修改认证的方式。 如果各位觉得好用，记得给可爱的栗小米同学打赏哦，多多支持开源软件！当然，有条件的朋友还是尽可能地购买官方激活码啦，毕竟码农不易，且行且珍惜~ 参考JetBrains 授权服务器]]></content>
