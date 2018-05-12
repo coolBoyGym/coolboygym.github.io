@@ -404,10 +404,10 @@
         <p><strong>ElasticSearch</strong>是一个基于<strong>Lucene</strong>的搜索服务器，能够高效地进行查询操作。同义词表是<strong>ES</strong>中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。</p>
 <a id="more"></a>
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>0、Ubuntu 16.04操作系统中，默认情况下，ES的同义词表保存在 /etc/elasticsearch/analysis/synonym.txt 文件中，以下操作以此为例。</p>
-<p>1、修改synonym.txt<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim /etc/elasticsearch/analysis/synonym.txt</div></pre></td></tr></table></figure></p>
-<p>根据规则添加所需的同义词条目，具体规则如下图所示，或查看文档<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html</a></p>
+<p>1、修改synonym.txt<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/elasticsearch/analysis/synonym.txt</span><br></pre></td></tr></table></figure></p>
+<p>根据规则添加所需的同义词条目，具体规则如下图所示，或查看文档<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html</a></p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/update-es-synonym.png" alt="ES更新同义词表"></p>
-<p>2、重启ES服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo systemctl restart elasticsearch</div></pre></td></tr></table></figure></p>
+<p>2、重启ES服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart elasticsearch</span><br></pre></td></tr></table></figure></p>
 <p>3、至此，同义词表更新完毕，可以通过观察程序的运行效果来验证是否成功。</p>
 
       
@@ -561,6 +561,20 @@
                 </a>
               </div>
             
+
+	    
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+    			<h3 class="widget-title">Tag Cloud</h3>
+    			<div id="myCanvasContainer" class="widget tagcloud">
+        			<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            			  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bash/">Bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/">JetBrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jupyter/">Jupyter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gensim/">gensim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东野圭吾/">东野圭吾</a><span class="tag-list-count">1</span></li></ul>
+        			</canvas>
+    			</div>
+		</div>
+	    
+
 
             
               

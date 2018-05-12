@@ -107,8 +107,8 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Mac上安装Jupyter Notebook，按照&lt;a href=&quot;https://jupyter.org/install&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jupyter官网文档&lt;/a&gt;进行安装，命令如下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;python3 -m pip install jupyter&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;安装完成后执行&lt;code&gt;jupyter notebook&lt;/code&gt;命令时提示&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Error executing Jupyter &lt;span class=&quot;built_in&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;notebook&#39;&lt;/span&gt;: [Errno 2] No such file or directory&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Mac上安装Jupyter Notebook，按照&lt;a href=&quot;https://jupyter.org/install&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Jupyter官网文档&lt;/a&gt;进行安装，命令如下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;python3 -m pip install jupyter&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后执行&lt;code&gt;jupyter notebook&lt;/code&gt;命令时提示&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Error executing Jupyter &lt;span class=&quot;built_in&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;notebook&#39;&lt;/span&gt;: [Errno 2] No such file or directory&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -148,7 +148,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;SendCloud作为专业的第三方邮件发送服务提供商，具有高效和稳定的特点，很好地满足平时业务中的相关需求。前一阵在使用时发现原有的邮件API接口升级到2.0了，对于普通发送功能而言，主要的区别在于传递的参数从&lt;code&gt;body参数&lt;/code&gt;变成了&lt;code&gt;query参数&lt;/code&gt;，由于SendCloud官网还未给出&lt;code&gt;nodejs&lt;/code&gt;版本的示例代码，故在此分享，供各位参考。如果需要查看相关文档，请至&lt;a href=&quot;https://www.sendcloud.net/doc/email_v2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SendCloud官方文档页&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;SendCloud作为专业的第三方邮件发送服务提供商，具有高效和稳定的特点，很好地满足平时业务中的相关需求。前一阵在使用时发现原有的邮件API接口升级到2.0了，对于普通发送功能而言，主要的区别在于传递的参数从&lt;code&gt;body参数&lt;/code&gt;变成了&lt;code&gt;query参数&lt;/code&gt;，由于SendCloud官网还未给出&lt;code&gt;nodejs&lt;/code&gt;版本的示例代码，故在此分享，供各位参考。如果需要查看相关文档，请至&lt;a href=&quot;https://www.sendcloud.net/doc/email_v2/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;SendCloud官方文档页&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -168,7 +168,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如&lt;a href=&quot;http://dwz.wailian.work/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;新浪微博短网址服务&lt;/a&gt;等，本文就来聊聊实现短链接服务的基本原理。&lt;/p&gt;
+      &lt;p&gt;网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如&lt;a href=&quot;http://dwz.wailian.work/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;新浪微博短网址服务&lt;/a&gt;等，本文就来聊聊实现短链接服务的基本原理。&lt;/p&gt;
     
     </summary>
     
@@ -228,7 +228,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;本文翻译自&lt;a href=&quot;https://www.git-tower.com/blog/posts/git-cheat-sheet&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;Git cheat sheet&lt;/strong&gt;&lt;/a&gt;，通过一页纸的内容搞定&lt;strong&gt;Git&lt;/strong&gt;常用命令。&lt;/p&gt;
+      &lt;p&gt;本文翻译自&lt;a href=&quot;https://www.git-tower.com/blog/posts/git-cheat-sheet&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;Git cheat sheet&lt;/strong&gt;&lt;/a&gt;，通过一页纸的内容搞定&lt;strong&gt;Git&lt;/strong&gt;常用命令。&lt;/p&gt;
     
     </summary>
     
@@ -369,7 +369,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt;是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/a&gt;。本文主要记录下笔者在&lt;strong&gt;Mac&lt;/strong&gt;上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt;是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/a&gt;。本文主要记录下笔者在&lt;strong&gt;Mac&lt;/strong&gt;上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。&lt;/p&gt;
     
     </summary>
     
@@ -391,7 +391,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
     

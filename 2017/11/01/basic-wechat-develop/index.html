@@ -413,21 +413,21 @@
 <p><strong>近日腾讯发布2017年中报，报告中指出，腾讯二季度实现营业收入566.06亿元，经营盈利、期内盈利分别达到225.6亿元和182.54亿元。按照当前利润与员工数估算，腾讯员工的平均年薪达到80万…</strong></p>
 </blockquote>
 <p>尽管很多人吐槽王者荣耀里的小学生太坑爹，但不得不承认，近年来腾讯的变现能力确实强大地吓人。这之中微信和QQ作为用户的入口，起到了很大的作用。特别是微信，已然是一款装机必备的全民软件，如何借助这个庞大的平台搞点事情，分享下微信带来的用户红利，也就成为一件很值得研究的事。微信公众号是个人或者企业的一个宣传平台，通过开发微信公众号，可以给关注公众号的用户提供更多定制化的服务，进一步可以将服务转化为效益。本文旨在给正准备做微信公众号开发的朋友分享一点经验，从而尽快熟悉微信公众号开发的整体流程。在此基础上可以继续去学习一些高级的开发技巧（<em>比如微信支付、账单系统之类的</em>），让自己的公众号更加地精(<em>zhi</em>)美(<em>qian</em>)。</p>
-<h2 id="磨刀不误砍柴工"><a href="#磨刀不误砍柴工" class="headerlink" title="磨刀不误砍柴工"></a>磨刀不误砍柴工</h2><p>微信公众号大家肯定都用过。目前微信公众号主要分为订阅号和服务号，每种账号又分为未认证和已认证，<strong>它们的差别主要在于具有不同的接口权限</strong>，下图（<em>引用自<a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></em>）是一些例子：</p>
+<h2 id="磨刀不误砍柴工"><a href="#磨刀不误砍柴工" class="headerlink" title="磨刀不误砍柴工"></a>磨刀不误砍柴工</h2><p>微信公众号大家肯定都用过。目前微信公众号主要分为订阅号和服务号，每种账号又分为未认证和已认证，<strong>它们的差别主要在于具有不同的接口权限</strong>，下图（<em>引用自<a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="noopener">微信开发实战系列</a></em>）是一些例子：</p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-7.png" alt="不同类型公众号的权限"></p>
 <p>总体来说，服务号权限 &gt; 订阅号权限，认证账号权限 &gt; 未认证账号权限。申请订阅号比较简单，服务号相对复杂点，另外要认证的话还要额外提交一些材料。我们可以根据不同的业务需求去申请不同类型的账号，基本上常用的权限列表已经可以满足大部分的场景。</p>
-<p><strong>开发微信公众号本质上和通常的网站开发并无区别</strong>。当我们进入一个公众号页面之后，我们可以向公众号发送文字、语音、图片等消息，也可以通过点击页面下方的菜单触发相应的功能。<strong>那么开发者与微信用户究竟是怎么进行交互的呢？</strong>实际上我们在公众号里的所有操作，都会发送到微信的服务器上，微信服务器将这些动作的具体含义按照一定的格式进行封装后，发送到微信公众号所对应的服务器上（<em>这个服务器的地址可以由开发者在微信公众号的后台进行配置</em>），开发者通过编写代码来处理不同的用户行为，并将处理后的结果按照一定的格式返回给微信服务器，再由微信服务器发送到微信公众号里面，从而完成了一次交互过程。在这里借用<a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方倍老师博客</a>中的一张图片来展示下这个过程，可以帮助大家理解地更清楚：</p>
+<p><strong>开发微信公众号本质上和通常的网站开发并无区别</strong>。当我们进入一个公众号页面之后，我们可以向公众号发送文字、语音、图片等消息，也可以通过点击页面下方的菜单触发相应的功能。<strong>那么开发者与微信用户究竟是怎么进行交互的呢？</strong>实际上我们在公众号里的所有操作，都会发送到微信的服务器上，微信服务器将这些动作的具体含义按照一定的格式进行封装后，发送到微信公众号所对应的服务器上（<em>这个服务器的地址可以由开发者在微信公众号的后台进行配置</em>），开发者通过编写代码来处理不同的用户行为，并将处理后的结果按照一定的格式返回给微信服务器，再由微信服务器发送到微信公众号里面，从而完成了一次交互过程。在这里借用<a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="noopener">方倍老师博客</a>中的一张图片来展示下这个过程，可以帮助大家理解地更清楚：</p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-5.png" alt="微信用户与开发者的交互流程"></p>
 <p>到这里我们可以知道，所谓的微信公众号开发，其实就是编写业务代码来处理用户的动作请求。这里面会涉及到和微信服务器之间的通信，也就涉及到一些安全认证方面的知识，后文会通过一个实际的例子进行说明。现在，就让我们来看看具体的流程吧。</p>
 <h2 id="巧妇难为无米之炊"><a href="#巧妇难为无米之炊" class="headerlink" title="巧妇难为无米之炊"></a>巧妇难为无米之炊</h2><p>开发微信公众号需要准备以下两样食材：</p>
-<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p>微信公众号可以在<a href="https://mp.weixin.qq.com" target="_blank" rel="external">微信公众平台的官网</a>上申请。前文说过，微信公众号分为几种类型，不同的类型具有不同的权限，具体的权限列表可以查看<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084" target="_blank" rel="external">微信公众平台技术文档</a>。值得注意的是，现在已经不再支持个人类型的公众账号申请微信认证。申请的过程无非是填写下邮箱和信息，建议使用QQ邮箱，毕竟是自家的东西。</p>
+<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p>微信公众号可以在<a href="https://mp.weixin.qq.com" target="_blank" rel="noopener">微信公众平台的官网</a>上申请。前文说过，微信公众号分为几种类型，不同的类型具有不同的权限，具体的权限列表可以查看<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084" target="_blank" rel="noopener">微信公众平台技术文档</a>。值得注意的是，现在已经不再支持个人类型的公众账号申请微信认证。申请的过程无非是填写下邮箱和信息，建议使用QQ邮箱，毕竟是自家的东西。</p>
 <h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>由于我们的服务器需要与微信服务器进行交互，因此必须能够让微信服务器可以访问到。很多公司都提供了云服务器租赁，价格不一，可以自行申请，细节在此不表。如果不想花钱申请，也可以使用一些外网穿透工具，将本地的IP暴露到公网中供外部访问，具体的工具请自行百度，不过大部分软件稳定性无法保证，而且分配的域名经常改变。个人建议还是申请一台服务器比较方便，等以后公众号运营良好开始涨(<em>ying</em>)粉(<em>li</em>)了，这些都不是事~</p>
 <h2 id="撸起袖子加油干"><a href="#撸起袖子加油干" class="headerlink" title="撸起袖子加油干"></a>撸起袖子加油干</h2><p>以下是详细步骤：</p>
-<h3 id="开启公众号开发者模式"><a href="#开启公众号开发者模式" class="headerlink" title="开启公众号开发者模式"></a>开启公众号开发者模式</h3><p>为了让微信服务器知道开发者服务器的存在，必须在公众号后台进行相应的配置。<br>(1) 登录<a href="https://mp.weixin.qq.com" target="_blank" rel="external">公众平台官网</a>，找到左边功能栏的最下方，有一个<strong>基本配置</strong>的选项</p>
-<p>(2) 点击<strong>基本配置</strong>按钮，在右边的页面中填写服务器的相关信息。其中<strong>URL填写<a href="http://外网IP:端口号/wx" target="_blank" rel="external">http://外网IP:端口号/wx</a></strong>，这里外网IP是服务器的外网IP地址，端口号固定填写80。Token可以自由填写，用于两个服务器之间的验证。具体见下图： </p>
+<h3 id="开启公众号开发者模式"><a href="#开启公众号开发者模式" class="headerlink" title="开启公众号开发者模式"></a>开启公众号开发者模式</h3><p>为了让微信服务器知道开发者服务器的存在，必须在公众号后台进行相应的配置。<br>(1) 登录<a href="https://mp.weixin.qq.com" target="_blank" rel="noopener">公众平台官网</a>，找到左边功能栏的最下方，有一个<strong>基本配置</strong>的选项</p>
+<p>(2) 点击<strong>基本配置</strong>按钮，在右边的页面中填写服务器的相关信息。其中<strong>URL填写<a href="http://外网IP:端口号/wx" target="_blank" rel="noopener">http://外网IP:端口号/wx</a></strong>，这里外网IP是服务器的外网IP地址，端口号固定填写80。Token可以自由填写，用于两个服务器之间的验证。具体见下图： </p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-0.png" alt="配置微信公众号"></p>
 <p>(3) 点击提交按钮，提示<strong>配置失败</strong>。这是自然的，因为我们还需要在开发者服务器上进行配置，才能完成验证的过程。</p>
-<p>(4) 前面在配置微信公众号时为什么提示失败呢？在此我们有必要探究下这个认证过程。当我们点击了提交后，微信服务器会向我们所填写的那个URL发起一个GET请求，并携带以下几个参数：timestamp, nonce, echostr, signature。其中timestamp是一个时间戳，nonce是一个随机数，echostr也是随机数，这几个都很普通，重点在于signature，它的生成方式是将nonce、timestamp和token（<em>也就是我们在网页中配置的TOKNE</em>）三个字符串按照字典序排序后，对排序后得到的字符串数组使用哈希加密算法得到。我们的服务器在收到这个GET请求后，提取对应的参数，并按照前面说的方式生成hashcode，如果这个值与参数中的signature相同，那么我们就将echostr返回给微信服务器，否则返回空值。微信服务器收到这个echostr之后，验证这个值与它发送的echostr值是否相同，如果相同，说明这个值的确是由我们的服务器返回的，从而完成验证，今后所有的信息就都可以发送到这个服务器地址上。这里面涉及到了一些安全认证的相关知识，有兴趣的朋友可以去查阅更详细的资料。<strong>总的来说，就是让通信的双方都能够确认对方的真实身份</strong>。以下是认证部分的主要代码，使用<a href="https://docs.python.org/2.7/" target="_blank" rel="external">Python2.7</a>和<a href="http://webpy.org" target="_blank" rel="external">web.py</a>框架编写：</p>
+<p>(4) 前面在配置微信公众号时为什么提示失败呢？在此我们有必要探究下这个认证过程。当我们点击了提交后，微信服务器会向我们所填写的那个URL发起一个GET请求，并携带以下几个参数：timestamp, nonce, echostr, signature。其中timestamp是一个时间戳，nonce是一个随机数，echostr也是随机数，这几个都很普通，重点在于signature，它的生成方式是将nonce、timestamp和token（<em>也就是我们在网页中配置的TOKNE</em>）三个字符串按照字典序排序后，对排序后得到的字符串数组使用哈希加密算法得到。我们的服务器在收到这个GET请求后，提取对应的参数，并按照前面说的方式生成hashcode，如果这个值与参数中的signature相同，那么我们就将echostr返回给微信服务器，否则返回空值。微信服务器收到这个echostr之后，验证这个值与它发送的echostr值是否相同，如果相同，说明这个值的确是由我们的服务器返回的，从而完成验证，今后所有的信息就都可以发送到这个服务器地址上。这里面涉及到了一些安全认证的相关知识，有兴趣的朋友可以去查阅更详细的资料。<strong>总的来说，就是让通信的双方都能够确认对方的真实身份</strong>。以下是认证部分的主要代码，使用<a href="https://docs.python.org/2.7/" target="_blank" rel="noopener">Python2.7</a>和<a href="http://webpy.org" target="_blank" rel="noopener">web.py</a>框架编写：</p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-1.png" alt="验证开发者服务器"></p>
 <h3 id="编写服务器业务逻辑"><a href="#编写服务器业务逻辑" class="headerlink" title="编写服务器业务逻辑"></a>编写服务器业务逻辑</h3><p>前面我们完成了微信服务器与开发者服务器的相互认证过程，接下来我们需要编写业务逻辑代码来处理微信服务器发送过来的信息。以文本消息为例，当用户在公众号页面发送了消息后，微信服务器会将这条消息封装成如下的<strong>XML</strong>格式，并将其作为请求的内容向开发者服务器发起一个<strong>POST</strong>请求：</p>
 <p><img src="https://raw.githubusercontent.com/coolBoyGym/images/master/hexo/wechat-4.png" alt="微信服务器封装的请求内容"></p>
@@ -444,8 +444,8 @@
 <p>如上所述，在我们调用各个接口前，需要先使用公众号的<strong>appid</strong>和<strong>appsecret</strong>信息（这两个值可以从微信公众号的网页上查看）向微信服务器请求获取<strong>access_token</strong>，然后带着这个值去调用微信公众平台提供的接口，实现相应的功能。</p>
 <p>(2) <strong>微信网页开发</strong>：网页开发就是指编写一系列的<strong>HTML5</strong>页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。</p>
 <h2 id="从这里出发"><a href="#从这里出发" class="headerlink" title="从这里出发"></a>从这里出发</h2><p>以上就是本文的主体内容。楼主经验尚浅，斗胆提笔撰文，有不当之处欢迎各位指出。本文主要是一个入门的简介，后续的开发还有很多内容要学，以下列出一些个人认为比较不错的文档和资料，楼主也从中学到了很多，在此感谢各位作者。</p>
-<p>(1) <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1445241432" target="_blank" rel="external">微信公众平台技术文档</a><br>(2) <a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="external">方培工作室-微信公众平台开发教程</a><br>(3) <a href="https://github.com/Wechat-Group" target="_blank" rel="external">微信开发者联盟</a><br>(4) <a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="external">微信开发实战系列</a></p>
-<p>本文中的代码已上传到<strong>github</strong>，里面包含了微信公众号一些常用功能的实现，仅供参考：<a href="https://github.com/coolBoyGym/wechatdemo" target="_blank" rel="external">微信公众号开发示例程序</a></p>
+<p>(1) <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1445241432" target="_blank" rel="noopener">微信公众平台技术文档</a><br>(2) <a href="http://www.cnblogs.com/txw1958/p/wechat-tutorial.html" target="_blank" rel="noopener">方培工作室-微信公众平台开发教程</a><br>(3) <a href="https://github.com/Wechat-Group" target="_blank" rel="noopener">微信开发者联盟</a><br>(4) <a href="http://www.cnblogs.com/liuhongfeng/category/737139.html" target="_blank" rel="noopener">微信开发实战系列</a></p>
+<p>本文中的代码已上传到<strong>github</strong>，里面包含了微信公众号一些常用功能的实现，仅供参考：<a href="https://github.com/coolBoyGym/wechatdemo" target="_blank" rel="noopener">微信公众号开发示例程序</a></p>
 
       
     </div>
@@ -598,6 +598,20 @@
                 </a>
               </div>
             
+
+	    
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+    			<h3 class="widget-title">Tag Cloud</h3>
+    			<div id="myCanvasContainer" class="widget tagcloud">
+        			<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            			  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bash/">Bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/">JetBrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jupyter/">Jupyter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gensim/">gensim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东野圭吾/">东野圭吾</a><span class="tag-list-count">1</span></li></ul>
+        			</canvas>
+    			</div>
+		</div>
+	    
+
 
             
               
