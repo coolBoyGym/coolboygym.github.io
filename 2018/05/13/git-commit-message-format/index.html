@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="小美哥的个人博客">
 <meta property="og:description" content="git是软件开发过程中必不可少的代码管理工具，在每次提交新代码时，需要写一些信息表示本次提交所改动的内容。为了方便日后的管理与迭代，commit message最好能有一些固定的格式，让人一眼就能知道每一次提交所做的修改。本文分享一下开源社区常用的代码提交规范，仅供参考。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-13T02:09:01.322Z">
+<meta property="og:updated_time" content="2018-05-13T02:16:19.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git commit message 编写规范">
 <meta name="twitter:description" content="git是软件开发过程中必不可少的代码管理工具，在每次提交新代码时，需要写一些信息表示本次提交所改动的内容。为了方便日后的管理与迭代，commit message最好能有一些固定的格式，让人一眼就能知道每一次提交所做的修改。本文分享一下开源社区常用的代码提交规范，仅供参考。">
@@ -421,6 +421,7 @@
 <p>Footer部分一般只用于两种情况，一是不兼容变动，如果本次的commit与前一个版本的代码无法兼容，那么Footer部分需要以<code>BREAKING CHANGE</code>开头，后面描述本次变动的详细情况以及迁移到新版本代码的方法。</p>
 <p>二是关闭Issue，如果本次commit是针对某个Issue，可以在Footer部分以<code>Close</code>开头，后面用<code>#</code>号标识对应的Issue号码。</p>
 <p>以上所说的就是完整的commit message的规范写法，在实际开发中，为了提高效率，也可以丢弃Body和Footer部分，在Header的subject字段中写入必要的说明，同时可以加入<code>Fix</code>和<code>Close</code>等标明修复某个bug或者关闭某个Issue，这样既简洁又达到了日常实用的目的。当然团队内部有时候也会针对开发的项目给出对应的要求，总的来说都是为了让开发过程更加的高效和便捷。</p>
+<p>参考资料：<br><a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">Commit message 和 Change log 编写指南</a><br><a href="https://www.zhihu.com/question/56120376" target="_blank" rel="noopener">规范的Commit message提交格式</a></p>
 
       
     </div>
