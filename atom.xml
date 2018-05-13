@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-12T07:09:26.430Z</updated>
+  <updated>2018-05-13T02:09:01.322Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git commit message 编写规范</title>
+    <link href="http://yoursite.com/2018/05/13/git-commit-message-format/"/>
+    <id>http://yoursite.com/2018/05/13/git-commit-message-format/</id>
+    <published>2018-05-13T01:35:55.000Z</published>
+    <updated>2018-05-13T02:09:01.322Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;git是软件开发过程中必不可少的代码管理工具，在每次提交新代码时，需要写一些信息表示本次提交所改动的内容。为了方便日后的管理与迭代，commit message最好能有一些固定的格式，让人一眼就能知道每一次提交所做的修改。本文分享一下开源社区常用的代码提交规范，仅供参考。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>Kibana和Elasticsearch允许外网访问</title>
