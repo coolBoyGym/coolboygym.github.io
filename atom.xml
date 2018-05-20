@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-13T02:16:19.394Z</updated>
+  <updated>2018-05-20T11:32:40.329Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用PyCharm进行Python远程开发</title>
+    <link href="http://yoursite.com/2018/05/20/pycharm-remote-development/"/>
+    <id>http://yoursite.com/2018/05/20/pycharm-remote-development/</id>
+    <published>2018-05-20T05:44:14.000Z</published>
+    <updated>2018-05-20T11:32:40.329Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文翻译自 &lt;a href=&quot;https://blog.jetbrains.com/pycharm/2015/03/feature-spotlight-python-remote-development-with-pycharm/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Feature Spotlight: Python remote development with PyCharm&lt;/a&gt;，讲述如何使用&lt;strong&gt;PyCharm&lt;/strong&gt;进行&lt;strong&gt;Python&lt;/strong&gt;远程开发。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。以下为全文内容：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="PyCharm" scheme="http://yoursite.com/tags/PyCharm/"/>
+    
+  </entry>
   
   <entry>
     <title>git commit message 编写规范</title>
@@ -399,24 +419,6 @@
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
       <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2017/10/28/hello-world/"/>
-    <id>http://yoursite.com/2017/10/28/hello-world/</id>
-    <published>2017-10-28T13:27:45.000Z</published>
-    <updated>2017-11-07T04:52:54.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
     
   </entry>
   
