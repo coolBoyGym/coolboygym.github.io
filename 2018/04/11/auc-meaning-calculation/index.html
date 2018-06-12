@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/coolboygym/images/master/hexo/auc-matrix.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/coolboygym/images/master/hexo/auc-example.png">
-<meta property="og:updated_time" content="2018-04-11T15:59:32.760Z">
+<meta property="og:updated_time" content="2018-06-12T13:38:02.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AUC值的含义与计算方法">
 <meta name="twitter:description" content="引言在机器学习领域，AUC值经常用来评价一个二分类模型的训练效果，对于许多机器学习或者数据挖掘的从业者或在校学生来说，AUC值的概念也经常被提起，但由于大多数时候我们都是借助一些软件包来训练机器学习模型，模型评价指标的计算往往被软件包所封装，因此我们常常会忽略了它们的具体意义，这在有些时候会让我们对于手头正在进行的任务感到困惑。笔者也曾遇到类似的问题，因此希望借由本文来梳理下AUC值的意义与计算方">
@@ -408,7 +408,7 @@
 <p>那么具体到机器学习的理论中，<strong>ROC</strong>曲线该怎么理解呢？首先，需要指出的是，<strong>ROC</strong>分析的是二元分类模型，也就是输出结果只有两种类别的模型，比如：（阳性/阴性）（有病/没病）（垃圾邮件/非垃圾邮件）。在二分类问题中，数据的标签通常用（0/1）来表示，在模型训练完成后进行测试时，会对测试集的每个样本计算一个介于0~1之间的概率，表征模型认为该样本为阳性的概率，我们可以选定一个<code>阈值</code>，将模型计算出的概率进行二值化，比如选定<code>阈值=0.5</code>，那么当模型输出的值大于等于0.5时，我们就认为模型将该样本预测为阳性，也就是标签为1，反之亦然。选定的阈值不同，模型预测的结果也会相应地改变。二元分类模型的单个样本预测有四种结果：</p>
 <ol>
 <li>真阳性（TP）：判断为阳性，实际也是阳性。 </li>
-<li>伪阳性（FP）：判断为阴性，实际却是阳性。</li>
+<li>伪阳性（FP）：判断为阳性，实际却是阴性。</li>
 <li>真阴性（TN）：判断为阴性，实际也是阴性。</li>
 <li>伪阴性（FN）：判断为阴性，实际却是阳性。</li>
 </ol>
@@ -586,7 +586,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@
     			<h3 class="widget-title">Tag Cloud</h3>
     			<div id="myCanvasContainer" class="widget tagcloud">
         			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            			  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bash/">Bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/">JetBrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jupyter/">Jupyter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyCharm/">PyCharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gensim/">gensim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东野圭吾/">东野圭吾</a><span class="tag-list-count">1</span></li></ul>
+            			  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bash/">Bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/">JetBrains</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jupyter/">Jupyter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kibana/">Kibana</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyCharm/">PyCharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gensim/">gensim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东野圭吾/">东野圭吾</a><span class="tag-list-count">1</span></li></ul>
         			</canvas>
     			</div>
 		</div>

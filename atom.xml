@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-20T11:32:40.329Z</updated>
+  <updated>2018-06-12T14:00:34.116Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二分类模型常用评价指标汇总</title>
+    <link href="http://yoursite.com/2018/06/09/machine-learning-matrix/"/>
+    <id>http://yoursite.com/2018/06/09/machine-learning-matrix/</id>
+    <published>2018-06-09T08:55:02.000Z</published>
+    <updated>2018-06-12T14:00:34.116Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有很多指标可以衡量机器学习模型的效果，不同的任务使用的评价指标也不尽相同。本文对二分类任务的评价指标加以总结。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
+    
+  </entry>
   
   <entry>
     <title>使用PyCharm进行Python远程开发</title>
@@ -164,7 +184,7 @@
     <link href="http://yoursite.com/2018/04/11/auc-meaning-calculation/"/>
     <id>http://yoursite.com/2018/04/11/auc-meaning-calculation/</id>
     <published>2018-04-11T03:46:37.000Z</published>
-    <updated>2018-04-11T15:59:32.760Z</updated>
+    <updated>2018-06-12T13:38:02.019Z</updated>
     
     <summary type="html">
     
@@ -397,28 +417,6 @@
     
     
       <category term="东野圭吾" scheme="http://yoursite.com/tags/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在Mac上搭建基于Hexo的个人博客网站</title>
-    <link href="http://yoursite.com/2017/10/29/create-hexo-blog/"/>
-    <id>http://yoursite.com/2017/10/29/create-hexo-blog/</id>
-    <published>2017-10-29T03:47:46.000Z</published>
-    <updated>2018-04-05T12:18:40.929Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt;是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/a&gt;。本文主要记录下笔者在&lt;strong&gt;Mac&lt;/strong&gt;上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
     
   </entry>
   
