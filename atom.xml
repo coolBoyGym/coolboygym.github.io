@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-12T14:00:34.116Z</updated>
+  <updated>2018-06-13T01:29:28.046Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Scikit-Learn 中文文档完整目录</title>
+    <link href="http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/"/>
+    <id>http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/</id>
+    <published>2018-06-13T00:21:38.000Z</published>
+    <updated>2018-06-13T01:29:28.046Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Scikit-learn&lt;/a&gt;是一个开源的机器学习工具包，集成了各种常用的机器学习算法和数据预处理工具。&lt;a href=&quot;http://www.apachecn.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apachecn&lt;/a&gt;是一个专注于优秀的开源项目维护的开源组织，在热心网友的共同努力下，对Scikit-learn的文档进行了中文翻译，详情见&lt;a href=&quot;http://sklearn.apachecn.org/cn/0.19.0/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;scikit-learn中文文档&lt;/a&gt;。本文按照个人的阅读偏好对该文档做了一个目录，便于使用时的检索。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
+    
+      <category term="scikit-learn" scheme="http://yoursite.com/tags/scikit-learn/"/>
+    
+  </entry>
+  
+  <entry>
     <title>二分类模型常用评价指标汇总</title>
     <link href="http://yoursite.com/2018/06/09/machine-learning-matrix/"/>
     <id>http://yoursite.com/2018/06/09/machine-learning-matrix/</id>
     <published>2018-06-09T08:55:02.000Z</published>
-    <updated>2018-06-12T14:00:34.116Z</updated>
+    <updated>2018-06-13T01:27:12.579Z</updated>
     
     <summary type="html">
     
@@ -396,27 +418,6 @@
     
     
       <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我们都曾行走在白夜里</title>
-    <link href="http://yoursite.com/2017/11/01/bai-ye-xing-note/"/>
-    <id>http://yoursite.com/2017/11/01/bai-ye-xing-note/</id>
-    <published>2017-10-31T22:33:18.000Z</published>
-    <updated>2017-11-01T13:36:05.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当我合上书本，再次看到封面上牵着手的小男孩和小女孩时，一种莫名的难过翻涌而来，投射到墙上的阴影仿佛要将整个房间笼罩。那里本该洒满阳光。&lt;/p&gt;
-&lt;p&gt;东野大叔的叙事风格宛若天马行空，这一点在《解忧杂货店》中就充分感受过，相比起来，《白夜行》可谓有过之而无不及，乃至于第一遍捧起书时到第五章就看不下去了，我已经忘了前面都说了啥。我是怀着一点猎奇的心来的，顶尖的推理小说作家，悬疑的杀人案件，如潮水般的好评，这足以让人坚信这本书能给人带来精彩的阅读体验。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="reading" scheme="http://yoursite.com/categories/reading/"/>
-    
-    
-      <category term="东野圭吾" scheme="http://yoursite.com/tags/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/"/>
     
   </entry>
   
