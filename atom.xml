@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-13T01:29:28.046Z</updated>
+  <updated>2018-06-16T23:16:08.806Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【已解决】PyCharm中出现unresolved reference error</title>
+    <link href="http://yoursite.com/2018/06/16/pycharm-unresolved-reference/"/>
+    <id>http://yoursite.com/2018/06/16/pycharm-unresolved-reference/</id>
+    <published>2018-06-16T11:26:08.000Z</published>
+    <updated>2018-06-16T23:16:08.806Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错&lt;code&gt;Unresolved reference &amp;#39;pytools&amp;#39;&lt;/code&gt;，出错的代码如下所示&lt;/p&gt;
+&lt;figure class=&quot;highlight py&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; pytools.model &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; baseline&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Scikit-Learn 中文文档完整目录</title>
     <link href="http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/"/>
     <id>http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/</id>
     <published>2018-06-13T00:21:38.000Z</published>
-    <updated>2018-06-13T01:29:28.046Z</updated>
+    <updated>2018-06-16T09:48:11.895Z</updated>
     
     <summary type="html">
     
@@ -31,8 +52,6 @@
     
       <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
     
-    
-      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
     
       <category term="scikit-learn" scheme="http://yoursite.com/tags/scikit-learn/"/>
     
@@ -145,7 +164,7 @@
     <link href="http://yoursite.com/2018/04/29/pycharm-license-expired/"/>
     <id>http://yoursite.com/2018/04/29/pycharm-license-expired/</id>
     <published>2018-04-29T02:32:26.000Z</published>
-    <updated>2018-04-29T03:38:42.527Z</updated>
+    <updated>2018-06-16T09:45:56.883Z</updated>
     
     <summary type="html">
     
@@ -156,7 +175,7 @@
       <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
     
     
-      <category term="JetBrains" scheme="http://yoursite.com/tags/JetBrains/"/>
+      <category term="PyCharm" scheme="http://yoursite.com/tags/PyCharm/"/>
     
   </entry>
   
@@ -398,26 +417,6 @@
     
       <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>手把手教你入门微信公众号开发</title>
-    <link href="http://yoursite.com/2017/11/01/basic-wechat-develop/"/>
-    <id>http://yoursite.com/2017/11/01/basic-wechat-develop/</id>
-    <published>2017-10-31T23:05:30.000Z</published>
-    <updated>2017-11-01T14:23:23.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
-    
-    
-      <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
     
   </entry>
   
