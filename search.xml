@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【已解决】PyCharm中出现unresolved reference error]]></title>
     <url>%2F2018%2F06%2F16%2Fpycharm-unresolved-reference%2F</url>
-    <content type="text"><![CDATA[问题描述从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错Unresolved reference &#39;pytools&#39;，出错的代码如下所示 1from pytools.model import baseline 解决方案我们先来看一下整个项目的基本结构：1234567pytools-- note-- model -- baseline-- result-- src—- __init__.py pytools是整个项目的根目录，model是它的一个子目录，baseline是model目录下的一个模块。出现这个错误的原因在于PyCharm对于资源的索引方式，pytools作为根目录，无法直接作为模块名访问。因此，我们需要新建一个目录，比如叫做projects，然后将整个pytools项目移到projects目录下，再用PyCharm打开projects目录，程序即可正常运行了。]]></content>
+    <content type="text"><![CDATA[问题描述从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错Unresolved reference &#39;pytools&#39;，出错的代码如下所示 1from pytools.model import baseline 解决方案我们先来看一下整个项目的基本结构：1234567pytools-- note-- model -- baseline-- result-- src—- __init__.py pytools是整个项目的根目录，model是它的一个子目录，baseline是model目录下的一个模块。出现这个错误的原因在于PyCharm对于资源的索引方式，pytools作为根目录，无法直接作为模块名访问。因此，我们需要新建一个目录，比如叫做projects，然后将整个pytools项目移到projects目录下，再用PyCharm打开projects目录，程序即可正常运行了。 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-13]]></content>
       <categories>
         <category>daily</category>
       </categories>
@@ -41,7 +41,7 @@
         <category>tool</category>
       </categories>
       <tags>
-        <tag>PyCharm</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -86,7 +86,7 @@
         <category>daily</category>
       </categories>
       <tags>
-        <tag>PyCharm</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-16T23:16:08.806Z</updated>
+  <updated>2018-06-16T23:20:57.096Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2018/06/16/pycharm-unresolved-reference/"/>
     <id>http://yoursite.com/2018/06/16/pycharm-unresolved-reference/</id>
     <published>2018-06-16T11:26:08.000Z</published>
-    <updated>2018-06-16T23:16:08.806Z</updated>
+    <updated>2018-06-16T23:20:57.096Z</updated>
     
     <summary type="html">
     
@@ -82,7 +82,7 @@
     <link href="http://yoursite.com/2018/05/20/pycharm-remote-development/"/>
     <id>http://yoursite.com/2018/05/20/pycharm-remote-development/</id>
     <published>2018-05-20T05:44:14.000Z</published>
-    <updated>2018-05-20T11:32:40.329Z</updated>
+    <updated>2018-06-16T23:17:12.595Z</updated>
     
     <summary type="html">
     
@@ -93,7 +93,7 @@
       <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
     
-      <category term="PyCharm" scheme="http://yoursite.com/tags/PyCharm/"/>
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -164,7 +164,7 @@
     <link href="http://yoursite.com/2018/04/29/pycharm-license-expired/"/>
     <id>http://yoursite.com/2018/04/29/pycharm-license-expired/</id>
     <published>2018-04-29T02:32:26.000Z</published>
-    <updated>2018-06-16T09:45:56.883Z</updated>
+    <updated>2018-06-16T23:17:20.361Z</updated>
     
     <summary type="html">
     
@@ -175,7 +175,7 @@
       <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
     
     
-      <category term="PyCharm" scheme="http://yoursite.com/tags/PyCharm/"/>
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
