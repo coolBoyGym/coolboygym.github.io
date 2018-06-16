@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="小美哥的个人博客">
 <meta property="og:description" content="问题描述从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错Unresolved reference &amp;#39;pytools&amp;#39;，出错的代码如下所示 1from pytools.model import baseline">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-16T23:20:57.096Z">
+<meta property="og:updated_time" content="2018-06-16T23:31:56.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【已解决】PyCharm中出现unresolved reference error">
 <meta name="twitter:description" content="问题描述从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错Unresolved reference &amp;#39;pytools&amp;#39;，出错的代码如下所示 1from pytools.model import baseline">
@@ -402,12 +402,12 @@
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错<code>Unresolved reference &#39;pytools&#39;</code>，出错的代码如下所示</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pytools.model <span class="keyword">import</span> baseline</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>我们先来看一下整个项目的基本结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pytools</span><br><span class="line">-- note</span><br><span class="line">-- model</span><br><span class="line">   -- baseline</span><br><span class="line">-- result</span><br><span class="line">-- src</span><br><span class="line">—- __init__.py</span><br></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>我们先来看一下整个项目的基本结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pytools</span><br><span class="line">-- note</span><br><span class="line">-- model</span><br><span class="line">   -- baseline.py</span><br><span class="line">-- result</span><br><span class="line">-- src</span><br><span class="line">—- __init__.py</span><br></pre></td></tr></table></figure></p>
 <p>pytools是整个项目的根目录，model是它的一个子目录，baseline是model目录下的一个模块。出现这个错误的原因在于PyCharm对于资源的索引方式，pytools作为根目录，无法直接作为模块名访问。因此，我们需要新建一个目录，比如叫做projects，然后将整个pytools项目移到projects目录下，再用PyCharm打开projects目录，程序即可正常运行了。</p>
 <hr>
 <p>以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。</p>
 <p>感谢您的阅读，祝您生活愉快！</p>
-<p>作者：<a href="https://coolboygym.github.io" target="_blank" rel="noopener">小美哥</a><br>2018-06-13</p>
+<p>作者：<a href="https://coolboygym.github.io" target="_blank" rel="noopener">小美哥</a><br>2018-06-17</p>
 
       
     </div>
