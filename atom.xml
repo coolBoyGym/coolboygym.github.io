@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-16T23:31:56.763Z</updated>
+  <updated>2018-06-17T02:43:25.357Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用pytest进行Python自动化测试</title>
+    <link href="http://yoursite.com/2018/06/17/pytest-basic-usage/"/>
+    <id>http://yoursite.com/2018/06/17/pytest-basic-usage/</id>
+    <published>2018-06-17T01:05:38.000Z</published>
+    <updated>2018-06-17T02:43:25.357Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介与安装&quot;&gt;&lt;a href=&quot;#简介与安装&quot; class=&quot;headerlink&quot; title=&quot;简介与安装&quot;&gt;&lt;/a&gt;简介与安装&lt;/h2&gt;&lt;p&gt;pytest是一个针对Python的自动化测试框架，它可以使简单的和可扩展的测试变得容易。使用pytest进行测试是简洁和可读的，不需要样板代码，这使得我们可以很方便地进行自动化测试。pytest是一个全平台通用的工具，支持的Python版本包括Python 2.7, 3.4, 3.5, 3.6, Jython, PyPy-2.3&lt;/p&gt;
+&lt;p&gt;和通常的Python第三方模块一样，pytest可以直接通过pip安装&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ pip install -U pytest&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>【已解决】PyCharm中出现unresolved reference error</title>
@@ -122,7 +143,7 @@
     <link href="http://yoursite.com/2018/05/12/kibana-es-access-connection/"/>
     <id>http://yoursite.com/2018/05/12/kibana-es-access-connection/</id>
     <published>2018-05-12T06:00:57.000Z</published>
-    <updated>2018-05-12T07:09:26.430Z</updated>
+    <updated>2018-06-17T01:09:53.670Z</updated>
     
     <summary type="html">
     
@@ -134,8 +155,6 @@
     
     
       <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
-    
-      <category term="Kibana" scheme="http://yoursite.com/tags/Kibana/"/>
     
   </entry>
   
@@ -399,24 +418,6 @@
     
     
       <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优秀的程序员是什么样的？</title>
-    <link href="http://yoursite.com/2017/11/03/do-not-trust-user-input/"/>
-    <id>http://yoursite.com/2017/11/03/do-not-trust-user-input/</id>
-    <published>2017-11-02T23:31:52.000Z</published>
-    <updated>2018-03-31T07:20:37.139Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在程序员的世界里有一句经典的至理名言：永远不要相信用户的输入。相信很多开发者都有过类似的踩坑经历，所谓“幸福的人都是相似的，而编程的人是幸福的”。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
-    
     
   </entry>
   
