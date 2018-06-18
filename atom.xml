@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-17T02:43:25.357Z</updated>
+  <updated>2018-06-18T00:46:53.263Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【已解决】tensorflow官网无法访问</title>
+    <link href="http://yoursite.com/2018/06/18/tensorflow-webpage-changed/"/>
+    <id>http://yoursite.com/2018/06/18/tensorflow-webpage-changed/</id>
+    <published>2018-06-18T00:37:25.000Z</published>
+    <updated>2018-06-18T00:46:53.263Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;想看一下tensorflow的官方文档，却无法访问  &lt;a href=&quot;https://www.tensorflow.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;官网地址已经改变！&lt;/strong&gt;现在的地址是 &lt;a href=&quot;https://tensorflow.google.cn&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://tensorflow.google.cn&lt;/a&gt; ，直接访问即可！令人疑惑的是，不知道为什么Google出来的结果包括github上文档给的官方地址还是&lt;a href=&quot;https://www.tensorflow.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org&lt;/a&gt;，有了解的朋友可以告诉我一声。感谢！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
+    
+    
+      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
+    
+  </entry>
   
   <entry>
     <title>使用pytest进行Python自动化测试</title>
@@ -398,26 +419,6 @@
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
       <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微信公众号开发工具汇总</title>
-    <link href="http://yoursite.com/2017/11/06/wechat-develop-tools/"/>
-    <id>http://yoursite.com/2017/11/06/wechat-develop-tools/</id>
-    <published>2017-11-06T13:56:26.000Z</published>
-    <updated>2017-12-04T00:16:09.459Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前面写了篇入坑指南，介绍了下开发微信公众号的基本流程。最近又捣鼓了一阵，发现这开发工具的选择对于提高开发效率真是有莫大的帮助，所谓“只要工具选得好，月底奖金跑不了”。今天得空，笔者就给各位老哥列举几个绝对能派上用场的小工具，保证没毛病！&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
     
   </entry>
   

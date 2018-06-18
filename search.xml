@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【已解决】tensorflow官网无法访问]]></title>
+    <url>%2F2018%2F06%2F18%2Ftensorflow-webpage-changed%2F</url>
+    <content type="text"><![CDATA[问题描述想看一下tensorflow的官方文档，却无法访问 https://www.tensorflow.org 解决方案官网地址已经改变！现在的地址是 https://tensorflow.google.cn ，直接访问即可！令人疑惑的是，不知道为什么Google出来的结果包括github上文档给的官方地址还是https://www.tensorflow.org，有了解的朋友可以告诉我一声。感谢！ 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-18]]></content>
+      <categories>
+        <category>daily</category>
+      </categories>
+      <tags>
+        <tag>ML</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用pytest进行Python自动化测试]]></title>
     <url>%2F2018%2F06%2F17%2Fpytest-basic-usage%2F</url>
     <content type="text"><![CDATA[简介与安装pytest是一个针对Python的自动化测试框架，它可以使简单的和可扩展的测试变得容易。使用pytest进行测试是简洁和可读的，不需要样板代码，这使得我们可以很方便地进行自动化测试。pytest是一个全平台通用的工具，支持的Python版本包括Python 2.7, 3.4, 3.5, 3.6, Jython, PyPy-2.3 和通常的Python第三方模块一样，pytest可以直接通过pip安装1$ pip install -U pytest 安装完成后可以运行pytest命令来查看当前版本12$ pytest --versionThis is pytest version 3.6.1, imported from /usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pytest.py 基本用法我们先来创建一个以test_开头的测试函数123456# content of test_sample.pydef func(x): return x + 1def test_answer(): assert func(3) == 5 然后在当前目录下运行pytest命令123456789101112131415161718$ pytest=========================== test session starts ============================platform linux -- Python 3.x.y, pytest-3.x.y, py-1.x.y, pluggy-0.x.yrootdir: $REGENDOC_TMPDIR, inifile:collected 1 itemtest_sample.py F [100%]================================= FAILURES =================================_______________________________ test_answer ________________________________ def test_answer():&gt; assert func(3) == 5E assert 4 == 5E + where 4 = func(3)test_sample.py:5: AssertionError========================= 1 failed in 0.12 seconds ========================= 可以看到，pytest自动地运行了test_answer函数，同时提示测试失败，因为func函数的返回值是4，而不是5，所以assert语句报错。 如果想要同时运行多个测试也很简单，在此之前我们需要先了解下pytest是如何确定需要执行哪些测试的。实际上，pytest遵循了标准的测试发现守则，具体来说有如下几条： 如果没有指定参数，则从testpaths（如果配置）或当前目录开始。或者可以在命令行参数中使用目录、文件名或节点ID的任何组合。 递归地进入文件夹，除非他们被指定为norecursedirs 在这些目录中，寻找形如test_*.py或者*_test.py的文件 在这些文件中，收集如下的这些项目： 以test_开头的全局函数 以Test开头的类中以test_开头的函数 除了上面的规则之外，我们也可以配置个性化的测试发现守则 在PyCharm中配置pytest通常我们会使用IDE进行日常的开发工作，PyCharm是一款针对Python的IDE，深受广大Python爱好者的青睐。我们可以在PyCharm中配置pytest，从而可以直接在PyCharm中使用pytest的功能，方便且高效。 当我们在命令行安装好pytest后，在PyCharm中进入 File | Settings（在Mac OS上是Preferences）| Tools | Python Integrated Tools ，在右边的窗口中有一个 Default test runner 选项，点击下拉框可以看到py.test，选择该项后点击Apply即可。然后我们可以回到写有测试函数的文件中直接右键，会出现一个Run &#39;py.test&#39; for project_name，直接点击即可运行自动化测试。 当然，以上只是pytest基本的用法，还有很多高级的技巧能够进一步简化测试的过程，提高测试的质量，具体的可以到官方文档上查看。 参考pytest官方文档python单元测试框架pytest简介 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-17]]></content>
