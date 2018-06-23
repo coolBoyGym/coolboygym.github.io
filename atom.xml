@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-18T00:46:53.263Z</updated>
+  <updated>2018-06-23T01:26:45.914Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>交叉验证的原理与用法</title>
+    <link href="http://yoursite.com/2018/06/23/cross-validation-usage/"/>
+    <id>http://yoursite.com/2018/06/23/cross-validation-usage/</id>
+    <published>2018-06-23T00:38:55.000Z</published>
+    <updated>2018-06-23T01:26:45.914Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;在机器学习中，交叉验证（cross validation）是一种用来做模型选择的方法。如果给定的样本数据充足，我们可以随机地将数据集切分成训练集、验证集和测试集，训练集用来训练模型，验证集用于模型的选择，而测试集用于最终对方法进行评估。然而实际情况中数据往往是不够充分的，为了更好地选择模型，可以使用交叉验证的方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
+    
+  </entry>
   
   <entry>
     <title>【已解决】tensorflow官网无法访问</title>
@@ -395,28 +415,6 @@
     
       <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
     
-    
-      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下安装Elasticsearch极简指南</title>
-    <link href="http://yoursite.com/2017/11/07/install-elasticsearch-osx/"/>
-    <id>http://yoursite.com/2017/11/07/install-elasticsearch-osx/</id>
-    <published>2017-11-07T09:58:02.000Z</published>
-    <updated>2017-12-04T00:16:25.396Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Elasticsearch&lt;/strong&gt;(以下简称&lt;strong&gt;ES&lt;/strong&gt;)是一个面向文档的实时分布式搜索和分析引擎。本文是在&lt;strong&gt;Mac&lt;/strong&gt;系统下使用&lt;strong&gt;Homebrew&lt;/strong&gt;安装&lt;strong&gt;ES+Kibana+Marvel&lt;/strong&gt;的一份极简指南。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
       <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
     
