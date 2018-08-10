@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-22T02:49:15.384Z</updated>
+  <updated>2018-06-23T01:26:45.914Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Python打印16进制乘法表</title>
-    <link href="http://yoursite.com/2018/07/22/hexadecimal-multiplication-table/"/>
-    <id>http://yoursite.com/2018/07/22/hexadecimal-multiplication-table/</id>
-    <published>2018-07-22T02:36:38.000Z</published>
-    <updated>2018-07-22T02:49:15.384Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;看到美剧《硅谷》里的大佬说他十五岁就把16进制的乘法表背得滚瓜烂熟了，作为码农的自己突然心里一颤，流下冷汗。心血来潮，用Python把16进制乘法表打印出来了，有空的时候也能多背背，巩固基础。废话不多说，直接上代码。&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;data = np.zeros((&lt;span class=&quot;number&quot;&gt;15&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;15&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;data&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
   
   <entry>
     <title>交叉验证的原理与用法</title>
@@ -419,6 +397,26 @@
     
     
       <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elasticsearch更新同义词表</title>
+    <link href="http://yoursite.com/2017/11/13/update-es-synonym/"/>
+    <id>http://yoursite.com/2017/11/13/update-es-synonym/</id>
+    <published>2017-11-13T12:35:56.000Z</published>
+    <updated>2017-12-04T00:17:00.772Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;是一个基于&lt;strong&gt;Lucene&lt;/strong&gt;的搜索服务器，能够高效地进行查询操作。同义词表是&lt;strong&gt;ES&lt;/strong&gt;中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
     
   </entry>
   
