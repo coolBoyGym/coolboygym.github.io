@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-23T01:26:45.914Z</updated>
+  <updated>2018-08-11T15:57:44.240Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《MySQL必知必会》学习笔记</title>
+    <link href="http://yoursite.com/2018/08/11/mysql-crash-course-note/"/>
+    <id>http://yoursite.com/2018/08/11/mysql-crash-course-note/</id>
+    <published>2018-08-11T15:52:03.000Z</published>
+    <updated>2018-08-11T15:57:44.240Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;了解SQL&quot;&gt;&lt;a href=&quot;#了解SQL&quot; class=&quot;headerlink&quot; title=&quot;了解SQL&quot;&gt;&lt;/a&gt;了解SQL&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据库是一个以某种有组织的方式存储的数据集合。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;表具有一些特性，这些特性定义了数据在表中如何存储，如可以存储什么样的数据，数据如何分解，各部分信息如何命名，等等。&lt;strong&gt;描述表的这组信息就是所谓的模式&lt;/strong&gt;，模式可以用来描述数据库中特定的表以及整个数据库(和其中表的关系)。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>交叉验证的原理与用法</title>
@@ -397,26 +420,6 @@
     
     
       <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elasticsearch更新同义词表</title>
-    <link href="http://yoursite.com/2017/11/13/update-es-synonym/"/>
-    <id>http://yoursite.com/2017/11/13/update-es-synonym/</id>
-    <published>2017-11-13T12:35:56.000Z</published>
-    <updated>2017-12-04T00:17:00.772Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;是一个基于&lt;strong&gt;Lucene&lt;/strong&gt;的搜索服务器，能够高效地进行查询操作。同义词表是&lt;strong&gt;ES&lt;/strong&gt;中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
     
   </entry>
   
