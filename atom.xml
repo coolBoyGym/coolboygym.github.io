@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-20T06:14:57.076Z</updated>
+  <updated>2018-10-29T01:12:29.479Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker容器的时区设置</title>
+    <link href="http://yoursite.com/2018/10/28/docker-set-timezone/"/>
+    <id>http://yoursite.com/2018/10/28/docker-set-timezone/</id>
+    <published>2018-10-28T02:03:53.000Z</published>
+    <updated>2018-10-29T01:12:29.479Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Docker作为一款优秀的开源容器管理工具，能够帮助开发者一键式地在各个平台上运行自己的应用而无需考虑环境兼容问题，已经成为目前主流的应用部署方案。&lt;/p&gt;
+&lt;p&gt;在使用Docker容器时，可能碰到的一个问题是时区的设置，因为Docker容器内默认的时区是UTC，这一点可以通过&lt;code&gt;date&lt;/code&gt;命令来验证。分别在宿主机和Docker容器内运行&lt;code&gt;date&lt;/code&gt;命令，观察两者的输出是否相同&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>《计算机是怎样跑起来的》阅读笔记</title>
@@ -402,26 +423,6 @@
     
     
       <category term="Bash" scheme="http://yoursite.com/tags/Bash/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PostgreSQL基本用法</title>
-    <link href="http://yoursite.com/2018/01/11/postgresql-basic-usage/"/>
-    <id>http://yoursite.com/2018/01/11/postgresql-basic-usage/</id>
-    <published>2018-01-11T13:26:50.000Z</published>
-    <updated>2018-01-29T11:26:57.765Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称&lt;strong&gt;pg&lt;/strong&gt;）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的&lt;strong&gt;pg&lt;/strong&gt;版本是&lt;strong&gt;9.6&lt;/strong&gt;。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
     
   </entry>
   
