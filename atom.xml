@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-29T01:12:29.479Z</updated>
+  <updated>2018-12-15T14:16:22.096Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在XGBoost中通过Early Stop避免过拟合</title>
+    <link href="http://yoursite.com/2018/12/15/early-stop-in-xgboost/"/>
+    <id>http://yoursite.com/2018/12/15/early-stop-in-xgboost/</id>
+    <published>2018-12-15T14:14:14.000Z</published>
+    <updated>2018-12-15T14:16:22.096Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文翻译自&lt;a href=&quot;https://machinelearningmastery.com/avoid-overfitting-by-early-stopping-with-xgboost-in-python/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Avoid Overfitting By Early Stopping With XGBoost In Python&lt;/a&gt;，讲述如何在使用XGBoost建模时通过Early Stop手段来避免过拟合。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。以下为全文内容：&lt;/p&gt;
+&lt;p&gt;过拟合问题是在使用复杂的非线性学习算法时会经常碰到，比如gradient boosting算法。&lt;/p&gt;
+&lt;p&gt;在这篇博客中你将发现如何通过Early Stop方法使得我们在使用Python中的XGBoost模型时可以尽可能地避免过拟合问题。&lt;/p&gt;
+&lt;p&gt;读完这篇博客后，你将学到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Early Stop可以减少训练集上的过拟合&lt;/li&gt;
+&lt;li&gt;在使用XGBoost模型时如何监控训练过程中模型的表现，如何绘制学习曲线&lt;/li&gt;
+&lt;li&gt;如何使用Early Stop方法在模型表现最好的时候停止训练&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;让我们开始吧。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="XGBoost" scheme="http://yoursite.com/tags/XGBoost/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker容器的时区设置</title>
@@ -343,26 +370,6 @@
     
     
       <category term="Jupyter" scheme="http://yoursite.com/tags/Jupyter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AUC值的含义与计算方法</title>
-    <link href="http://yoursite.com/2018/04/11/auc-meaning-calculation/"/>
-    <id>http://yoursite.com/2018/04/11/auc-meaning-calculation/</id>
-    <published>2018-04-11T03:46:37.000Z</published>
-    <updated>2018-06-12T13:38:02.019Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;在机器学习领域，&lt;strong&gt;AUC&lt;/strong&gt;值经常用来评价一个二分类模型的训练效果，对于许多机器学习或者数据挖掘的从业者或在校学生来说，&lt;strong&gt;AUC&lt;/strong&gt;值的概念也经常被提起，但由于大多数时候我们都是借助一些软件包来训练机器学习模型，模型评价指标的计算往往被软件包所封装，因此我们常常会忽略了它们的具体意义，这在有些时候会让我们对于手头正在进行的任务感到困惑。笔者也曾遇到类似的问题，因此希望借由本文来梳理下&lt;strong&gt;AUC&lt;/strong&gt;值的意义与计算方法，通过实际的例子帮助读者加深理解，同时给出了使用&lt;strong&gt;scikit-learn&lt;/strong&gt;工具库计算&lt;strong&gt;AUC&lt;/strong&gt;值的方法，供各位参考。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
-    
-    
-      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
     
   </entry>
   
