@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-15T14:16:22.096Z</updated>
+  <updated>2019-01-12T03:03:46.918Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【已解决】Python Pickle dump 报错</title>
+    <link href="http://yoursite.com/2019/01/12/python-pickle-dump-os-error/"/>
+    <id>http://yoursite.com/2019/01/12/python-pickle-dump-os-error/</id>
+    <published>2019-01-12T03:01:47.000Z</published>
+    <updated>2019-01-12T03:03:46.918Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Python代码中使用Pickle模块dump一个对象，报错：&lt;br&gt;&lt;figure class=&quot;highlight py&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; open(path, &lt;span class=&quot;string&quot;&gt;&#39;wb&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; f:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;   pickle.dump(self, f)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Traceback (most recent call last):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  File &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;stdin&amp;gt;&quot;&lt;/span&gt;, line &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OSError: [Errno &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt;] Invalid argument&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>在XGBoost中通过Early Stop避免过拟合</title>
@@ -410,26 +428,6 @@
     
     
       <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用的Bash快捷键</title>
-    <link href="http://yoursite.com/2018/01/30/bash-shortcut-key/"/>
-    <id>http://yoursite.com/2018/01/30/bash-shortcut-key/</id>
-    <published>2018-01-30T05:09:16.000Z</published>
-    <updated>2018-03-27T04:21:29.787Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Bash命令行是程序员日常开发中必备的好帮手，掌握一些有效且常用的快捷键可以帮助我们更好地使用bash这个工具，提高工作效率。本文根据笔者个人的经验，总结了一些针对Linux系统的Bash快捷键操作，供各位参考。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="Bash" scheme="http://yoursite.com/tags/Bash/"/>
     
   </entry>
   
