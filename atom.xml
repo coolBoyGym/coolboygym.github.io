@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-12T03:03:46.918Z</updated>
+  <updated>2018-12-15T14:16:22.096Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,24 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【已解决】Python Pickle dump 报错</title>
-    <link href="http://yoursite.com/2019/01/12/python-pickle-dump-os-error/"/>
-    <id>http://yoursite.com/2019/01/12/python-pickle-dump-os-error/</id>
-    <published>2019-01-12T03:01:47.000Z</published>
-    <updated>2019-01-12T03:03:46.918Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Python代码中使用Pickle模块dump一个对象，报错：&lt;br&gt;&lt;figure class=&quot;highlight py&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; open(path, &lt;span class=&quot;string&quot;&gt;&#39;wb&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; f:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;   pickle.dump(self, f)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Traceback (most recent call last):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  File &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;stdin&amp;gt;&quot;&lt;/span&gt;, line &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OSError: [Errno &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt;] Invalid argument&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
   
   <entry>
     <title>在XGBoost中通过Early Stop避免过拟合</title>
@@ -62,113 +44,6 @@
   </entry>
   
   <entry>
-    <title>Docker容器的时区设置</title>
-    <link href="http://yoursite.com/2018/10/28/docker-set-timezone/"/>
-    <id>http://yoursite.com/2018/10/28/docker-set-timezone/</id>
-    <published>2018-10-28T02:03:53.000Z</published>
-    <updated>2018-10-29T01:12:29.479Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Docker作为一款优秀的开源容器管理工具，能够帮助开发者一键式地在各个平台上运行自己的应用而无需考虑环境兼容问题，已经成为目前主流的应用部署方案。&lt;/p&gt;
-&lt;p&gt;在使用Docker容器时，可能碰到的一个问题是时区的设置，因为Docker容器内默认的时区是UTC，这一点可以通过&lt;code&gt;date&lt;/code&gt;命令来验证。分别在宿主机和Docker容器内运行&lt;code&gt;date&lt;/code&gt;命令，观察两者的输出是否相同&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《计算机是怎样跑起来的》阅读笔记</title>
-    <link href="http://yoursite.com/2018/09/20/how-computer-running-notes/"/>
-    <id>http://yoursite.com/2018/09/20/how-computer-running-notes/</id>
-    <published>2018-09-20T00:08:55.000Z</published>
-    <updated>2018-09-20T06:14:57.076Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;其实不仅是计算机，其他学问亦是如此。首先要划出一个“知识的范围”，精通一门学问所必知必会的知识都在这个范围内。其次是掌握该范围内每个知识点中“基础中的基础知识”。最后是能独当一面的“目标”，即掌握了这些知识可以做什么。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
-    
-    
-      <category term="book" scheme="http://yoursite.com/tags/book/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《MySQL必知必会》学习笔记</title>
-    <link href="http://yoursite.com/2018/08/11/mysql-crash-course-note/"/>
-    <id>http://yoursite.com/2018/08/11/mysql-crash-course-note/</id>
-    <published>2018-08-11T15:52:03.000Z</published>
-    <updated>2018-09-20T00:11:48.989Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;了解SQL&quot;&gt;&lt;a href=&quot;#了解SQL&quot; class=&quot;headerlink&quot; title=&quot;了解SQL&quot;&gt;&lt;/a&gt;了解SQL&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;数据库是一个以某种有组织的方式存储的数据集合。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;表具有一些特性，这些特性定义了数据在表中如何存储，如可以存储什么样的数据，数据如何分解，各部分信息如何命名，等等。&lt;strong&gt;描述表的这组信息就是所谓的模式&lt;/strong&gt;，模式可以用来描述数据库中特定的表以及整个数据库(和其中表的关系)。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
-    
-    
-      <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>交叉验证的原理与用法</title>
-    <link href="http://yoursite.com/2018/06/23/cross-validation-usage/"/>
-    <id>http://yoursite.com/2018/06/23/cross-validation-usage/</id>
-    <published>2018-06-23T00:38:55.000Z</published>
-    <updated>2018-06-23T01:26:45.914Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;在机器学习中，交叉验证（cross validation）是一种用来做模型选择的方法。如果给定的样本数据充足，我们可以随机地将数据集切分成训练集、验证集和测试集，训练集用来训练模型，验证集用于模型的选择，而测试集用于最终对方法进行评估。然而实际情况中数据往往是不够充分的，为了更好地选择模型，可以使用交叉验证的方法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
-    
-    
-      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【已解决】tensorflow官网无法访问</title>
-    <link href="http://yoursite.com/2018/06/18/tensorflow-webpage-changed/"/>
-    <id>http://yoursite.com/2018/06/18/tensorflow-webpage-changed/</id>
-    <published>2018-06-18T00:37:25.000Z</published>
-    <updated>2018-06-18T00:46:53.263Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;想看一下tensorflow的官方文档，却无法访问  &lt;a href=&quot;https://www.tensorflow.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;官网地址已经改变！&lt;/strong&gt;现在的地址是 &lt;a href=&quot;https://tensorflow.google.cn&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://tensorflow.google.cn&lt;/a&gt; ，直接访问即可！令人疑惑的是，不知道为什么Google出来的结果包括github上文档给的官方地址还是&lt;a href=&quot;https://www.tensorflow.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org&lt;/a&gt;，有了解的朋友可以告诉我一声。感谢！&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
-    
-      <category term="ML" scheme="http://yoursite.com/tags/ML/"/>
-    
-  </entry>
-  
-  <entry>
     <title>使用pytest进行Python自动化测试</title>
     <link href="http://yoursite.com/2018/06/17/pytest-basic-usage/"/>
     <id>http://yoursite.com/2018/06/17/pytest-basic-usage/</id>
@@ -186,47 +61,6 @@
     
     
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【已解决】PyCharm中出现unresolved reference error</title>
-    <link href="http://yoursite.com/2018/06/16/pycharm-unresolved-reference/"/>
-    <id>http://yoursite.com/2018/06/16/pycharm-unresolved-reference/</id>
-    <published>2018-06-16T11:26:08.000Z</published>
-    <updated>2018-06-16T23:31:56.763Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错&lt;code&gt;Unresolved reference &amp;#39;pytools&amp;#39;&lt;/code&gt;，出错的代码如下所示&lt;/p&gt;
-&lt;figure class=&quot;highlight py&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; pytools.model &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; baseline&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scikit-Learn 中文文档完整目录</title>
-    <link href="http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/"/>
-    <id>http://yoursite.com/2018/06/13/scikit-learn-doc-chinese-catalog/</id>
-    <published>2018-06-13T00:21:38.000Z</published>
-    <updated>2018-06-16T09:48:11.895Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://scikit-learn.org/stable/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Scikit-learn&lt;/a&gt;是一个开源的机器学习工具包，集成了各种常用的机器学习算法和数据预处理工具。&lt;a href=&quot;http://www.apachecn.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apachecn&lt;/a&gt;是一个专注于优秀的开源项目维护的开源组织，在热心网友的共同努力下，对Scikit-learn的文档进行了中文翻译，详情见&lt;a href=&quot;http://sklearn.apachecn.org/cn/0.19.0/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;scikit-learn中文文档&lt;/a&gt;。本文按照个人的阅读偏好对该文档做了一个目录，便于使用时的检索。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
-    
-    
-      <category term="scikit-learn" scheme="http://yoursite.com/tags/scikit-learn/"/>
     
   </entry>
   
@@ -271,86 +105,6 @@
   </entry>
   
   <entry>
-    <title>git commit message 编写规范</title>
-    <link href="http://yoursite.com/2018/05/13/git-commit-message-format/"/>
-    <id>http://yoursite.com/2018/05/13/git-commit-message-format/</id>
-    <published>2018-05-13T01:35:55.000Z</published>
-    <updated>2018-05-13T02:16:19.394Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;git是软件开发过程中必不可少的代码管理工具，在每次提交新代码时，需要写一些信息表示本次提交所改动的内容。为了方便日后的管理与迭代，commit message最好能有一些固定的格式，让人一眼就能知道每一次提交所做的修改。本文分享一下开源社区常用的代码提交规范，仅供参考。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kibana和Elasticsearch允许外网访问</title>
-    <link href="http://yoursite.com/2018/05/12/kibana-es-access-connection/"/>
-    <id>http://yoursite.com/2018/05/12/kibana-es-access-connection/</id>
-    <published>2018-05-12T06:00:57.000Z</published>
-    <updated>2018-06-17T01:09:53.670Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
-    
-    
-      <category term="ES" scheme="http://yoursite.com/tags/ES/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac设置固定IP地址</title>
-    <link href="http://yoursite.com/2018/05/12/set-fixed-ip-address-on-mac/"/>
-    <id>http://yoursite.com/2018/05/12/set-fixed-ip-address-on-mac/</id>
-    <published>2018-05-12T04:14:08.000Z</published>
-    <updated>2018-05-12T05:50:58.839Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在日常的开发过程中，有时候为了方便程序的调试，需要将本机的&lt;strong&gt;IP&lt;/strong&gt;地址固定。本文分享下在Mac系统中固定&lt;strong&gt;IP&lt;/strong&gt;地址的方法，仅供参考。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
-    
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【已解决】PyCharm证书过期</title>
-    <link href="http://yoursite.com/2018/04/29/pycharm-license-expired/"/>
-    <id>http://yoursite.com/2018/04/29/pycharm-license-expired/</id>
-    <published>2018-04-29T02:32:26.000Z</published>
-    <updated>2018-06-16T23:17:20.361Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;今天打开&lt;strong&gt;PyCharm&lt;/strong&gt;的时候弹出提示框 &lt;code&gt;Your license has expired&lt;/code&gt;，表示证书到期了，无法继续使用软件。之前使用的证书是在学校的时候注册的学生账号，也就是以&lt;code&gt;.edu.cn&lt;/code&gt;结尾的账号。现在需要寻找一种新的认证方式。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>gensim计算文档相似度</title>
     <link href="http://yoursite.com/2018/04/23/gensim-doc-similarity/"/>
     <id>http://yoursite.com/2018/04/23/gensim-doc-similarity/</id>
@@ -371,63 +125,101 @@
   </entry>
   
   <entry>
-    <title>【已解决】Mac安装Jupyter notebook出错的问题</title>
-    <link href="http://yoursite.com/2018/04/18/jupyter-notebook-install-error/"/>
-    <id>http://yoursite.com/2018/04/18/jupyter-notebook-install-error/</id>
-    <published>2018-04-18T12:02:25.000Z</published>
-    <updated>2018-04-27T05:34:45.481Z</updated>
+    <title>优秀的程序员是什么样的？</title>
+    <link href="http://yoursite.com/2017/11/03/do-not-trust-user-input/"/>
+    <id>http://yoursite.com/2017/11/03/do-not-trust-user-input/</id>
+    <published>2017-11-02T23:31:52.000Z</published>
+    <updated>2018-03-31T07:20:37.139Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;在Mac上安装Jupyter Notebook，按照&lt;a href=&quot;https://jupyter.org/install&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Jupyter官网文档&lt;/a&gt;进行安装，命令如下&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;python3 -m pip install --upgrade pip&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;python3 -m pip install jupyter&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;安装完成后执行&lt;code&gt;jupyter notebook&lt;/code&gt;命令时提示&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Error executing Jupyter &lt;span class=&quot;built_in&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;notebook&#39;&lt;/span&gt;: [Errno 2] No such file or directory&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+      &lt;p&gt;在程序员的世界里有一句经典的至理名言：永远不要相信用户的输入。相信很多开发者都有过类似的踩坑经历，所谓“幸福的人都是相似的，而编程的人是幸福的”。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>手把手教你入门微信公众号开发</title>
+    <link href="http://yoursite.com/2017/11/01/basic-wechat-develop/"/>
+    <id>http://yoursite.com/2017/11/01/basic-wechat-develop/</id>
+    <published>2017-10-31T23:05:30.000Z</published>
+    <updated>2017-11-01T14:23:23.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一篇关于微信公众号开发的入门指南，较为详细地介绍了开发微信公众号的基本原理，并且有相应的代码实现。如果您正打算要做公众号开发，却又苦于找不到一份简洁明了的入门级教学文档，那么这篇博客应该能解决您的问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
+    
+    
+      <category term="wechat" scheme="http://yoursite.com/tags/wechat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我们都曾行走在白夜里</title>
+    <link href="http://yoursite.com/2017/11/01/bai-ye-xing-note/"/>
+    <id>http://yoursite.com/2017/11/01/bai-ye-xing-note/</id>
+    <published>2017-10-31T22:33:18.000Z</published>
+    <updated>2018-06-16T09:42:26.810Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我合上书本，再次看到封面上牵着手的小男孩和小女孩时，一种莫名的难过翻涌而来，投射到墙上的阴影仿佛要将整个房间笼罩。那里本该洒满阳光。&lt;/p&gt;
+&lt;p&gt;东野大叔的叙事风格宛若天马行空，这一点在《解忧杂货店》中就充分感受过，相比起来，《白夜行》可谓有过之而无不及，乃至于第一遍捧起书时到第五章就看不下去了，我已经忘了前面都说了啥。我是怀着一点猎奇的心来的，顶尖的推理小说作家，悬疑的杀人案件，如潮水般的好评，这足以让人坚信这本书能给人带来精彩的阅读体验。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="idea" scheme="http://yoursite.com/categories/idea/"/>
+    
+    
+      <category term="东野圭吾" scheme="http://yoursite.com/tags/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Mac上搭建基于Hexo的个人博客网站</title>
+    <link href="http://yoursite.com/2017/10/29/create-hexo-blog/"/>
+    <id>http://yoursite.com/2017/10/29/create-hexo-blog/</id>
+    <published>2017-10-29T03:47:46.000Z</published>
+    <updated>2018-04-05T12:18:40.929Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt;是一个快速、简洁且高效的博客框架，特别适合于部署静态的博客网站，更多介绍请移步&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/a&gt;。本文主要记录下笔者在&lt;strong&gt;Mac&lt;/strong&gt;上实际的部署流程，包含期间遇到的坑和一些基本用法的介绍。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/10/28/hello-world/"/>
+    <id>http://yoursite.com/2017/10/28/hello-world/</id>
+    <published>2017-10-28T13:27:45.000Z</published>
+    <updated>2017-11-07T04:52:54.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
     
       <category term="daily" scheme="http://yoursite.com/categories/daily/"/>
     
-    
-      <category term="Jupyter" scheme="http://yoursite.com/tags/Jupyter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nodejs调用SendCloud邮件API2.0</title>
-    <link href="http://yoursite.com/2018/04/07/nodejs-sendcloud-mail-api/"/>
-    <id>http://yoursite.com/2018/04/07/nodejs-sendcloud-mail-api/</id>
-    <published>2018-04-07T02:50:44.000Z</published>
-    <updated>2018-04-07T04:59:20.798Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;SendCloud作为专业的第三方邮件发送服务提供商，具有高效和稳定的特点，很好地满足平时业务中的相关需求。前一阵在使用时发现原有的邮件API接口升级到2.0了，对于普通发送功能而言，主要的区别在于传递的参数从&lt;code&gt;body参数&lt;/code&gt;变成了&lt;code&gt;query参数&lt;/code&gt;，由于SendCloud官网还未给出&lt;code&gt;nodejs&lt;/code&gt;版本的示例代码，故在此分享，供各位参考。如果需要查看相关文档，请至&lt;a href=&quot;https://www.sendcloud.net/doc/email_v2/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;SendCloud官方文档页&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
-    
-    
-      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网页短链接的实现原理</title>
-    <link href="http://yoursite.com/2018/03/31/short-link-implement/"/>
-    <id>http://yoursite.com/2018/03/31/short-link-implement/</id>
-    <published>2018-03-31T03:48:20.000Z</published>
-    <updated>2018-04-07T05:10:43.107Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如&lt;a href=&quot;http://dwz.wailian.work/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;新浪微博短网址服务&lt;/a&gt;等，本文就来聊聊实现短链接服务的基本原理。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
-    
-    
-      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
     
   </entry>
   

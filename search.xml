@@ -1,74 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[【已解决】Python Pickle dump 报错]]></title>
-    <url>%2F2019%2F01%2F12%2Fpython-pickle-dump-os-error%2F</url>
-    <content type="text"><![CDATA[问题描述在Python代码中使用Pickle模块dump一个对象，报错：123456&gt;&gt;&gt; with open(path, 'wb') as f:&gt;&gt;&gt; pickle.dump(self, f)Traceback (most recent call last): File "&lt;stdin&gt;", line 1, in &lt;module&gt;OSError: [Errno 22] Invalid argument 相关环境参数： 操作系统：macOS 10.13.4 Python版本：Python 3.6.3 解决方案出现该问题的原因是Pickle的对象太大，超过了2G，在OSX系统中无法直接dump，需要借助bytearray进行文件写入，如下所示： 12345678910111213import pickleimport os.pathfile_path = "pkl.pkl"n_bytes = 2**31max_bytes = 2**31 - 1data = bytearray(n_bytes)## writebytes_out = pickle.dumps(data)with open(file_path, 'wb') as f_out: for idx in range(0, len(bytes_out), max_bytes): f_out.write(bytes_out[idx:idx+max_bytes]) 参考资料https://stackoverflow.com/questions/31468117/python-3-can-pickle-handle-byte-objects-larger-than-4gbhttps://bugs.python.org/issue24658https://docs.python.org/3/library/pickle.html 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2019-01-12]]></content>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[在XGBoost中通过Early Stop避免过拟合]]></title>
     <url>%2F2018%2F12%2F15%2Fearly-stop-in-xgboost%2F</url>
     <content type="text"><![CDATA[本文翻译自Avoid Overfitting By Early Stopping With XGBoost In Python，讲述如何在使用XGBoost建模时通过Early Stop手段来避免过拟合。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。以下为全文内容： 过拟合问题是在使用复杂的非线性学习算法时会经常碰到，比如gradient boosting算法。 在这篇博客中你将发现如何通过Early Stop方法使得我们在使用Python中的XGBoost模型时可以尽可能地避免过拟合问题。 读完这篇博客后，你将学到： Early Stop可以减少训练集上的过拟合 在使用XGBoost模型时如何监控训练过程中模型的表现，如何绘制学习曲线 如何使用Early Stop方法在模型表现最好的时候停止训练 让我们开始吧。 使用Early Stop避免过拟合Early Stop是训练复杂机器学习模型以避免其过拟合的一种方法。 它通过监控模型在一个额外的测试集上的表现来工作，当模型在测试集上的表现在连续的若干次（提前指定好的）迭代中都不再提升时它将终止训练过程。 它通过尝试自动选择拐点来避免过拟合，在拐点处，测试数据集的性能开始下降，而训练数据集的性能随着模型开始过拟合而继续改善。 性能的度量可以是训练模型时正在使用的损失函数（例如对数损失），或通常意义上用户感兴趣的外部度量（例如分类精度）。 在XGBoost中监控模型的表现XGBoost模型在训练时可以计算并输入在某个指定的测试数据集的性能表现。 在调用model.fit()函数时，可以指定测试数据集和评价指标，同时设置verbose参数为True，这样就可以在训练过程中输出模型在测试集的表现。 例如，我们可以通过下面的方法在使用XGBoost训练二分类任务时输出分类错误率（通过“error”指定）： 12eval_set = [(X_test, y_test)]model.fit(X_train, y_train, eval_metric="error", eval_set=eval_set, verbose=True) XGBoost提供了一系列的模型评价指标，包括但不限于： “rmse” 代表均方根误差 “mae” 代表平均绝对误差 “logloss” 代表二元对数损失 “mlogloss” 代表m-元对数损失 “error” 代表分类错误率 “auc” 代表ROC曲线下面积 完整的列表见XGBoost文档中的“Learning Task Parameters””章节。 例如，我们可以演示如何监控使用UCI机器学习存储库（更新：从这里下载）的关于Pima糖尿病发病数据集的XGBoost模型在训练过程中的性能指标。 完整代码清单如下： 12345678910111213141516171819202122# monitor training performancefrom numpy import loadtxtfrom xgboost import XGBClassifierfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import accuracy_score# load datadataset = loadtxt('pima-indians-diabetes.csv', delimiter=",")# split data into X and yX = dataset[:,0:8]Y = dataset[:,8]# split data into train and test setsX_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=7)# fit model no training datamodel = XGBClassifier()eval_set = [(X_test, y_test)]model.fit(X_train, y_train, eval_metric="error", eval_set=eval_set, verbose=True)# make predictions for test datay_pred = model.predict(X_test)predictions = [round(value) for value in y_pred]# evaluate predictionsaccuracy = accuracy_score(y_test, predictions)print("Accuracy: %.2f%%" % (accuracy * 100.0)) 运行这段代码将会在67%的数据集上训练模型，并且在每一轮迭代中使用剩下的33%数据来评估模型的性能。 每次迭代都会输出分类错误，最终将会输出最后的分类准确率。 12345678910111213...[89] validation_0-error:0.204724[90] validation_0-error:0.208661[91] validation_0-error:0.208661[92] validation_0-error:0.208661[93] validation_0-error:0.208661[94] validation_0-error:0.208661[95] validation_0-error:0.212598[96] validation_0-error:0.204724[97] validation_0-error:0.212598[98] validation_0-error:0.216535[99] validation_0-error:0.220472Accuracy: 77.95% 观察所有的输出，我们可以看到，在训练快要结束时测试集上的模型性能的变化是平缓的，甚至变得更差。 使用学习曲线来评估XGBoost模型我们可以提取出模型在测试数据集上的表现并绘制成图案，从而更好地洞察到在整个训练过程中学习曲线是如何变化的。 在调用XGBoost模型时我们提供了一个数组，数组的每一项是一个X和y的配对。在测试集之外，我们同时将训练集也作为输入，从而观察在训练过程中模型在训练集和测试集上各自的表现。 例如： 12eval_set = [(X_train, y_train), (X_test, y_test)]model.fit(X_train, y_train, eval_metric="error", eval_set=eval_set, verbose=True) 模型在各个数据集上的表现可以在训练结束后通过model.evals_result()函数获取，这个函数返回一个dict包含了评估数据集的代码和对应的分数列表，例如： 12results = model.evals_result()print(results) 这将输出如下的结果：1234&#123; 'validation_0': &#123;'error': [0.259843, 0.26378, 0.26378, ...]&#125;, 'validation_1': &#123;'error': [0.22179, 0.202335, 0.196498, ...]&#125;&#125; “validation_0”和“validation_1”代表了在调用fit()函数时传给eval_set参数的数组中数据集的顺序。 一个特定的结果，比如第一个数据集上的分类错误率，可以通过如下方法获取： 1results['validation_0']['error'] 另外我们可以指定更多的评价指标，从而同时获取多种评价指标的变化情况。 接着我们可以使用收集到的数据绘制曲线，从而更直观地了解在整个训练过程中模型在训练集和测试集上的表现究竟如何。 下面是一段完整的代码，展示了如何将收集到的数据绘制成学习曲线： 12345678910111213141516171819202122232425262728293031323334353637383940414243# plot learning curvefrom numpy import loadtxtfrom xgboost import XGBClassifierfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import accuracy_scorefrom matplotlib import pyplot# load datadataset = loadtxt('pima-indians-diabetes.csv', delimiter=",")# split data into X and yX = dataset[:,0:8]Y = dataset[:,8]# split data into train and test setsX_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=7)# fit model no training datamodel = XGBClassifier()eval_set = [(X_train, y_train), (X_test, y_test)]model.fit(X_train, y_train, eval_metric=["error", "logloss"], eval_set=eval_set, verbose=True)# make predictions for test datay_pred = model.predict(X_test)predictions = [round(value) for value in y_pred]# evaluate predictionsaccuracy = accuracy_score(y_test, predictions)print("Accuracy: %.2f%%" % (accuracy * 100.0))# retrieve performance metricsresults = model.evals_result()epochs = len(results['validation_0']['error'])x_axis = range(0, epochs)# plot log lossfig, ax = pyplot.subplots()ax.plot(x_axis, results['validation_0']['logloss'], label='Train')ax.plot(x_axis, results['validation_1']['logloss'], label='Test')ax.legend()pyplot.ylabel('Log Loss')pyplot.title('XGBoost Log Loss')pyplot.show()# plot classification errorfig, ax = pyplot.subplots()ax.plot(x_axis, results['validation_0']['error'], label='Train')ax.plot(x_axis, results['validation_1']['error'], label='Test')ax.legend()pyplot.ylabel('Classification Error')pyplot.title('XGBoost Classification Error')pyplot.show() 运行这段代码将会在每一次训练迭代中输出模型在训练集和测试集上的分类错误率。我们可以通过设置verbose=False来关闭输出。 我们绘制了两张图，第一张图表示的是模型在每一轮迭代中在两个数据集上的对数损失： 第二张图表示分类错误率： 从第一张图来看，似乎有机会可以进行Early Stop，大约在20到40轮迭代时比较合适。 从第二张图可以得到相似的结果，大概在40轮迭代时效果比较理想。 在XGBoost中进行Early StopXGBoost提供了在指定轮数完成后提前停止训练的功能。 除了提供用于评估每轮迭代中的评价指标和数据集之外，还需要指定一个窗口大小，意味着连续这么多轮迭代中模型的效果没有提升。这是通过early_stopping_rounds参数来设置的。 例如，我们可以像下面这样设置连续10轮中对数损失都没有提升： 12eval_set = [(X_test, y_test)]model.fit(X_train, y_train, early_stopping_rounds=10, eval_metric="logloss", eval_set=eval_set, verbose=True) 如果同时指定了多个评估数据集和多个评价指标，early_stopping_rounds将会使用数组中的最后一个作为依据。 下面提供了一个使用early_stopping_rounds的详细例子： 123456789101112131415161718192021222324# early stoppingfrom numpy import loadtxtfrom xgboost import XGBClassifierfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import accuracy_score# load datadataset = loadtxt('pima-indians-diabetes.csv', delimiter=",")# split data into X and yX = dataset[:,0:8]Y = dataset[:,8]# split data into train and test setsseed = 7test_size = 0.33X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=seed)# fit model no training datamodel = XGBClassifier()eval_set = [(X_test, y_test)]model.fit(X_train, y_train, early_stopping_rounds=10, eval_metric="logloss", eval_set=eval_set, verbose=True)# make predictions for test datay_pred = model.predict(X_test)predictions = [round(value) for value in y_pred]# evaluate predictionsaccuracy = accuracy_score(y_test, predictions)print("Accuracy: %.2f%%" % (accuracy * 100.0)) 运行这段代码将得到如下的输出（部分）：1234567891011...[35] validation_0-logloss:0.487962[36] validation_0-logloss:0.488218[37] validation_0-logloss:0.489582[38] validation_0-logloss:0.489334[39] validation_0-logloss:0.490969[40] validation_0-logloss:0.48978[41] validation_0-logloss:0.490704[42] validation_0-logloss:0.492369Stopping. Best iteration:[32] validation_0-logloss:0.487297 我们可以看到模型在迭代到42轮时停止了训练，在32轮迭代后观察到了最好的效果。 通常将early_stopping_rounds设置为一个与总训练轮数相关的函数（本例中是10%），或者通过观察学习曲线来设置使得训练过程包含拐点，这两种方法都是不错的选择。 总结在这篇博客中你发现了如何监控模型的表现以及怎么做Early Stop。 你学会了： 使用Early Stop手段在模型过拟合之前停止训练 在使用XGBoost模型时如何监控模型的表现并绘制出模型的学习曲线 在训练XGBoost模型时如何设置Early Stop参数 关于Early Stop或者这篇博客你还有什么想问的问题吗？欢迎在下方的评论区留言，我将尽我最大的努力来解答。 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-12-15]]></content>
       <tags>
         <tag>XGBoost</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Docker容器的时区设置]]></title>
-    <url>%2F2018%2F10%2F28%2Fdocker-set-timezone%2F</url>
-    <content type="text"><![CDATA[Docker作为一款优秀的开源容器管理工具，能够帮助开发者一键式地在各个平台上运行自己的应用而无需考虑环境兼容问题，已经成为目前主流的应用部署方案。 在使用Docker容器时，可能碰到的一个问题是时区的设置，因为Docker容器内默认的时区是UTC，这一点可以通过date命令来验证。分别在宿主机和Docker容器内运行date命令，观察两者的输出是否相同 12345$ date2018年10月29日 星期一 08时47分17秒 CST$ docker run -it ubuntu /bin/bashroot@367851bfa10f:/# dateMon Oct 29 00:48:09 UTC 2018 可以看到，宿主机使用的是UTC+8时间，而Docker容器内使用的是UTC时间。大多数应用开发者通常希望使用UTC+8时间，因此我们需要在Docker中重新设置时区。以ubuntu镜像为例，我们可以通过如下的Dockerfile来完成时区的设置 12345678FROM ubuntuRUN apt-get updateRUN export DEBIAN_FRONTEND=noninteractiveRUN apt-get install -y tzdata=2018d-1RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime RUN dpkg-reconfigure -f noninteractive tzdataWORKDIR /appADD . /app 大体来说就是，我们需要在ubuntu镜像中安装tzdate软件包，然后进行软链接，再重新执行时区的设置。值得注意的是，在设置时区时只有Asia/Shanghai的选项而没有Asia/Beijing的选项，所以这里不要想当然地写错了。我们可以通过docker build命令生成对应的镜像，运行该镜像以观察效果。新建一个文件夹，将这个Dockerfile移到该文件夹下，然后执行以下命令 1234567$ docker build -t timezone:v1 ....Successfully built 0262dcc4daa5Successfully tagged timezone:v1$ docker run -it timezone:v1 /bin/bashroot@11eb9259d038:/app# dateMon Oct 29 09:05:44 CST 2018 可以看到，Docker镜像中的时区修改为了UTC+8时间，大功告成！ 参考链接：https://stackoverflow.com/questions/44331836/apt-get-install-tzdata-noninteractive 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-10-29]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[《计算机是怎样跑起来的》阅读笔记]]></title>
-    <url>%2F2018%2F09%2F20%2Fhow-computer-running-notes%2F</url>
-    <content type="text"><![CDATA[前言 其实不仅是计算机，其他学问亦是如此。首先要划出一个“知识的范围”，精通一门学问所必知必会的知识都在这个范围内。其次是掌握该范围内每个知识点中“基础中的基础知识”。最后是能独当一面的“目标”，即掌握了这些知识可以做什么。 第1章 计算机的三大原则1.3 软件是指令和数据的集合 无论是哪个程序，其内容都是数值的罗列，每个数值要么是指令，要么是数据。 1.5 只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对 所谓计算机的协同工作指的是，输入到一台计算机中的数据，可以通过互联网传送到与这台计算机相连的其他计算机上执行运算，运算所输出的结果再返回给这台计算机。像这样部署在其他计算机上能执行某种运算的程序就叫作XML Web服务。 第3章 体验一次手工汇编3.1 从程序员的角度看硬件 然而真正需要了解的硬件信息只有以下7种（如图3.1所示），所以没有必要在编程时还总是盯着详细的电路图看。 即便是相同的机器语言，例如01010011，只要CPU的种类不同，对它的解释也就不同。 3.3 Z80 CPU的寄存器结构 既然数据的运算是在CPU中进行的，那么在CPU内部就应该有存储数据的地方。这种存储数据的地方叫作“寄存器”。 PC寄存器也叫作“程序指针”，存储着指向CPU接下来要执行的指令的地址。PC寄存器的值会随着滴答滴答的时钟信号自动更新，可以说程序就是依靠不断变化的PC寄存器的值运行起来的。 第4章 程序像河水一样流动着4.4 结构化程序设计 简单地说，所谓结构化程序设计就是“为了把程序编写得具备结构性，仅使用顺序执行、条件分支和循环表示程序的流程即可，而不再使用跳转指令”。 但是即使使用了结构化异常处理，在硬件上使用的也还是跳转指令，只是说在高级语言中不用再写相当于跳转指令的语句了。如果把用高级语言所编写的程序转换成机器语言，像结构化异常处理这样的语句还是会被转换为跳转指令。 4.5 画流程图来思考算法 所谓算法（Algorithm），就是解决既定问题的步骤。想让计算机解决问题，就需要把问题的解法转换成程序的流程。 4.6 特殊的程序流程——中断处理 像这样由于外部的原因使正常的流程中断，中断后再返回到之前流程的过程就是中断处理流程。 4.7 特殊的程序流程——事件驱动 通常把用户在应用程序中点击鼠标或者敲击键盘这样的操作称作“事件”（Event）。负责检测事件的是Windows。Windows通过调用应用程序的WndProc()函数通知应用程序事件的发生。而应用程序则根据事件的类型做出相应的处理。这种机制就是事件驱动。可以说事件驱动也是一种特殊的条件分支，它以从Windows送来的通知为条件，根据通知的内容决定程序下一步的流程。 第5章 与算法成为好朋友的七个要点5.2 要点1：算法中解决问题的步骤是明确且有限的 而且请诸位注意这样一个条件，那就是“步骤必须是明确的并且步骤数必须是有限的”。 第7章 面向对象编程7.8 观点6：面向对象编程通过在对象间传递消息驱动程序 在时序图中，把用矩形表示的对象横向排列，从上往下表示时间的流逝，用箭头表示对象间的消息传递（即程序上的函数调用）。 第8章 数据库8.4 通过拆表和整理数据实现规范化 规范化的要点是在一个数据库中要避免重复存储相同的数据。 8.5 用主键和外键在表间建立关系 当出现多对多关系时，可以在这两张表之间再加入一张表，把多对多关系分解成两个一对多关系（如图8.10所示）。加入的这张表被称作连接表（Link Table）。 8.7 设计用户界面 只要通过拆表实现了规范化、设置了主键和外键、确保没有多对多关系、根据需要设置了参照完整性和索引，那么数据库的设计就告一段落了。 8.9 使用数据对象向DBMS发送SQL语句 在Windows应用程序中，向DBMS发送SQL语句时，一般情况下使用的都是被称为数据对象（Data Object）的软件组件（参考第7章所介绍的类）。 第9章 TCP/IP 协议9.2 实验1：查看网卡的MAC地址 以太网中的每台计算机都需要先确认一件事：在网线上有没有其他的计算机正在传输电信号，也就是说要先确保没有人在占用网络，然后才能发送自己想传输的电信号。谁先抢到了网线的使用权，谁就先发送。万一遇到了多台计算机同时都想发送电信号的情况，只需要让这些计算机等待一段长度随机的时间后再重新发送相同的电信号即可。 在每一块网卡所带有的ROM（Read Only Memory，只读存储器）中，都预先烧录了一个唯一的MAC地址。网卡的制造厂商负责确定这个MAC地址是什么。因为MAC地址是由制造厂商的编号和产品编号两部分组成的，所以世界上的每一个MAC地址都是独一无二的。 9.3 实验2：查看计算机的IP地址 通常把设定了IP地址的计算机称为“主机”（Host）。因为路由器也算是计算机的一种，所以它们也有IP地址。在TCP/IP网络中，传输的数据都会携带MAC地址和IP地址两个地址。 子网掩码中，值为1的那些位对应着IP地址中的网络地址，后面值为0的那些位则对应着主机地址。因此255.255.255.240这个子网掩码就表示，其所对应的IP地址前28比特是网络地址，后4比特是主机地址。 9.5 实验4：路由器是数据传输过程中的指路人 分布在世界各地的LAN中的路由器相互交换着信息，互联网正是由于这种信息的交换才得以联通。这种信息被称作“路由表”，用来记录应该把数据转发到哪里。 9.7 实验6:DNS服务器可以把主机名解析成IP地址 诸位的计算机都有一个主机名，每个LAN也都有一个域名。举例来说，笔者所使用的计算机的主机名是ma50j（源于这台计算机的型号），所在的LAN的域名是yzw.co.jp。把主机名和域名组合起来所形成的ma50j.yze.co.jp，就是能够标识笔者这台计算机的一个世界范围内独一无二的名字，这个名字与IP地址的作用是等价的。通常把这种由主机名和域名组合起来形成的名字称作FQDN（Fully Qualified Domain Name，完整限定域名）。 第11章 XML究竟是什么 通常把用于定义新语言的语言称作元语言。通过使用XML可以定义出各种各样的新语言。 11.1 XML是标记语言 通常把通过添加标签为数据赋予意义的行为称为“标记”。为这种给数据赋予意义的行为定义规则的语言就是“标记语言”。HTML是用于编写网页的标记语言，更简单地说法就是HTML决定了可用于编写网页的标签。 11.2 XML是可扩展的语言 XML本身并不会限定标签的种类，反倒是允许XML的使用者随心所欲地创建标签。也就是说，在“&lt;”和“&gt;”中的单词可以是任意的。这就是所谓的“可扩展”。 11.3 XML是元语言 XML并没有限定标签的使用方式，使用什么样的标签都可以。可以说XML仅仅限定了进行标记时标签的书写格式（书写风格）。也就是说通过定义要使用的标签种类，就可以创造出一门新的标记语言。通常把这种用于创造语言的语言称作“元语言”。 11.4 XML可以为信息赋予意义 也就是说，XML的主要用途是为在互联网上交换的信息赋予意义（如图11.9所示）。当然，在互联网以外的场景也可以使用XML。只不过在XML诞生的过程中互联网一直伴随其左右。 11.9 XML可用于各种各样的领域 SOAP（Simple Object Access Protocol，简单对象访问协议）可用于分布式计算。所谓分布式计算，就是把程序分散部署在用网络连接起来的多台计算机上，使这些计算机相互协作，充分发挥计算机整体的计算能力。简单地说，SOAP就是使运行在A公司计算机中的A程序，可以调用运行在B公司计算机中的B程序。 第12章 SE负责监管计算机系统的构建12.3 系统开发过程的规范 在瀑布模型中，每完成一个阶段，都要书写文档（报告）并进行审核。进行审核时还需要召开会议，在会上由SE为开发团队的成员、上司以及客户讲解文档的内容。若审核通过了，就可以从上司或客户那里得到批准，继续进入后续的开发阶段。若审核没有通过，则不能进入后续的阶段。一旦进入了后续的阶段，就不能回退到之前的阶段。为了避免回退到上一阶段，一是要力求完美地完成每一个阶段的工作，二是要彻底地执行审核过程，这些就是瀑布模型的特征。 12.7 技术能力和沟通能力 正如之前讲解的那样，SE所要具备的能力是多种多样的。这些能力大体上可以分为两类——技术能力（Technical Skill）和沟通能力（Communication Skill）。所谓技术能力，是指灵活运用硬件、软件、网络、数据库等技术的能力。而所谓沟通能力，是指和他人交换信息的能力，而且这里要求的是双向的信息交换能力。一个方向是从客户到SE，即SE倾听客户等的需求；另一个方向是从SE到客户，即SE向客户等人传达信息。 12.10 大幅提升设备利用率的多机备份 专家也好普通人也罢，只有为社会做出了贡献才能有成就感，才会觉得工作有意义。可能有人会觉得“这么说来，即使是程序员，只要能意识到自己也是在为社会做贡献不就好了吗？”能这样想就对了！SE也好程序员也罢，所有和计算机相关的工程师都要有这样一种意识：我们要让计算机技术服务于社会。如果能有这样的决心，就应该能作为一生的事业和计算机愉快地相处下去了吧。 阅读感受★★★☆☆语言组织上通俗易懂是个亮点，但内容相对有点老旧，作为基础的入门材料可以看看。 版权信息书名：计算机是怎样跑起来的作者：[日]矢泽久雄译者：胡屹出版社：人民邮电出版社出版时间：2015-05 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-09-20]]></content>
-      <categories>
-        <category>idea</category>
-      </categories>
-      <tags>
-        <tag>book</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[《MySQL必知必会》学习笔记]]></title>
-    <url>%2F2018%2F08%2F11%2Fmysql-crash-course-note%2F</url>
-    <content type="text"><![CDATA[了解SQL 数据库是一个以某种有组织的方式存储的数据集合。 表具有一些特性，这些特性定义了数据在表中如何存储，如可以存储什么样的数据，数据如何分解，各部分信息如何命名，等等。描述表的这组信息就是所谓的模式，模式可以用来描述数据库中特定的表以及整个数据库(和其中表的关系)。 检索数据 如果没有明确排序查询结果，则返回的数据的顺序没有特殊意义。返回数据的顺序可能是数据被添加到表中的顺序，也可能不是。只要返回相同数目的行，就是正常的。 在处理SQL语句时，其中所有空格都被忽略。SQL语句可以在一行上给出，也可以分成许多行。多数SQL开发人员认为将SQL语句分成多行更容易阅读和调试。 排序数据 关系数据库设计理论认为，如果不明确规定排序顺序，则不应该假定检索出的数据的顺序有意义。 过滤数据 MySQL在执行匹配时默认不区分大小写。 在确实需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起 来是最慢的。 正则表达式 所有种类的程序设计语言、文本编辑器、操作系统等都支持正则表达式。 LIKE匹配整个列。如果被匹配的文本在列值中出现，LIKE将不会找到它，相应的行也不被返回(除非使用通配符)。而REGEXP在列值内进行匹配，如果被匹配的文本在列值中出现，REGEXP将会找到它，相应的行将被返回。这是一个非常重要的差别。 存在找出你自己经常使用的数字、所有字母字符或所有数字字母字符等的匹配。为更方便工作，可以使用预定义的字符集，称为字符类。 创建计算字段 SELECT提供了测试和试验函数与计算的一个很好的办法。虽然SELECT通常用来从表中检索数据，但可以省略FROM子句以便简单地访问和处理表达式。 创建联结 在联结两个表时，你实际上做的是将第一个表中的每一行与第二个表中的每一行配对。 应该注意，表别名只在查询执行中使用。与列别名不一样，表别名不返回到客户机。 全文本搜索 在使用全文本搜索时，MySQL不需要分别查看每个行，不需要分别分析和处理每个词。MySQL创建指定列中各词的一个索引，搜索可以针对这些词进行。这样，MySQL可以快速有效地决定哪些词匹配(哪些行包含它们)，哪些词不匹配，它们匹配的频率，等等。 在定义之后，MySQL自动维护该索引。在增加、更新或删除行时，索引随之自动更新。 更新数据 如果用UPDATE语句更新多行，并且在更新这些行中的一行或多行时出一个现错误，则整个UPDATE操作被取消 (错误发生前更新的所有行被恢复到它们原来的值)。为即使是发生错误，也继续进行更新，可使用IGNORE关键字。 创建视图 重要的是知道视图仅仅是用来查看存储在别处的数据的一种设施。视图本身不包含数据，因此它们返回的数据是从其他表中检索出来的。在添加或更改这些表中的数据时，视图将返回改变过的数据。 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-08-11]]></content>
-      <categories>
-        <category>idea</category>
-      </categories>
-      <tags>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[交叉验证的原理与用法]]></title>
-    <url>%2F2018%2F06%2F23%2Fcross-validation-usage%2F</url>
-    <content type="text"><![CDATA[引言在机器学习中，交叉验证（cross validation）是一种用来做模型选择的方法。如果给定的样本数据充足，我们可以随机地将数据集切分成训练集、验证集和测试集，训练集用来训练模型，验证集用于模型的选择，而测试集用于最终对方法进行评估。然而实际情况中数据往往是不够充分的，为了更好地选择模型，可以使用交叉验证的方法。 原理具体而言，当我们开始一个机器学习的建模工作时，首先会将数据集切分成训练集和测试集，我们在训练集上进行模型的训练和参数的调优，最终到测试集上验证模型的效果。为了能够选择出最优的模型和参数，我们通常会在训练集中再切分出一小部分作为验证集，通过观察模型在验证集上的效果来评估其好坏。但是如果训练集的数目不太多，那么不同验证集的选择方式可能会对模型的效果有很大影响。因此，我们可以采用交叉验证的方式。最常用的是K-fold交叉验证法，我们随机的将训练集等分为K份，每次训练时取其中的一份作为验证集，剩下的作为训练集，通过观察模型在K次实验中的各个指标的平均值，可以对模型的效果有一个比较准确的了解，而不至于受到验证集选择方式的影响。我们可以设置不同的模型参数并逐一观察它们的平均效果，最终可以选择出一组最优的参数应用到测试集上。 测试集的选择前面我们谈到了使用交叉验证来进行参数选择，其实对于测试集和训练集的切分也可以应用交叉验证的方法。当整个数据集较小时，如何选择合适的测试集也是个问题，在随机切分的情况下，我们可能刚好选择了一些相对容易预测的数据点作为测试集，这会使得我们模型的最终效果看起来很好，但这并不是真实的情况。为了避免这种因为测试集的选择方式所导致的模型效果出现波动的问题，我们也可以使用交叉验证的方式，通过观察模型在多个测试集上的平均效果来总体地评估模型的效果。 正负样本比还有一个值得注意的问题，在二分类问题中，当数据集的正负样本比很低时，对模型的训练是很有挑战的，而实际情况往往就是这样的。这种情况下我们通常希望训练集和测试集中的正负样本比可以和总体的比例保持一致，从而降低不平衡数据集带来的影响，因此我们会采用分层的方式来切分测试集。具体而言，假设我们希望切分25%的数据作为测试集，那么我们的做法是分别随机地选取25%的正例和25%的负例作为测试集，剩下的作为训练集。这种分层抽样的方式在实际情况中是非常必要的。 幸运的是，在Scikit-Learn中，StratifiedKFold 可以直接帮助我们完成这一点。 定义1class sklearn.model_selection.StratifiedKFold(n_splits=3, shuffle=False, random_state=None) 参数1234567891011n_splits : int, default=3Number of folds. Must be at least 2.shuffle : boolean, optionalWhether to shuffle each stratification of the data before splitting into batches.random_state : int, RandomState instance or None, optional, default=NoneIf int, random_state is the seed used by the random number generator; If RandomState instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by np.random. Used when shuffle == True. 实例1234567891011121314&gt;&gt;&gt; from sklearn.model_selection import StratifiedKFold&gt;&gt;&gt; X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])&gt;&gt;&gt; y = np.array([0, 0, 1, 1])&gt;&gt;&gt; skf = StratifiedKFold(n_splits=2)&gt;&gt;&gt; skf.get_n_splits(X, y)2&gt;&gt;&gt; print(skf) StratifiedKFold(n_splits=2, random_state=None, shuffle=False)&gt;&gt;&gt; for train_index, test_index in skf.split(X, y):... print("TRAIN:", train_index, "TEST:", test_index)... X_train, X_test = X[train_index], X[test_index]... y_train, y_test = y[train_index], y[test_index]TRAIN: [1 3] TEST: [0 2]TRAIN: [0 2] TEST: [1 3] 参考《统计学习方法》 李航sklearn.model_selection.StratifiedKFold 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-23]]></content>
-      <categories>
-        <category>MachineLearning</category>
-      </categories>
-      <tags>
-        <tag>ML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【已解决】tensorflow官网无法访问]]></title>
-    <url>%2F2018%2F06%2F18%2Ftensorflow-webpage-changed%2F</url>
-    <content type="text"><![CDATA[问题描述想看一下tensorflow的官方文档，却无法访问 https://www.tensorflow.org 解决方案官网地址已经改变！现在的地址是 https://tensorflow.google.cn ，直接访问即可！令人疑惑的是，不知道为什么Google出来的结果包括github上文档给的官方地址还是https://www.tensorflow.org，有了解的朋友可以告诉我一声。感谢！ 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-18]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>ML</tag>
       </tags>
   </entry>
   <entry>
@@ -80,28 +17,6 @@
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【已解决】PyCharm中出现unresolved reference error]]></title>
-    <url>%2F2018%2F06%2F16%2Fpycharm-unresolved-reference%2F</url>
-    <content type="text"><![CDATA[问题描述从GitHub上克隆的Python项目，在本地使用PyCharm打开，发现在某个文件的头部导入模块的部分报错Unresolved reference &#39;pytools&#39;，出错的代码如下所示 1from pytools.model import baseline 解决方案我们先来看一下整个项目的基本结构：1234567pytools-- note-- model -- baseline.py-- result-- src—- __init__.py pytools是整个项目的根目录，model是它的一个子目录，baseline是model目录下的一个模块。出现这个错误的原因在于PyCharm对于资源的索引方式，pytools作为根目录，无法直接作为模块名访问。因此，我们需要新建一个目录，比如叫做projects，然后将整个pytools项目移到projects目录下，再用PyCharm打开projects目录，程序即可正常运行了。 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-17]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Scikit-Learn 中文文档完整目录]]></title>
-    <url>%2F2018%2F06%2F13%2Fscikit-learn-doc-chinese-catalog%2F</url>
-    <content type="text"><![CDATA[Scikit-learn是一个开源的机器学习工具包，集成了各种常用的机器学习算法和数据预处理工具。Apachecn是一个专注于优秀的开源项目维护的开源组织，在热心网友的共同努力下，对Scikit-learn的文档进行了中文翻译，详情见scikit-learn中文文档。本文按照个人的阅读偏好对该文档做了一个目录，便于使用时的检索。全文系作者原创，仅供学习参考使用，转载授权请私信联系，否则将视为侵权行为。码字不易，感谢支持。 安装与介绍 安装scikit-learn 使用 scikit-learn 介绍机器学习 监督学习 广义线性模型 线性和二次判别分析 内核岭回归 支持向量机 随机梯度下降 最近邻 高斯过程 交叉分解 朴素贝叶斯 决策树 集成方法 多类和多标签算法 特征选择 半监督学习 等式回归 概率校准 神经网络模型 无监督学习 高斯混合模型 流形学习 聚类 双聚类 矩阵分解 协方差估计 新奇和异常值检测 密度估计 受限波尔兹曼机 模型选择和评估 交叉验证 调整超参数 模型评估 模型持久化 绘制验证曲线 数据处理 模型合并 特征提取 数据预处理 降维 随机投影 内核近似 成对的距离度量 预测目标预处理 实用指南 数据集加载工具 大规模计算 模型性能 处理文本数据 用户指南 归纳总结 以上就是本文的全部内容，如果您喜欢这篇文章，欢迎将它分享给朋友们。 感谢您的阅读，祝您生活愉快！ 作者：小美哥2018-06-13]]></content>
-      <categories>
-        <category>MachineLearning</category>
-      </categories>
-      <tags>
-        <tag>scikit-learn</tag>
       </tags>
   </entry>
   <entry>
@@ -127,50 +42,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[git commit message 编写规范]]></title>
-    <url>%2F2018%2F05%2F13%2Fgit-commit-message-format%2F</url>
-    <content type="text"><![CDATA[git是软件开发过程中必不可少的代码管理工具，在每次提交新代码时，需要写一些信息表示本次提交所改动的内容。为了方便日后的管理与迭代，commit message最好能有一些固定的格式，让人一眼就能知道每一次提交所做的修改。本文分享一下开源社区常用的代码提交规范，仅供参考。 完整的commit message格式如下: 12345&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&lt;BLANK LINE&gt;&lt;body&gt;&lt;BLANK LINE&gt;&lt;footer&gt; 有三个大的部分，分别是Header(第一行)、Body和Footer。在Header部分，type字段用于说明commit的类别，允许使用下面7个标识符: feat: 增加新功能 fix: 修复bug docs: 编写文档 style: 变换代码风格(不影响代码运行的变动) refactor: 代码重构(对代码结构有大的改动，但不影响运行) test: 增加测试代码 chore: 辅助工具的变动 scope字段用于说明本次commit所影响的范围，比如视图层、数据模型或者路由模块等，是一个可选参数。 subject字段是本次commit的一个概要，需要用最简洁的语言来说明本次修改的内容。 在Body部分，可以使用多行文本详细地说明本次提交所改动的一些细节，从而帮助后续的使用者们更好地了解代码的内容。 Footer部分一般只用于两种情况，一是不兼容变动，如果本次的commit与前一个版本的代码无法兼容，那么Footer部分需要以BREAKING CHANGE开头，后面描述本次变动的详细情况以及迁移到新版本代码的方法。 二是关闭Issue，如果本次commit是针对某个Issue，可以在Footer部分以Close开头，后面用#号标识对应的Issue号码。 以上所说的就是完整的commit message的规范写法，在实际开发中，为了提高效率，也可以丢弃Body和Footer部分，在Header的subject字段中写入必要的说明，同时可以加入Fix和Close等标明修复某个bug或者关闭某个Issue，这样既简洁又达到了日常实用的目的。当然团队内部有时候也会针对开发的项目给出对应的要求，总的来说都是为了让开发过程更加的高效和便捷。 参考资料：Commit message 和 Change log 编写指南规范的Commit message提交格式]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Kibana和Elasticsearch允许外网访问]]></title>
-    <url>%2F2018%2F05%2F12%2Fkibana-es-access-connection%2F</url>
-    <content type="text"><![CDATA[ElasticSearch(下文简称ES)是一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。Kibana则是一款开源的分析与可视化平台，可以用来与ES进行交互，通过可视化界面来查看和操作ES中的数据。默认情况下这两个软件只允许通过本机localhost访问。本文分享如何通过设置使得这两者可以被同一网络中的其他机器访问。 我们先看一下在使用默认设置时，当我们尝试通过IP地址去访问ES的服务(在9200端口)时，会得到如下结果 12$ curl 10.0.0.141:9200curl: (7) Failed to connect to 10.0.0.141 port 9200: Connection refused 从提示结果可以看到，ES服务拒绝了我们的访问，这是因为ES服务默认监听的主机是localhost，如果希望通过IP进行访问，需要设置其监听0.0.0.0。这个地址表示的是所有未知的主机和目的网络的集合。对于Kibana也是一样的道理，因此以下只阐述ES的配置方法 具体来说，分为两步走，首先要找到ES的配置文件，在不同的系统中配置文件存放的路径也不同。对于Mac系统来说，如果是通过brew安装的ES，那么可以通过以下命令来查看配置文件的位置 12345678910111213141516171819202122$ brew info elasticsearchelasticsearch: stable 6.2.3, HEADDistributed search &amp; analytics enginehttps://www.elastic.co/products/elasticsearch/usr/local/Cellar/elasticsearch/5.6.3 (217 files, 124MB) * Built from source on 2017-11-07 at 16:32:00From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/elasticsearch.rb==&gt; RequirementsRequired: java = 1.8 ✔==&gt; Options--HEAD Install HEAD version==&gt; CaveatsData: /usr/local/var/lib/elasticsearch/elasticsearch_gao-yimei/Logs: /usr/local/var/log/elasticsearch/elasticsearch_gao-yimei.logPlugins: /usr/local/var/elasticsearch/plugins/Config: /usr/local/etc/elasticsearch/To have launchd start elasticsearch now and restart at login: brew services start elasticsearchOr, if you don't want/need a background service you can just run: elasticsearch 结果中的Config标识了配置文件所在的目录。进入该目录，可以看到一个名为elasticsearch.yml的配置文件，通过less命令查看并搜索host可以找到一个network.host的配置参数，我们只需要将该参数前的#号去掉，并将该值设置为0.0.0.0并保存即可。注意第一个0与参数名之间需要有一个空格，这是配置文件的格式要求 修改完成后，还需要一步，那就是重新启动ES服务器，对于Mac用户，可以通过以下命令重启服务： 1234$ brew services restart elasticsearch Stopping `elasticsearch`... (might take a while)==&gt; Successfully stopped `elasticsearch` (label: homebrew.mxcl.elasticsearch)==&gt; Successfully started `elasticsearch` (label: homebrew.mxcl.elasticsearch) 等待两三分钟后，服务即可稳定，此时再通过IP访问ES服务，就可以正常使用 值得注意的是，当我们这样设置以后，同一网络中的所有设备都能随意地访问到本机的ES服务，包括所有存储在ES中的数据，这是一个比较危险的操作，因此请谨慎使用。另外，对于其他很多不同的软件，也存在这种默认情况下不允许通过IP访问的问题，设置的方式和ES大同小异，可以参考上述的操作流程。]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>ES</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Mac设置固定IP地址]]></title>
-    <url>%2F2018%2F05%2F12%2Fset-fixed-ip-address-on-mac%2F</url>
-    <content type="text"><![CDATA[在日常的开发过程中，有时候为了方便程序的调试，需要将本机的IP地址固定。本文分享下在Mac系统中固定IP地址的方法，仅供参考。 1、点击桌面上的系统偏好设置图标，在打开的设置界面点击网络图标 2、在网络设置界面，点击高级，进入高级设置 3、在高级设置界面，进入TCP/IP选项，点击配置IPv4选项，在下拉框中选择手动，同时设置对应的IPv4地址和路由器地址。注意必须保证此处设置的IPv4地址是内网中还未被使用的，如已被占用会提示错误，需要重新进行填写 4、还是在当前页面，进入DNS选项，在DNS服务器这一栏中添加本地的DNS服务器地址，可能需要问一下网络管理员 5、设置完成，点击右下角好，再继续点击右下角应用，然后重新连接网络，即可使用固定的IP地址进行程序开发]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【已解决】PyCharm证书过期]]></title>
-    <url>%2F2018%2F04%2F29%2Fpycharm-license-expired%2F</url>
-    <content type="text"><![CDATA[问题描述今天打开PyCharm的时候弹出提示框 Your license has expired，表示证书到期了，无法继续使用软件。之前使用的证书是在学校的时候注册的学生账号，也就是以.edu.cn结尾的账号。现在需要寻找一种新的认证方式。 解决方案PyCharm属于JetBrains的一员，这个系列的软件的认证方式有三种，分别是账号登录、激活码和授权服务器。对于在校的学生用户，可以使用.edu后缀的邮箱注册JetBrains账号即可免费使用。激活码则需要在官网上购买，也可以在网上找一些共享的激活码，但使用期限和稳定性无法保证，也并非官方推荐的方法。还有一种方法就是通过授权服务器，这种方法相当于把大量可用的license聚集起来，然后在多个用户间共享，每个用户每次分配到的license可能都不一致。关于授权服务器的更多信息，可以查看官网文档 官方提供了一些可用的授权服务器地址，一般是需要付费的。当然也可以自己来搭建授权服务器。这里就分享一下网友栗小米搭建的授权服务器地址:https://www.imsxm.com，亲测可用，稳定性很高，而且还会保持更新，可以说是非常赞了！ 具体的使用方法很简单，打开软件后，在授权页面勾选License server选项，在地址栏输入http://idea.imsxm.com/，再点击右下角的Activate即可。重启软件，弹出提示框Your copy is licensed to imsxm.com，表示软件已经认证成功。也可以在软件内点击菜单栏上的Help选项，单击最后一个选项Register，即可修改认证的方式。 如果各位觉得好用，记得给可爱的栗小米同学打赏哦，多多支持开源软件！当然，有条件的朋友还是尽可能地购买官方激活码啦，毕竟码农不易，且行且珍惜~ 参考JetBrains 授权服务器]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[gensim计算文档相似度]]></title>
     <url>%2F2018%2F04%2F23%2Fgensim-doc-similarity%2F</url>
     <content type="text"><![CDATA[gensim是一个基于Python语言的开源工具集，用于处理向量空间模型(vector space modeling)和话题模型(topic modeling)的相关问题。本文分享如何使用gensim工具来计算两篇中文文档的相似度。 首先我们要生成一些中文文档。下面的代码生成一个名为documents的文档列表，由于是演示，这里的每个文档中只有几个词语。关于如何对原始的字符串做分词操作，可以参考jieba 1234567891011from gensim import corporafrom pprint import pprintdocuments = ["你好 好的 不错 笨蛋", "笨蛋 傻瓜 傻子 哈哈", "好的 不错 你好 哈哈", "有趣 可以 好的 不错 还行", "傻瓜 傻子 二货 还行", "可以 好的 不错 哈哈", "有趣 有趣 哈哈 哈哈"]texts = [[word for word in document.split()] for document in documents]pprint(texts) [[&apos;你好&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;笨蛋&apos;], [&apos;笨蛋&apos;, &apos;傻瓜&apos;, &apos;傻子&apos;, &apos;哈哈&apos;], [&apos;好的&apos;, &apos;不错&apos;, &apos;你好&apos;, &apos;哈哈&apos;], [&apos;有趣&apos;, &apos;可以&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;还行&apos;], [&apos;傻瓜&apos;, &apos;傻子&apos;, &apos;二货&apos;, &apos;还行&apos;], [&apos;可以&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;哈哈&apos;], [&apos;有趣&apos;, &apos;有趣&apos;, &apos;哈哈&apos;, &apos;哈哈&apos;]] 然后我们要对原始的文档做一些预处理。这里我们统计了每个词语出现的次数，移除了只出现一次的词语，因为这些词语通常不会对计算文档相似度产生任何贡献。其他的预处理操作还包括移除数字、字母以及标点符号等，这里我们没有展示，如果实际中遇到可以进行相应的处理。 1234567from collections import defaultdictfrequency = defaultdict(int)for text in texts: for token in text: frequency[token] += 1texts = [[token for token in text if frequency[token] &gt; 1] for text in texts]pprint(texts) [[&apos;你好&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;笨蛋&apos;], [&apos;笨蛋&apos;, &apos;傻瓜&apos;, &apos;傻子&apos;, &apos;哈哈&apos;], [&apos;好的&apos;, &apos;不错&apos;, &apos;你好&apos;, &apos;哈哈&apos;], [&apos;有趣&apos;, &apos;可以&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;还行&apos;], [&apos;傻瓜&apos;, &apos;傻子&apos;, &apos;还行&apos;], [&apos;可以&apos;, &apos;好的&apos;, &apos;不错&apos;, &apos;哈哈&apos;], [&apos;有趣&apos;, &apos;有趣&apos;, &apos;哈哈&apos;, &apos;哈哈&apos;]] 接着我们生成了包含所有词语的词典，为后面的计算做准备。在实际情况中，词典通常会很大，为了避免重复计算，可以将词典保存下来。 123dictionary = corpora.Dictionary(texts)dictionary.save('sample.dict')print(dictionary) Dictionary(10 unique tokens: [&apos;不错&apos;, &apos;你好&apos;, &apos;好的&apos;, &apos;笨蛋&apos;, &apos;傻子&apos;]...) 有了前一步生成的词典，我们就可以将每个词语转化成一个索引，表示该词语在所有文档中出现的次序，然后每个文档就可以转化成一个索引的列表，比如这里的第一个文档表示为[(0, 1), (1, 1), (2, 1), (3, 1)]，它的含义是在第一篇文档中，第0个词语(也就是“你好”)出现了一次，第一个词语(也就是“好的”)出现了一次，依次类推。 123corpus = [dictionary.doc2bow(text) for text in texts]corpora.MmCorpus.serialize('sample.mm', corpus)pprint(corpus) [[(0, 1), (1, 1), (2, 1), (3, 1)], [(3, 1), (4, 1), (5, 1), (6, 1)], [(0, 1), (1, 1), (2, 1), (6, 1)], [(0, 1), (2, 1), (7, 1), (8, 1), (9, 1)], [(4, 1), (5, 1), (9, 1)], [(0, 1), (2, 1), (6, 1), (7, 1)], [(6, 2), (8, 2)]] 然后我们可以调用gensim中的tf-idf模块来进一步对每个单词计算权重。关于tf-idf的计算方法，可以参考维基百科 1234from gensim import models, similaritiestf_idf = models.TfidfModel(corpus)vec = [(0, 1), (5, 1), (7, 1)]print(tf_idf[vec]) [(0, 0.3011997233053068), (5, 0.6742695034927825), (7, 0.6742695034927825)] 现在，我们可以开始计算两个文档的相似度了。这里我们采用了余弦相似度作为衡量指标，当然还有其他的方式，可以参考文本相似度计算方法研究综述 123index = similarities.SparseMatrixSimilarity(tf_idf[corpus], num_features=10)sims = index[tf_idf[vec]]print(sims) [0.08686648 0.37695488 0.10641449 0.43870124 0.38928968 0.63969857 0. ] 我们还可以将整个相似度矩阵打印出来，就可以看到前面我们所准备的七篇文档两两之间的相似度。1print(index[tf_idf[corpus]]) [[1. 0.3609379 0.71441036 0.13975498 0. 0.20378576 0. ] [0.3609379 1.0000001 0.08823138 0. 0.64554304 0.08823138 0.10185669] [0.71441036 0.08823138 1.0000001 0.17120475 0. 0.37446705 0.1440983 ] [0.13975498 0. 0.17120475 1. 0.31315398 0.60019135 0.4952337 ] [0. 0.64554304 0. 0.31315398 0.99999994 0. 0. ] [0.20378576 0.08823138 0.37446705 0.60019135 0. 1. 0.1440983 ] [0. 0.10185669 0.1440983 0.4952337 0. 0.1440983 0.99999994]] 本文中的代码使用Jupyter Notebook编写，需要的朋友可以直接到github上查看。]]></content>
@@ -179,106 +50,6 @@
       </categories>
       <tags>
         <tag>gensim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【已解决】Mac安装Jupyter notebook出错的问题]]></title>
-    <url>%2F2018%2F04%2F18%2Fjupyter-notebook-install-error%2F</url>
-    <content type="text"><![CDATA[问题描述在Mac上安装Jupyter Notebook，按照Jupyter官网文档进行安装，命令如下12python3 -m pip install --upgrade pippython3 -m pip install jupyter 安装完成后执行jupyter notebook命令时提示1Error executing Jupyter command 'notebook': [Errno 2] No such file or directory 相关的环境参数 操作系统：macOS 10.13.4 Python版本：Python 3.6.3 解决方案依次输入以下两条命令，若提示权限不足在前面加sudo12pip3 install ipython[notebook]pip3 install jupyter]]></content>
-      <categories>
-        <category>daily</category>
-      </categories>
-      <tags>
-        <tag>Jupyter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[nodejs调用SendCloud邮件API2.0]]></title>
-    <url>%2F2018%2F04%2F07%2Fnodejs-sendcloud-mail-api%2F</url>
-    <content type="text"><![CDATA[SendCloud作为专业的第三方邮件发送服务提供商，具有高效和稳定的特点，很好地满足平时业务中的相关需求。前一阵在使用时发现原有的邮件API接口升级到2.0了，对于普通发送功能而言，主要的区别在于传递的参数从body参数变成了query参数，由于SendCloud官网还未给出nodejs版本的示例代码，故在此分享，供各位参考。如果需要查看相关文档，请至SendCloud官方文档页 123456789101112131415161718192021222324252627282930313233var http = require('http');var param = &#123; apiUser: 'your api user', apiKey: 'related api key', from: 'service@example.com', fromName: '客服测试', subject: '测试接口功能', to: 'somebody@example.com', html: '测试SendCloud邮件API，收到请勿回复，谢谢。'&#125;;data = require('querystring').stringify(param);var options = &#123; host: "api.sendcloud.net", port: 80, path: "/apiv2/mail/send", method: "POST"&#125;;options.path = options.path + '?' + data;var req = http.request(options, function(res) &#123; var responseStr = ''; res.on('data', function (chunk) &#123; responseStr += chunk; &#125;); res.on('end', function() &#123; console.log(responseStr); &#125;);&#125;);req.end(); 实际使用时，只需要修改参数param的内容填入对应的值即可。有一个值得注意的地方是，新版的邮件发送功能多了一个设置，在首页 -&gt; 邮件 -&gt; 发送设置页面，有一个From开关的设置，它的意思是“如果开启此开关后，自主填写的From的域名后缀不会生效，将和发信域名的后缀保持一致”。所以如果我们需要使用自主填写的From域名，需要先将这个开关设为OFF状态。但这其实并非SendCloud推荐的做法，如果我们需要用自己的域名来发送，最好还是按照SendCloud相应的流程认证之后再使用比较好。]]></content>
-      <categories>
-        <category>coding</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[网页短链接的实现原理]]></title>
-    <url>%2F2018%2F03%2F31%2Fshort-link-implement%2F</url>
-    <content type="text"><![CDATA[网页短链接是指将原本较长的网址转化成较短的网址，从而便于用户的记忆与社交软件上的传播。很多互联网公司都提供了生成短链接的服务，比如新浪微博短网址服务等，本文就来聊聊实现短链接服务的基本原理。 我们不妨先来看一下短链接服务的整个流程，以前面提到的微博短网址服务为例。用户输入想要缩短的长网址，转化后得到一个以http://t.cn开头的短网址，然后用户将该链接通过微信或者微博等方式分享给朋友，其他人点击之后即可进入原本长网址所对应的页面。整个流程如下图所示： 从图中可以很清楚地看到，实现短链接服务的关键是两个步骤：1、如何把一个任意长的字符串转化成一个较短的字符串；2、从短网址如何还原出长网址。第一个问题很容易让人想到哈希算法，通过一定的方式将任意长的文本转化成一个固定长度的字符串，只要目标字符串的长度适当，那么不同的输入几乎不可能对应同一个字符串。不过这么做有个缺点就是无法从得到的结果还原输入的字符串，因此不适用于我们的场景。但基于哈希算法的思想，我们可以设计一种以多进制为基础的算法完成这个任务。 具体而言，我们可以创建一个用于保存长网址的数据表，比如就叫Url，这张表很简单，只需要两个字段，一个主键用于保存id，一个url字段用于存放原始的长网址，每个长网址都在这张表有一条记录。当进行长网址转换时，先检查数据表中是否存在该长网址，若是直接获取该记录的id，否则在数据表中创建一条新记录，并返回其id。对于这个id，我们可以得到一个多进制表示下的新值，比如在以“0-9a-z”这36个字符表示的36进制中，一亿这个数字可以被表示成1njchs，只需要6个字符即可，将这6个字符拼接到准备好的域名后即可得到一个对应的短网址返回给用户。由于一亿个网址只需要6个字符，因此这种方式足够满足大部分网站的需求。 而当用户点击了我们生成的短网址后，只需要将代表多进制的这部分提取出来，还原成十进制的数字后查表即可得到原始的长网址，再根据网址做一个重定向即可让用户访问到原始的网页。具体的实现可以参考下面的typescript代码 1234567891011121314151617181920212223// 将原始的长链接通过36进制转化为短链接export async function long2short(url: string) &#123; if (!url.startsWith('http://') &amp;&amp; !url.startsWith('https://')) &#123; throw new Error('Invalid url'); &#125; if (url.startsWith(config.shortLinkBaseUrl)) &#123; return url; &#125; let item = await Url.getByUrl(url); if (!item) &#123; item = await Url.create(url); &#125; return config.shortLinkBaseUrl + item.id.toString(36);&#125;// 将短链接还原为真实的长链接export async function short2long(url: string) &#123; let item = await Url.select(Number.parseInt(url, 36)); if (!item) &#123; throw new Error('Invalid url'); &#125; return item.url;&#125; 这里的config.shortLinkBaseUrl也就是我们用来做短链接服务的域名，在前面的例子中就是http://t.cn，我们需要在这个域名对应的服务器内实现短链接的服务，同时这个域名本身不能太长，否则就失去了它的意义。另外还有一点值得注意，就是在根据长网址去数据表查找它是否存在时，因为长网址可以任意长，因此直接用它作为索引在数据表中查找的话效率较低，可以考虑在表中增加一个hash字段，保存长网址的哈希值，并通过查找哈希值来判断条目是否存在，提高查找的效率。 以上就是短链接服务的基本实现方法，最核心的其实就是多进制的使用，有兴趣的朋友可以自己动手试试看，有任何问题欢迎留言交流。]]></content>
-      <categories>
-        <category>coding</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[常用的Bash快捷键]]></title>
-    <url>%2F2018%2F01%2F30%2Fbash-shortcut-key%2F</url>
-    <content type="text"><![CDATA[Bash命令行是程序员日常开发中必备的好帮手，掌握一些有效且常用的快捷键可以帮助我们更好地使用bash这个工具，提高工作效率。本文根据笔者个人的经验，总结了一些针对Linux系统的Bash快捷键操作，供各位参考。 Ctrl + L: 清屏，强迫症患者必备Ctrl + R: 逆向搜索命令的历史记录Ctrl + C: 终止命令，中断一个前台作业Ctrl + A: 光标移动到命令行首Ctrl + E: 光标移动到命令行尾Ctrl + U: 从光标处删除至命令行首Ctrl + K: 从光标处删除至命令行尾Ctrl + W: 从光标处删除至字首Alt + D: 从光标处删除至字尾Ctrl + Shift + C: 在bash中复制Ctrl + Shift + V: 在bash中粘贴方向键上↑: 查看历史中的上一条命令方向键下↓: 查看历史中的下一条命令Command -h: 查看某个命令的帮助文档 虽然数量不多，但都很常用，牢记这几个快捷操作，相信对开发会有帮助的。]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>Bash</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[PostgreSQL基本用法]]></title>
-    <url>%2F2018%2F01%2F11%2Fpostgresql-basic-usage%2F</url>
-    <content type="text"><![CDATA[前言PostgreSQL是一个开源的、对象关系型数据库管理系统（ORDBMS）。本文旨在介绍PostgreSQL（下文简称pg）的一些基本操作，供初学者参考和查阅。需要注意的是，以下所有操作是在Ubuntu 16.04中进行的，使用的pg版本是9.6。对于不同的操作系统和版本，操作流程可能有些许的差别，具体可以参看后面给出的参考文档中的内容。 安装Ubuntu默认集成了pg，可以通过命令行直接安装 以下命令分别安装pg的客户端和服务端12$ sudo apt-get install postgresql-client$ sudo apt-get install postgresql 安装完成后，通过以下命令即可启动pg1$ sudo service postgresql start 相应的，只要将这里的start改为stop和restart，就可以实现服务的停止和重启 创建一个数据库在初次安装完成后，pg默认已经进行了如下的操作：创建了一个名为postgres的数据库用户和一个名为postgres的数据库，同时还创建了一个名为postgres的Linux系统用户。实际上，这里创建的postgres数据库用户拥有超级管理员身份，可以访问我们后面所创建的所有数据库，同时可以进行创建新数据库用户和修改用户密码等操作。 为了操作数据库，我们通常需要先登录控制台1$ sudo -u postgres psql 这条命令表示Linux用户postgres以超级用户postgres的身份登录了名为postgres的数据库，因为是Ubuntu系统，所以默认这个时候是不需要输入密码的，直接进入了pg的控制台1postgres=# 通常我们会在登录后先给postgres用户设置一下密码1postgres=# \password postgres 两次输入相同的密码后即可修改成功 因为postgers用户具有很高的权限，通常我们不会直接以这个身份登录，而是会另外创建一个新用户，比如创建一个和当前系统用户同名的数据库用户1postgres=# CREATE USER dbuser WITH PASSWORD 'password'; 然后我们可以为这个新用户创建一个数据库1postgres=# CREATE DATABASE exampledb OWNER dbuser; 接下来我们就可以使用刚才创建的用户登录控制台并连接到创建的数据库中来进行一系列的操作了1$ psql -U dbuser -d exampledb 常用的控制台命令12345678910\password 设置密码\q 退出\h 查看SQL命令的解释，比如\h select\? 查看psql命令列表\l 列出所有数据库\c [database_name] 连接其他数据库\d 列出当前数据库的所有表格\d [table_name] 列出某一张表格的结构\x 对数据做展开操作\du 列出所有用户 常用的SQL语句123456789101112131415161718192021222324252627282930313233343536373839404142# 创建新表CREATE TABLE table_name(name VARCHAR(20), birth DATE);# 插入数据INSERT INTO table_name(name, birth) VALUES('欧文', '1994-08-23');# 查询记录SELECT * FROM table_name;# 更新数据UPDATE table_name set name = '勒夫' WHERE name = '欧文';# 删除记录DELETE FROM table_name WHERE name = '欧文' ;# 添加字段ALTER TABLE table_name ADD email VARCHAR(40);# 更改字段类型ALTER TABLE table_name ALTER COLUMN birth SET NOT NULL;# 设置字段默认值（注意字符串使用单引号）ALTER TABLE table_name ALTER COLUMN email SET DEFAULT 'example@example.com';# 去除字段默认值ALTER TABLE table_name ALTER email DROP DEFAULT;# 重命名字段ALTER TABLE table_name RENAME COLUMN birth TO birthday;# 删除字段ALTER TABLE table_name DROP COLUMN email;# 表重命名ALTER TABLE table_name RENAME TO backup_table;# 删除表DROP TABLE IF EXISTS backup_table;# 删除库\c postgres;DROP DATABASE IF EXISTS hello; 备份和恢复12$ pg_dump --format=t -d db_name -U user_name -h 127.0.0.1 -O -W &gt; dump.sql$ psql -h 127.0.0.1 -U user_name db_name &lt; dump.sql 参考资料 PostgreSQL官方文档 阮一峰的网路日志]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[一页纸搞定git命令]]></title>
-    <url>%2F2017%2F12%2F04%2Fgit-cheat-sheet-cn%2F</url>
-    <content type="text"><![CDATA[本文翻译自Git cheat sheet，通过一页纸的内容搞定Git常用命令。 创建复制一个已创建的仓库： 通过 SSH1$ git clone ssh://user@domain.com/repo.git 通过 HTTP1$ git clone http://domain.com/user/repo.git 创建一个新的本地仓库:1$ git init 配置列出当前配置：1$ git config --list 列出repository配置：1$ git config --local --list 列出全局配置：1$ git config --global --list 列出系统配置：1$ git config --system --list 设置用户名：1$ git config --global user.name “[firstname lastname]” 设置用户邮箱：1$ git config --global user.email “[valid-email]” 设置git命令输出为彩色：1$ git config --global color.ui auto 配置文件Repository配置对应的配置文件路径：1/.git/config 用户全局配置对应的配置文件路径：1~/.gitconfig 系统配置对应的配置文件路径：1/etc/gitconfig 本地修改显示工作路径下已修改的文件：1$ git status 显示与上次提交版本文件的不同：1$ git diff 把当前所有修改添加到下次提交中：1$ git add . 把对某个文件的修改添加到下次提交中：1$ git add -p &lt;file&gt; 提交本地的所有修改：1$ git commit -a 提交之前已标记的变化：1$ git commit 附加消息提交：1$ git commit -m 'message here' 修改上次提交 请勿修改已发布的提交记录!!! 1$ git commit --amend 提交历史从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）：1$ git log 显示所有提交（仅显示提交的hash和message）：1$ git log --oneline 显示某个用户的所有提交：1$ git log --author="username" 显示某个文件的所有修改：1$ git log -p &lt;file&gt; 谁，在什么时间，修改了文件的什么内容：1$ git blame &lt;file&gt; 分支与标签列出所有分支：1$ git branch -av 列出所有的远端分支：1$ git branch -r 切换分支：1$ git checkout &lt;branch&gt; 基于当前分支创建新分支：1$ git branch &lt;new-branch&gt; 基于远程分支创建新的可追溯的分支：1$ git branch --track &lt;remote/branch&gt; 删除本地分支:1$ git branch -d &lt;branch&gt; 强制删除一个本地分支： 将会丢失未合并的修改!!! 1$ git branch -D &lt;branch&gt; 给当前版本打标签：1$ git tag &lt;tag-name&gt; 更新与发布列出当前配置的所有远程端：1$ git remote -v 显示某个远程端的信息：1$ git remote show &lt;remote&gt; 添加新的远程端：1$ git remote add &lt;shortname&gt; &lt;url&gt; 下载远程端版本，但不合并到HEAD中：1$ git fetch &lt;remote&gt; 下载远程端版本，并自动与HEAD版本合并：1$ git pull &lt;remote&gt; &lt;branch&gt; 将本地版本发布到远程端：1$ git push &lt;remote&gt; &lt;branch&gt; 删除远程端分支：1$ git branch -dr &lt;remote/branch&gt; 发布标签:1$ git push --tags 合并与重置将分支合并到当前HEAD中：1$ git merge &lt;branch&gt; 将当前HEAD版本重置到分支中： 请勿重置已发布的提交!!! 1$ git rebase &lt;branch&gt; 丢弃某次重置：1$ git rebase --abort 解决冲突后继续重置：1$ git rebase --continue 使用配置好的merge tool 解决冲突：1$ git mergetool 在编辑器中手动解决冲突后，标记文件为已解决冲突：12$ git add &lt;resolved-file&gt;$ git rm &lt;resolved-file&gt; 撤销放弃工作目录下的所有修改：1$ git reset --hard HEAD 放弃某个文件的所有本地修改：1$ git checkout HEAD &lt;file&gt; 重置一个提交（通过创建一个截然不同的新提交）1$ git revert &lt;commit&gt; 将HEAD重置到指定的版本，并抛弃该版本之后的所有修改：1$ git reset --hard &lt;commit&gt; 将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：1$ git reset &lt;commit&gt; 将HEAD重置到上一次提交的版本，并保留未提交的本地修改：1$ git reset --keep &lt;commit&gt; 删除添加.gitignore文件前错误提交的文件：123$ git rm -r --cached .$ git add .$ git commit -m "remove xyz file"]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch更新同义词表]]></title>
-    <url>%2F2017%2F11%2F13%2Fupdate-es-synonym%2F</url>
-    <content type="text"><![CDATA[ElasticSearch是一个基于Lucene的搜索服务器，能够高效地进行查询操作。同义词表是ES中的一个辅助工具，可以增加查询操作的灵活性和实用性。在项目开发中，有时会需要更新同义词表，以提供更好的服务。 步骤0、Ubuntu 16.04操作系统中，默认情况下，ES的同义词表保存在 /etc/elasticsearch/analysis/synonym.txt 文件中，以下操作以此为例。 1、修改synonym.txt1$ sudo vim /etc/elasticsearch/analysis/synonym.txt 根据规则添加所需的同义词条目，具体规则如下图所示，或查看文档https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-tokenfilter.html 2、重启ES服务1$ sudo systemctl restart elasticsearch 3、至此，同义词表更新完毕，可以通过观察程序的运行效果来验证是否成功。]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>ES</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Mac下安装Elasticsearch极简指南]]></title>
-    <url>%2F2017%2F11%2F07%2Finstall-elasticsearch-osx%2F</url>
-    <content type="text"><![CDATA[Elasticsearch(以下简称ES)是一个面向文档的实时分布式搜索和分析引擎。本文是在Mac系统下使用Homebrew安装ES+Kibana+Marvel的一份极简指南。 前置条件想要安装ES的前提是已经在本机安装了Java环境，在命令行键入1$ java -version 如果正确打印出版本信息则说明已安装Java，否则请到Java官网下载最新版安装即可。 另外，本文使用Homebrew来安装ES，Homebrew是Mac环境里的一种包管理工具，可以方便地进行软件的安装、更新和卸载操作。如果本机未安装，可以使用以下命令进行安装。1$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 完成以上步骤后，本机已具备Java和Homebrew，进入正题。 安装ES &amp; Kibana123$ brew update$ brew install elasticsearch$ brew install kibana 以上命令将ES和Kibana安装到本地，其中Kibana是ES的一个配套工具，可以让用户在网页中与ES进行交互。安装完成后，在命令行键入12$ brew info elasticsearch$ brew info kibana 可以分别看到两个软件的一些安装信息，比如安装路径和配置文件的路径等，后面会用到。 安装MarvelMarvel也是ES的一个插件，能够让你通过Kibana非常容易地监视ES集群的健康状态等信息。最新版的Marvel已经集成到X-Pack模块当中。X-Pack是ES的一个安全框架，可以给网页端访问Kibana加入账号系统，使操作更加安全，更多介绍请移步官方文档12$ cd /usr/local/Cellar/elasticsearch/&lt;whatever version you have&gt;$ bin/elasticsearch-plugin install x-pack 以上命令安装X-Pack模块到本地，至此安装部分完成。 启动ES &amp; Kibana12$ brew services start elasticsearch$ brew services start kibana 启动后可以在本地浏览器访问 ES: http://localhost:9200 Kibana: http://localhost:5601 首次进入Kibana页面时需要输入账号名和密码，默认的用户名是elastic，密码是changeme，可以通过以下命令修改密码123$ curl -XPUT -u elastic 'localhost:9200/_xpack/security/user/kibana/_password' -H "Content-Type: application/json" -d '&#123; "password" : "kibanapassword"&#125;' 如果不想使用账号密码，可以将下面的配置写入ES和kibana的配置文件，配置文件所在目录可以通过brew info xxx查看1xpack.security.enabled: false 重启ES和Kibana后以上配置即可生效12$ brew services restart elasticsearch$ brew services restart kibana 然后可以在Kibana页面中的Dev Tools子页面下直接与ES交互。关于ES的具体命令，请参看《Elasticsearch 权威指南》 祝学习愉快==]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-        <tag>ES</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[微信公众号开发工具汇总]]></title>
-    <url>%2F2017%2F11%2F06%2Fwechat-develop-tools%2F</url>
-    <content type="text"><![CDATA[前面写了篇入坑指南，介绍了下开发微信公众号的基本流程。最近又捣鼓了一阵，发现这开发工具的选择对于提高开发效率真是有莫大的帮助，所谓“只要工具选得好，月底奖金跑不了”。今天得空，笔者就给各位老哥列举几个绝对能派上用场的小工具，保证没毛病！ 微信公众平台技术文档这货实际上是必需品，没了它，您还真是寸步难行。官方文档包含了一个产品最直接也最全面的说明，在微信公众平台技术文档中，详细说明了微信公众号开发的概念与流程，以及各个接口的调用方法。开发中遇到的大部分问题都可以在这里找到答案。值得称赞的是，这份文档还在一开始给出了一份较为详尽的示例程序，通过代码的方式带着读者走了一遍开发的流程，细致全面又不显得啰嗦，可以说是比较用心了，给写文档的妹子点个赞！ 微信公众平台接口测试账号入坑指南里提到过，当前公众号类型主要分为订阅号和服务号，不同类型账号的主要区别在于接口调用的权限不同，那么如果我们就是想学习下各个接口的调用方法，但手边又找不到一个具有对应权限的公众号该怎么办呢？这时候你可以去申请一个接口测试账号。申请流程很简单，点击网页上的按钮，直接用微信扫码即可。 顾名思义，接口测试账号就是专门为开发人员准备的，用于测试接口调用方法的微信公众账号。和普通的公众号一样，可以在网页上对测试账号进行后台的管理，也可以通过扫描二维码的方式来关注测试账号，进行相应的操作。所不同的是，测试账号的名称和logo是无法更改的，名称就叫“xxx接口测试号”，logo则是个灰色的人头，为的就是把它们和通常的公众号区分开来。很显然，要是能改名改logo，那测试号就可以直接用于实际生产环境中了，也就没有必要再去申请公众号。 微信公众平台接口调试工具当我们在开发一个新功能的时候，通常希望能先预览一下实际的效果，这样可以对整个任务有一个更加感性的认识。而在开发微信公众号时，接口调试工具就能起到这样的作用。接口调试工具提供了一组图形化界面，通过简单地输入一些参数，就可以实现各个接口的调用，并立即在公众号上查看对应的效果。这种交互方式非常直观，也非常高效。此外接口调试工具还可以帮助我们进行debug，当我们在开发中遇到一直无法调通某个接口的情况时，可以将使用到的参数直接复制到接口调试工具的网页上，从而观察运行结果是否符合预期，通过比较两种方式调用结果的异同，我们可以更准确地找到bug所在。当然，关于debug这一点，下文介绍的工具才是真正的利器。 微信web开发者工具入坑指南里提到过，微信网页开发已经成为整个微信公众号开发当中很重要的一分部。事实上，在微信公众号开发中，设置自动回复规则和下拉菜单这两项所能提供给用户的服务非常有限，要想完成一些比较复杂的逻辑交互，就必须实现微信公众号内的网页开发。 网页开发就是指编写一系列的HTML5页面，并在微信公众号中引导用户打开我们开发的页面，从而实现相关的业务逻辑，这一功能使得公众号可以像一个内嵌在微信当中的应用一样，能够实现非常复杂的交互逻辑，而且相比于通常的应用来说更加小巧。 做过前端开发的老哥们对于浏览器中的“检查元素”这个功能一定都不陌生。当下前后端的开发通常是分离的，二者通过API接口进行对接。前端开发过程中为了进行调试，通常会在网页中打开“检查元素”功能来查看后端的回复是否正确，从而发现代码中可能存在的bug。而当我们进行微信web开发时，公众号里的网页是由微信自带的浏览器进行解析的，我们只能看到网页的效果，却无法看到任何有关前后端通信的数据，这样一来，当错误出现时，我们也就无从知道究竟是前端的锅还是后台的锅，这自然会影响开发的效率。微信团队的大佬们自然也想到了这一点，于是便有了web开发者工具这一调试利器。 微信web开发者工具实际上就是个自带“审查元素”功能的微信浏览器。通过扫码的方式，我们可以用自己的微信账号来登录这个软件。在登录之后，它就成为了一个可以在电脑桌面上打开的“微信浏览器”，通过在地址栏输入前端网页的地址，我们可以模拟在手机上的微信公众号中点击了某个网页的行为，当然此时前后端通信的数据也就一目了然。我们可以按照网页上的逻辑进行操作，就好像我们在一个普通的浏览器中所做的一样，简单好用，可以说是非常走心了。 以上就是笔者在捣鼓微信公众号时经常用到的一些小工具，回想起来，它们确实给开发过程带来了很大的帮助，在此分享给各位老哥，希望对各位有所帮助。]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>wechat</tag>
       </tags>
   </entry>
   <entry>
